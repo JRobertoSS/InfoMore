@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>infomore</display-name>
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Servlet</display-name>
+    <servlet-name>Servlet</servlet-name>
+    <servlet-class>br.com.infomore.controle.web.Servlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>Servlet</servlet-name>
+    <url-pattern>/Usuario</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>ServletMapa</display-name>
+    <servlet-name>ServletMapa</servlet-name>
+    <servlet-class>br.com.infomore.controle.web.ServletMapa</servlet-class>
+  </servlet>
+  
+   <servlet-mapping>
+    <servlet-name>ServletMapa</servlet-name>
+    <url-pattern>/Mapa</url-pattern>
+  </servlet-mapping>
+</web-app>
