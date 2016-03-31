@@ -13,13 +13,9 @@
 <script>
 	function initialize() {
 		// pegar a latitude da requisição
-		var latitude =
-<%out.print(request.getParameter("latitude"));%>
-	;
+		var latitude = <%out.print(request.getParameter("latitude"));%>;
 		//  pegar a longitude da requisição
-		var longitude =
-<%out.print(request.getParameter("longitude"));%>
-	;
+		var longitude = <%out.print(request.getParameter("longitude"));%>;
 		// inicializar um novo objeto de LatLng com os valores da latitude e longitude
 		var meuLocal = new google.maps.LatLng(latitude, longitude);
 		// indicar o container do mapa (div)
@@ -87,9 +83,29 @@
 </script>
 </head>
 <body>
+	*manter essas infos em uma opção
 	<div id="map"></div>
 	<div id="raio">raio</div>
 	<div id="lat">lat</div>
 	<div id="lng">lng</div>
+	
+	*Um botão (Filtrar) para as localidades, em que aparecem as 05 categorias: Saúde, Educação, Segurança, Lazer/Cultura e Comodidades.
+	Ao clicar em uma categoria, todos os pontos dentro do raio e desta categoria são mostrados. É possível listar
+	quais pontos específicos de cada categoria são desejados (Ex. Hospitais, farmácias e Postos, na categoria Saúde))
+	Ao clicar em um ponto, é possível ver os detalhes e salvar este ponto nos "favoritos/pontos importantes" do usuário
+	
+	
+	*Um botão (Filtrar) para as ocorrências, em que aparecem as categorias em que há ocorrências apenas (Se houver apenas
+	uma categoria, não vai ter sentido manter isso, bota direto a lista dos pontos, sem categoria). 
+	Ao clicar em uma categoria, todos os pontos dentro do raio e desta categoria são mostrados. É possível listar
+	quais pontos específicos de cada categoria são desejados (Ex. Acidentes, Assaltos e Homicídios, na categoria Segurança))
+	
+	*Um botão (Filtrar) para as áreas de abrangência, em que aparecem as categorias Energia, Água e Telecomunicações.
+	Ao clicar nisso, aparece quais categorias possuem (ou não) cobertura do serviço.
+	
+	*Um botão de informações sobre a área demarcada. Ainda não definimos, mas pode ser algo como, além das infos de lat, long e raio acima, quantidade de pontos de cada categoria e coisa do tipo.
+	
+	 
+	
 </body>
 </html>

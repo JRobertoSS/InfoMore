@@ -33,11 +33,11 @@ public class UsuarioViewHelper implements IViewHelper {
 		if (resultado.getMsg() == null) {
 			if (acao.equals("salvar")) {
 				resultado.setMsg("Cadastrado com sucesso!");
-				d = request.getRequestDispatcher("login.jsp");
+				d = request.getRequestDispatcher("/login.jsp");
 			}
 			if (acao.equals("alterar")) {
 				resultado.setMsg("Alterado com sucesso!");
-				d = request.getRequestDispatcher("WEB-INF/user/perfil.jsp"); //futuro perfil
+				d = request.getRequestDispatcher("/user/perfil.jsp"); //futuro perfil
 			}
 			if (acao.equals("excluir")) 
 				resultado.setMsg("Excluído com sucesso!");
@@ -50,9 +50,9 @@ public class UsuarioViewHelper implements IViewHelper {
 				Usuario usuario = (Usuario) resultado.getEntidades().get(0);
 				request.getSession().setAttribute("usuario", usuario);
 				if(usuario.getExecutarWizard())
-					d = request.getRequestDispatcher("WEB-INF/user/classificacao.jsp");
+					d = request.getRequestDispatcher("/user/classificacao.jsp");
 				else
-					d = request.getRequestDispatcher("WEB-INF/user/local.jsp");
+					d = request.getRequestDispatcher("/user/local.jsp");
 			}
 			if(acao.equals("consultar"))
 				request.setAttribute("usuarios", resultado.getEntidades());
@@ -61,13 +61,13 @@ public class UsuarioViewHelper implements IViewHelper {
 		
 		} else{
 			if (acao.equals("salvar")) 
-				d = request.getRequestDispatcher("cadastro.jsp");
+				d = request.getRequestDispatcher("/cadastro.jsp");
 			
 			if (acao.equals("alterar") || acao.equals("excluir")) 
 				d = request.getRequestDispatcher("futuraPaginaDoUsuario.jsp"); // edição de perfil
 			
 			if (acao.equals("login")) 
-				d = request.getRequestDispatcher("login.jsp");
+				d = request.getRequestDispatcher("/login.jsp");
 			
 			
 		}

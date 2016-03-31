@@ -4,8 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="js/jquery.js"></script>
-<script src="js/scripts.js"></script>
+<!-- Por alguma razão que só Satã sabe, não está chamando scripts em arquivos externos, então... -->
+<script>
+function atualizaDados(valor, destino){
+	destino.value = valor;
+}
+</script>
+
 <title>Configuração das Prioridades</title>
 </head>
 <body>
@@ -17,7 +22,7 @@
 	  		</tr>
 	        <tr>
 	        	<td><input type="range" min="1" max="10" value="5" step="1" 
-	                  name="rngSaude" id="rngSaude" oninput="valorSaude();" onchange="valorSaude();">
+	                  name="rngSaude" id="rngSaude" oninput="atualizaDados(this.value, valorRngSaude);">
 	                  <output for="rngSaude" name="valorRngSaude" id="valorRngSaude">5</output>
 	            </td>
 	        </tr>             
@@ -29,7 +34,7 @@
 	  		</tr>
 	        <tr>
 	        	<td><input type="range" min="1" max="10" value="5" step="1" 
-	                  name="rngSeguranca" id="rngSeguranca">
+	                  name="rngSeguranca" id="rngSeguranca" oninput="atualizaDados(this.value, valorRngSeguranca);">
 	                  <output for="rngSeguranca" name="valorRngSeguranca">5</output>
 	            </td>
 	        </tr>             
@@ -41,7 +46,7 @@
 	  		</tr>
 	        <tr>
 	        	<td><input type="range" min="1" max="10" value="5" step="1" 
-	                  name="rngEducacao" id="rngEducacao">
+	                  name="rngEducacao" id="rngEducacao" oninput="atualizaDados(this.value, valorRngEducacao);">
 	                  <output for="rngEducacao" name="valorRngEducacao">5</output>
 	            </td>
 	        </tr>             
@@ -53,7 +58,7 @@
 	  		</tr>
 	        <tr>
 	        	<td><input type="range" min="1" max="10" value="5" step="1" 
-	                  name="rngLazerCultura" id="rngLazerCultura">
+	                  name="rngLazerCultura" id="rngLazerCultura" oninput="atualizaDados(this.value, valorRngLazerCultura);">
 	                  <output for="rngLazerCultura" name="valorRngLazerCultura">5</output>
 	            </td>
 	        </tr>             
@@ -65,7 +70,7 @@
 	  		</tr>
 	        <tr>
 	        	<td><input type="range" min="1" max="10" value="5" step="1" 
-	                  name="rngComodidades" id="rngComodidades">
+	                  name="rngComodidades" id="rngComodidades" oninput="atualizaDados(this.value, valorRngComodidades);">
 	                  <output for="rngComodidades" name="valorRngComodidades">5</output>
 	            </td>
 	        </tr>             

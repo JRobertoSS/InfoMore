@@ -1,4 +1,4 @@
-package br.com.infomore.core.impl.controle;
+package br.com.infomore.controle.web;
 
 import java.io.IOException;
 import javax.servlet.Filter;

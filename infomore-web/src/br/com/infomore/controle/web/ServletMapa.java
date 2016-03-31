@@ -39,13 +39,19 @@ public class ServletMapa extends HttpServlet {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 		
 		if(request.getParameter("local") != null && request.getParameter("local").equals("meulocal")){
-			request.getRequestDispatcher("WEB-INF/user/mapa.jsp").forward(request, response);
+			request.getRequestDispatcher("/user/mapa.jsp").forward(request, response);
 		}
 		
-		if(request.getParameter("acao") != null && request.getParameter("acao").equals("classificacao") && usuario.getExecutarWizard()){
+		if(request.getParameter("acao") != null && request.getParameter("acao").equals("classificacao") 
+				&& usuario.getExecutarWizard()){
 			// salvar as classificações do usuário e encaminhar para o meu local
-			
-			request.getRequestDispatcher("WEB-INF/user/local.jsp").forward(request, response);
+			request.getRequestDispatcher("/user/local.jsp").forward(request, response);
+		}
+		
+		if(request.getParameter("acao") != null && request.getParameter("acao").equals("classificacao") 
+				&& !usuario.getExecutarWizard()){
+			// encaminhar para o mapa
+			request.getRequestDispatcher("/user/mapa.jsp").forward(request, response);
 		}
 	}
 	
