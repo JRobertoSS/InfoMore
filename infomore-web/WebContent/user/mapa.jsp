@@ -103,7 +103,7 @@
 	*Um botão (Filtrar) para as áreas de abrangência, em que aparecem as categorias Energia, Água e Telecomunicações.
 	Ao clicar nisso, aparece quais categorias possuem (ou não) cobertura do serviço.
 	
-	*Um botão de informações sobre a área demarcada. Ainda não definimos, mas pode ser algo como, além das infos de lat, long e raio acima, quantidade de pontos de cada categoria e coisa do tipo.
+	*Um botão de informações sobre a área demarcada. Ainda não definimos, mas pode ser algo como, além das infos de latitude, longitude e raio, quantidade de pontos de cada categoria no local e coisa do tipo.
 	
 	 
 	

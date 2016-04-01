@@ -10,8 +10,9 @@ import br.com.infomore.dominio.EntidadeDominio;
 import br.com.infomore.dominio.Usuario;
 
 public class UsuarioDAO extends AbstractDAO {
-
-	@Override
+	
+}
+	/*@Override
 	public String salvar(EntidadeDominio entidade) {
 		Usuario usuario = (Usuario) entidade;
 		String sql = "insert into usuarios (nome, email, senha, executarWizard) values (?, ?, ?, ?);";
@@ -66,5 +67,5 @@ public class UsuarioDAO extends AbstractDAO {
 		}
 		return lista;
 	}
+*/
 
-}

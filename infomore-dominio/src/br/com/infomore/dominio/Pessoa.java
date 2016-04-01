@@ -2,11 +2,11 @@ package br.com.infomore.dominio;
 
 import java.util.Date;
 
-public class Pessoa extends EntidadeDominio{
+public abstract class Pessoa extends EntidadeDominio{
 
 	private String nome;
 
-	private Date dataNascimento;
+	private Date dtNascimento;
 
 	public String getNome() {
 		return nome;
@@ -16,12 +16,13 @@ public class Pessoa extends EntidadeDominio{
 		this.nome = nome;
 	}
 
-	public Date getDataNascimento() {
-		return dataNascimento;
+	public Date getDtNascimento() {
+		return dtNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setDtNascimento(Date dtNascimento) {
+		this.dtNascimento = dtNascimento;
 	}
 
+	
 }
