@@ -49,7 +49,7 @@ public class UsuarioViewHelper implements IViewHelper {
 			if (acao.equals("login")) {
 				Usuario usuario = (Usuario) resultado.getEntidades().get(0);
 				request.getSession().setAttribute("usuario", usuario);
-				if(usuario.getExecutarWizard())
+				if(usuario.isExecutarWizard())
 					d = request.getRequestDispatcher("/user/classificacao.jsp");
 				else
 					d = request.getRequestDispatcher("/user/local.jsp");

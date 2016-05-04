@@ -2,6 +2,9 @@ package br.com.infomore.dominio;
 
 import java.util.Date;
 
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class Pessoa extends EntidadeDominio{
 
 	private String nome;

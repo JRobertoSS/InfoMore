@@ -2,15 +2,22 @@ package br.com.infomore.dominio;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+import javax.persistence.Table;
+@Entity
+@Table(name="usuarios")
 public class Usuario extends Pessoa {
 
+	@Column(name="email")
 	private String email;
-
+	
+	@Column(name="senha")
 	private String senha;
-
+	
+	@Column(name="executarWizard")
 	private boolean executarWizard;
 
 	@ManyToOne
@@ -87,19 +94,19 @@ public class Usuario extends Pessoa {
 		this.avaliacoes = avaliacoes;
 	}
 
-	public List<Ponto> getPontosIndicados() {
+	public List<PontoIndicado> getPontosIndicados() {
 		return pontosIndicados;
 	}
 
-	public void setPontosIndicados(List<Ponto> pontosIndicados) {
+	public void setPontosIndicados(List<PontoIndicado> pontosIndicados) {
 		this.pontosIndicados = pontosIndicados;
 	}
 
-	public List<Ponto> getPontosFavoritos() {
+	public List<PontoFavorito> getPontosFavoritos() {
 		return pontosFavoritos;
 	}
 
-	public void setPontosFavoritos(List<Ponto> pontosFavoritos) {
+	public void setPontosFavoritos(List<PontoFavorito> pontosFavoritos) {
 		this.pontosFavoritos = pontosFavoritos;
 	}
 	

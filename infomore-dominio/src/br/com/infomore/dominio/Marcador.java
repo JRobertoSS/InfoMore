@@ -2,19 +2,24 @@ package br.com.infomore.dominio;
 
 import java.util.List;
 
-import javax.persistence.Entity;
+import javax.persistence.Column;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-@Entity
+@MappedSuperclass
 public abstract class Marcador extends EntidadeDominio{
 
+	@Column(name="latitude")
 	private double latitude;
 
+	@Column(name="longitude")
 	private double longitude;
 
+	@Column(name="descricao")
 	private String descricao;
 
+	@Column(name="ocorrencia")
 	private boolean ocorrencia;
 
 	@ManyToOne

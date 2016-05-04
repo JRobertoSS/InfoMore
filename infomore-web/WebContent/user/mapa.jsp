@@ -1,3 +1,5 @@
+<%@page import="br.com.infomore.dominio.Ponto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,11 +32,20 @@
 		// criar um novo objeto de mapa com o container e as opções definidas
 		var map = new google.maps.Map(mapCanvas, mapOptions);
 		// criar um novo objeto de marcador 
+		<%
+			List<Ponto> pontos = (List<Ponto>) request.getAttribute("pontos");
+			for(Ponto ponto : pontos) {
+				// Gerar um local para o ponto.
+				// ...
+		%>
 		var marker = new google.maps.Marker({
 			position : meuLocal, // posição no meuLocal (LatLng)
 			map : map, // objeto do mapa
 			title : 'Meu Local', // título do marcador
 		});
+		<%
+			}
+		%>
 		// criar um objeto de Círculo para determinar o raio inicial
 		var circle = new google.maps.Circle({
 			map : map, // objeto do mapa
@@ -105,7 +116,7 @@
 	
 	*Um botão de informações sobre a área demarcada. Ainda não definimos, mas pode ser algo como, além das infos de latitude, longitude e raio, quantidade de pontos de cada categoria no local e coisa do tipo.
 	
-	 
+	 <!--  window.variavel para salvar como 'global'-->
 	
 </body>
 </html>

@@ -7,17 +7,12 @@
 			<attribute name="owner.project.facets" value="jst.utility"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/Desenvolvimento/Desenvolvimento Eclipse/Bibliotecas/mysql-connector-java-5.1.14-bin.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/jpa/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="lib/required/antlr-2.7.6.jar"/>
-	<classpathentry kind="lib" path="lib/required/commons-collections-3.1.jar"/>
-	<classpathentry kind="lib" path="lib/required/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/required/javassist-3.12.0.GA.jar"/>
-	<classpathentry kind="lib" path="lib/required/jta-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/required/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

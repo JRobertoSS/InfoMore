@@ -1,12 +1,11 @@
 package br.com.infomore.core.impl.controle;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.com.infomore.core.IDAO;
+import br.com.infomore.core.impl.dao.AbstractDAO;
 import br.com.infomore.core.IFachada;
 import br.com.infomore.core.IStrategy;
 import br.com.infomore.core.aplicacao.Resultado;
@@ -24,7 +23,7 @@ public class Fachada implements IFachada {
 	 * Mapa de DAOS, será indexado pelo nome da entidade 
 	 * O valor é uma instância do DAO para uma dada entidade; 
 	 */
-	private Map<String, IDAO> daos;
+	private Map<String, AbstractDAO> daos;
 	
 	/**
 	 * Mapa para conter as regras de negócio de todas operações por entidade;
@@ -37,7 +36,7 @@ public class Fachada implements IFachada {
 	
 	public Fachada(){
 		/* Intânciando o Map de DAOS */
-		daos = new HashMap<String, IDAO>();
+		daos = new HashMap<String, AbstractDAO>();
 		/* Intânciando o Map de Regras de Negócio */
 		rns = new HashMap<String, Map<String, List<IStrategy>>>();
 		
@@ -82,20 +81,23 @@ public class Fachada implements IFachada {
 	}
 	
 	public Resultado login(EntidadeDominio entidade){
+
 		resultado = new Resultado();
 		
 		Usuario usuario = (Usuario) entidade;
-		UsuarioDAO uDAO = new UsuarioDAO();
-		List<EntidadeDominio> consulta = uDAO.consultar(usuario);
+		UsuarioDAO uDao = new UsuarioDAO();
+		Usuario consulta = uDao.consultarPorEmail(usuario.getEmail());
 	
-		if (!consulta.isEmpty())
-			resultado.setEntidades(consulta);
-		else{
+		if (consulta != null){
+			List<EntidadeDominio> lista = new ArrayList<EntidadeDominio>();
+			lista.add(consulta);
+			resultado.setEntidades(lista);
+		}else{
 			resultado.setMsg("E-mail inválido, ou Usuário inexistente!");
 			return resultado;
 		}
-		Usuario usuarioConsulta = (Usuario) consulta.get(0);
-		if(!usuario.getSenha().equals(usuarioConsulta.getSenha()))
+		
+		if(!consulta.getSenha().equals(usuario.getSenha()))
 			resultado.setMsg("Senha inválida!");
 		return resultado;
 	}
@@ -109,16 +111,11 @@ public class Fachada implements IFachada {
 		
 		
 		if(msg == null){
-			IDAO dao = daos.get(nmClasse);
-			try {
-				dao.salvar(entidade);
-				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-				entidades.add(entidade);
-				resultado.setEntidades(entidades);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				resultado.setMsg("Não foi possível realizar o registro!");
-			}
+			AbstractDAO dao = daos.get(nmClasse);
+			dao.salvar(entidade);
+			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+			entidades.add(entidade);
+			resultado.setEntidades(entidades);
 		}else{
 			resultado.setMsg(msg);
 		}
@@ -133,17 +130,11 @@ public class Fachada implements IFachada {
 		String msg = executarRegras(entidade, "alterar");
 	
 		if(msg == null){
-			IDAO dao = daos.get(nmClasse);
-			try {
-				dao.alterar(entidade);
-				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-				entidades.add(entidade);
-				resultado.setEntidades(entidades);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				resultado.setMsg("Não foi possível realizar o registro!");
-				
-			}
+			AbstractDAO dao = daos.get(nmClasse);
+			dao.alterar(entidade);
+			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+			entidades.add(entidade);
+			resultado.setEntidades(entidades);
 		}else{
 			resultado.setMsg(msg);
 					
@@ -163,17 +154,11 @@ public class Fachada implements IFachada {
 		
 		
 		if(msg == null){
-			IDAO dao = daos.get(nmClasse);
-			try {
-				dao.excluir(entidade);
-				List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-				entidades.add(entidade);
-				resultado.setEntidades(entidades);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				resultado.setMsg("Não foi possível realizar o registro!");
-				
-			}
+			AbstractDAO dao = daos.get(nmClasse);
+			dao.excluir(entidade);
+			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+			entidades.add(entidade);
+			resultado.setEntidades(entidades);
 		}else{
 			resultado.setMsg(msg);
 					
@@ -185,23 +170,16 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public Resultado consultar(EntidadeDominio entidade) {
+	public Resultado listar(EntidadeDominio entidade) {
 		resultado = new Resultado();
 		String nmClasse = entidade.getClass().getName();	
 		
-		String msg = executarRegras(entidade, "consultar");
+		String msg = executarRegras(entidade, "listar");
 		
 		
 		if(msg == null){
-			IDAO dao = daos.get(nmClasse);
-			try {
-				
-				resultado.setEntidades(dao.consultar(entidade));
-			} catch (SQLException e) {
-				e.printStackTrace();
-				resultado.setMsg("Não foi possível realizar a consulta!");
-				
-			}
+			AbstractDAO dao = daos.get(nmClasse);
+			resultado.setEntidades(dao.listar());
 		}else{
 			resultado.setMsg(msg);
 			
@@ -212,10 +190,24 @@ public class Fachada implements IFachada {
 	}
 	
 	@Override
-	public Resultado visualizar(EntidadeDominio entidade) {
+	public Resultado consultar(EntidadeDominio entidade) {
 		resultado = new Resultado();
 		resultado.setEntidades(new ArrayList<EntidadeDominio>(1));
-		resultado.getEntidades().add(entidade);		
+		
+		String nmClasse = entidade.getClass().getName();	
+		
+		String msg = executarRegras(entidade, "consultar");
+		
+		List<EntidadeDominio> consulta = new ArrayList<EntidadeDominio>();
+		
+		if(msg == null){
+			AbstractDAO dao = daos.get(nmClasse);
+			consulta.add((EntidadeDominio)dao.consultarPorChave(entidade.getId()));
+		}else{
+			resultado.setMsg(msg);	
+		}
+			
+		resultado.setEntidades(consulta);		
 		return resultado;
 
 	}

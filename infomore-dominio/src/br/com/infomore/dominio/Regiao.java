@@ -1,6 +1,10 @@
 package br.com.infomore.dominio;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="regioes")
 public class Regiao extends Marcador {
 
 	private double raio;

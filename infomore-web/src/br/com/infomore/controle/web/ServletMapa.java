@@ -16,7 +16,7 @@ import br.com.infomore.controle.web.command.impl.ConsultarCommand;
 import br.com.infomore.controle.web.command.impl.ExcluirCommand;
 import br.com.infomore.controle.web.command.impl.LoginCommand;
 import br.com.infomore.controle.web.command.impl.SalvarCommand;
-import br.com.infomore.controle.web.command.impl.VisualizarCommand;
+import br.com.infomore.controle.web.command.impl.ListarCommand;
 import br.com.infomore.controle.web.vh.IViewHelper;
 import br.com.infomore.controle.web.vh.impl.UsuarioViewHelper;
 import br.com.infomore.core.aplicacao.Resultado;
@@ -43,13 +43,13 @@ public class ServletMapa extends HttpServlet {
 		}
 		
 		if(request.getParameter("acao") != null && request.getParameter("acao").equals("classificacao") 
-				&& usuario.getExecutarWizard()){
+				&& usuario.isExecutarWizard()){
 			// salvar as classificações do usuário e encaminhar para o meu local
 			request.getRequestDispatcher("/user/local.jsp").forward(request, response);
 		}
 		
 		if(request.getParameter("acao") != null && request.getParameter("acao").equals("classificacao") 
-				&& !usuario.getExecutarWizard()){
+				&& !usuario.isExecutarWizard()){
 			// encaminhar para o mapa
 			request.getRequestDispatcher("/user/mapa.jsp").forward(request, response);
 		}

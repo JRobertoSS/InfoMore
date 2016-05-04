@@ -1,7 +1,10 @@
 package br.com.infomore.dominio;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.Table;
+@Entity
+@Table(name="tipos_marcador")
 public class TipoMarcador extends EntidadeDominio{
 
 	private String tipo;

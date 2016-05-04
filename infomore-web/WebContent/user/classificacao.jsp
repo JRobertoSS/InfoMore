@@ -4,12 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- Por alguma razão que só Satã sabe, não está chamando scripts em arquivos externos, então... -->
-<script>
-function atualizaDados(valor, destino){
-	destino.value = valor;
-}
-</script>
+<script src="${pageContext.request.contextPath}/user/js/scripts.js"></script>
 
 <title>Configuração das Prioridades</title>
 </head>

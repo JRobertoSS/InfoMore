@@ -1,13 +1,18 @@
 package br.com.infomore.dominio;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="avaliacoes")
 public class Avaliacao extends EntidadeDominio{
 
+	@Column(name="comentario")
 	private String comentario;
 
+	@Column(name="estrelas")
 	private int estrelas;
 	
 	@ManyToOne

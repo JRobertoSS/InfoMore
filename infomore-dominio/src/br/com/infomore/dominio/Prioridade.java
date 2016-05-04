@@ -1,7 +1,11 @@
 package br.com.infomore.dominio;
 
+import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="prioridades")
 public class Prioridade extends EntidadeDominio{
 
 	private double peso;

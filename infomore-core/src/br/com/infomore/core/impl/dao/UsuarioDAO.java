@@ -1,16 +1,31 @@
 package br.com.infomore.core.impl.dao;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import br.com.infomore.dominio.EntidadeDominio;
+import javax.persistence.Column;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.Table;
+
 import br.com.infomore.dominio.Usuario;
 
-public class UsuarioDAO extends AbstractDAO {
+public class UsuarioDAO extends AbstractDAO<Long, Usuario> {
 	
+	public UsuarioDAO(){
+		super(Usuario.class);	
+	}
+	
+	public Usuario consultarPorEmail(String email){
+		EntityManager em = entityManagerFactory.createEntityManager();
+		
+		Query query = em.createQuery("SELECT * FROM " + 
+		Usuario.class.getAnnotation(Table.class).name()+ "WHERE " +
+		Usuario.class.getAnnotation(Column.class).name() +
+		"=" + email);
+	
+		return (Usuario)query.getResultList();
+	}
+
 }
 	/*@Override
 	public String salvar(EntidadeDominio entidade) {

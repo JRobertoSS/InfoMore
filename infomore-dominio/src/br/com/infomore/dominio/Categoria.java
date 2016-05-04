@@ -2,12 +2,19 @@ package br.com.infomore.dominio;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="categorias")
 public class Categoria extends EntidadeDominio{
 
+	@Column(name="nome")
 	private String nome;
 
+	@Column(name="descricao")
 	private String descricao;
 
 	@OneToMany
