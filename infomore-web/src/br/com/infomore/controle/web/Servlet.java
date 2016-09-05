@@ -53,6 +53,7 @@ public class Servlet extends HttpServlet {
     	 * está configurado no web.xml e sendo utilizada no action do html
     	 */
     	vhs.put("/infomore-web/Usuario", new UsuarioViewHelper()); // ARRUMAR O URL USADO DE KEY PARA CHAMAR O VIEW HELPER!!!
+    	vhs.put("/infomore-web/user/Usuario", new UsuarioViewHelper());
     /*	vhs.put("/playmore-web/admin/SalvarFabricante", new FabricanteViewHelper());
     	vhs.put("/playmore-web/admin/SalvarFornecedor", new FornecedorViewHelper());
     	vhs.put("/playmore-web/admin/SalvarProduto", new ProdutoViewHelper());

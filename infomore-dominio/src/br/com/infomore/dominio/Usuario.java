@@ -4,13 +4,23 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name="usuarios")
 public class Usuario extends Pessoa {
 
+	public Usuario() {
+	}
+	
 	@Column(name="email")
 	private String email;
 	
@@ -20,23 +30,15 @@ public class Usuario extends Pessoa {
 	@Column(name="executarWizard")
 	private boolean executarWizard;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="id_tipo_usuario", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.ALL)
 	private TipoUsuario tipoUsuario;
 	
-	@OneToMany
+	@OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
+    @Cascade(CascadeType.ALL)
 	private List<Prioridade> prioridades;
-
-	@OneToMany
-	private List<Confirmacao> confirmacoes;
-	
-	@OneToMany
-	private List<Avaliacao> avaliacoes;
-	
-	@OneToMany
-	private List<PontoIndicado> pontosIndicados;
-	
-	@OneToMany
-	private List<PontoFavorito> pontosFavoritos;
 
 	public String getEmail() {
 		return email;
@@ -78,37 +80,5 @@ public class Usuario extends Pessoa {
 		this.prioridades = prioridades;
 	}
 
-	public List<Confirmacao> getConfirmacoes() {
-		return confirmacoes;
-	}
-
-	public void setConfirmacoes(List<Confirmacao> confirmacoes) {
-		this.confirmacoes = confirmacoes;
-	}
-
-	public List<Avaliacao> getAvaliacoes() {
-		return avaliacoes;
-	}
-
-	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-		this.avaliacoes = avaliacoes;
-	}
-
-	public List<PontoIndicado> getPontosIndicados() {
-		return pontosIndicados;
-	}
-
-	public void setPontosIndicados(List<PontoIndicado> pontosIndicados) {
-		this.pontosIndicados = pontosIndicados;
-	}
-
-	public List<PontoFavorito> getPontosFavoritos() {
-		return pontosFavoritos;
-	}
-
-	public void setPontosFavoritos(List<PontoFavorito> pontosFavoritos) {
-		this.pontosFavoritos = pontosFavoritos;
-	}
-	
 	
 }

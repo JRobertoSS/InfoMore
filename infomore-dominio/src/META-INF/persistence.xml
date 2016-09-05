@@ -5,18 +5,7 @@
 	version="2.0">
 	<persistence-unit name="InfoMore" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>br.com.infomore.dominio.Avaliacao</class>
-		<class>br.com.infomore.dominio.Categoria</class>
-		<class>br.com.infomore.dominio.Confirmacao</class>
-		<class>br.com.infomore.dominio.Ponto</class>
-		<class>br.com.infomore.dominio.PontoFavorito</class>
-		<class>br.com.infomore.dominio.PontoIndicado</class>
-		<class>br.com.infomore.dominio.Prioridade</class>
-		<class>br.com.infomore.dominio.Regiao</class>
-		<class>br.com.infomore.dominio.TipoMarcador</class>
-		<class>br.com.infomore.dominio.TipoUsuario</class>
-		<class>br.com.infomore.dominio.Usuario</class>
-		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
@@ -27,7 +16,7 @@
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.password" value="123456" />
 			<property name="javax.persistence.schema-generation.database.action"
-				value="drop-and-create" />
+				value="create-or-update" />
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -5,5 +5,8 @@
         <dependent-module archiveName="mysql-connector-java-5.1.14-bin.jar" deploy-path="/" handle="module:/classpath/lib/D:/Desenvolvimento/Desenvolvimento Eclipse/Bibliotecas/mysql-connector-java-5.1.14-bin.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="infomore-dominio.jar" deploy-path="/" handle="module:/resource/infomore-dominio/infomore-dominio">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

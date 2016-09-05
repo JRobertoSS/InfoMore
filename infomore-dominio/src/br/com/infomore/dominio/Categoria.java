@@ -4,20 +4,28 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="categorias")
 public class Categoria extends EntidadeDominio{
 
+	public Categoria() {
+	}
+	
 	@Column(name="nome")
 	private String nome;
 
 	@Column(name="descricao")
 	private String descricao;
 
-	@OneToMany
+	@OneToMany(mappedBy="categoria", fetch = FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
 	private List<Categoria> categoria;
 
 	public String getNome() {

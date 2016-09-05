@@ -20,8 +20,7 @@ public class UsuarioDAO extends AbstractDAO<Long, Usuario> {
 		
 		Query query = em.createQuery("SELECT * FROM " + 
 		Usuario.class.getAnnotation(Table.class).name()+ "WHERE " +
-		Usuario.class.getAnnotation(Column.class).name() +
-		"=" + email);
+		Usuario.class.getAnnotation(Column.class).name() + "=" + email);
 	
 		return (Usuario)query.getResultList();
 	}
