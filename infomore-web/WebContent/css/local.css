@@ -1,0 +1,20 @@
+#slideEscolherLocal{
+	width: 285x;
+}
+
+a.botao{
+	top: 200px;
+	width: 250px;
+}
+
+.input-field > input{
+	width: 250px;
+	right: 10px;
+	left: 10px;
+}
+
+
+.input-field > li{
+	padding-left: 20px;
+	width: 260px;
+}

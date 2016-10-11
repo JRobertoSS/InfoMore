@@ -31,7 +31,7 @@ public class Ponto extends Marcador {
 
 	
 	@Column(name="certeza")
-	private boolean certeza;
+	private double certeza;
 	
     @OneToMany(fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
@@ -45,14 +45,14 @@ public class Ponto extends Marcador {
 		this.usuario = usuario;
 	}
 	
-	public boolean isCerteza() {
+	public double getCerteza() {
 		return certeza;
 	}
 
-	public void setCerteza(boolean certeza) {
+	public void setCerteza(double certeza) {
 		this.certeza = certeza;
 	}
-	
+
 	public List<Confirmacao> getConfirmacoes() {
 		return confirmacoes;
 	}

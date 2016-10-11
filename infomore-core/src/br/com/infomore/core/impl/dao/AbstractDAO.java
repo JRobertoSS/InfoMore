@@ -11,9 +11,9 @@ import javax.persistence.Table;
 public abstract class AbstractDAO<K, T>{
 	protected static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("InfoMore");
 	
-	private Class classeObjeto;
+	private Class < T > classeObjeto;
 	
-	public AbstractDAO(Class classeObjeto){
+	public AbstractDAO(Class < T > classeObjeto){
 		this.classeObjeto = classeObjeto;
 	}
 	
@@ -38,14 +38,14 @@ public abstract class AbstractDAO<K, T>{
 		em.getTransaction().commit();
 	}
 	
-	public T consultarPorChave(K chave){
+	public T consultar(T objeto, K chave){
 		EntityManager em = entityManagerFactory.createEntityManager();
-		return (T) em.find(classeObjeto, chave);
+		return ( T ) em.find(classeObjeto, chave);
 	}
 	
-	public List<T> listar() {
+	public List < T > listar() {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		 Query query = em.createQuery("SELECT * FROM " + (classeObjeto.getAnnotation(Table.class).toString()));
-		    return (List<T>) query.getResultList();
+		    return ( List < T > ) query.getResultList();
 	}
 }

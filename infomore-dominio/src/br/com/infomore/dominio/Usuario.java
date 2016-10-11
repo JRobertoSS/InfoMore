@@ -19,6 +19,7 @@ import org.hibernate.annotations.FetchMode;
 public class Usuario extends Pessoa {
 
 	public Usuario() {
+	
 	}
 	
 	@Column(name="email")
@@ -29,7 +30,7 @@ public class Usuario extends Pessoa {
 	
 	@Column(name="executarWizard")
 	private boolean executarWizard;
-
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_tipo_usuario", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
@@ -39,6 +40,18 @@ public class Usuario extends Pessoa {
 	@OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
 	private List<Prioridade> prioridades;
+	
+	@OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
+    @Cascade(CascadeType.ALL)
+	private List<Avaliacao> avaliacoes;
+	
+	@OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
+    @Cascade(CascadeType.ALL)
+	private List<Confirmacao> confirmacoes;
+	
+	@OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
+    @Cascade(CascadeType.ALL)
+	private List<Ponto> pontosIndicados;
 
 	public String getEmail() {
 		return email;
@@ -79,6 +92,32 @@ public class Usuario extends Pessoa {
 	public void setPrioridades(List<Prioridade> prioridades) {
 		this.prioridades = prioridades;
 	}
+
+	public List<Avaliacao> getAvaliacoes() {
+		return avaliacoes;
+	}
+
+	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+		this.avaliacoes = avaliacoes;
+	}
+
+	public List<Confirmacao> getConfirmacoes() {
+		return confirmacoes;
+	}
+
+	public void setConfirmacoes(List<Confirmacao> confirmacoes) {
+		this.confirmacoes = confirmacoes;
+	}
+
+	public List<Ponto> getPontosIndicados() {
+		return pontosIndicados;
+	}
+
+	public void setPontosIndicados(List<Ponto> pontosIndicados) {
+		this.pontosIndicados = pontosIndicados;
+	}
+	
+	
 
 	
 }

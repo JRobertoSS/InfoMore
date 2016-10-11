@@ -1,0 +1,40 @@
+.menuNav{
+	width: 100vw;
+	height: 10vh;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.container {
+	width: 100vw;
+	height: 90vh;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.meuPerfil{
+	font-size: larger;
+	font-weight: bolder;
+	color: white;
+}
+
+ul.dropdown-content{
+    width:160px !important;
+}
+.form-content{
+	margin: 20px;
+	padding: 20px;
+}
+.form-input{
+	width: 60%;
+}
+.top{
+	top: 50px;
+}
+a.botao{
+	top: 200px;
+	width: 250px;
+}

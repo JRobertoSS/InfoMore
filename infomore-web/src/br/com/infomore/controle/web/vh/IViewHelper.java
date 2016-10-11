@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.infomore.core.aplicacao.Resultado;
 import br.com.infomore.dominio.EntidadeDominio;
 
-
 public interface IViewHelper {
 
-	public EntidadeDominio getEntidade(HttpServletRequest request);
-	
-	public void setView(Resultado resultado, 
-			HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException;
-	
+    public EntidadeDominio getEntity(HttpServletRequest request);
+
+    public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException;
+
 }

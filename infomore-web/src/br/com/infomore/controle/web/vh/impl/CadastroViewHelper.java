@@ -1,0 +1,63 @@
+package br.com.infomore.controle.web.vh.impl;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import br.com.infomore.controle.web.vh.IViewHelper;
+import br.com.infomore.core.aplicacao.Resultado;
+import br.com.infomore.dominio.EntidadeDominio;
+import br.com.infomore.dominio.Usuario;
+
+public class CadastroViewHelper implements IViewHelper {
+
+    @Override
+    public EntidadeDominio getEntity(HttpServletRequest request) {
+	try {
+	    request.setCharacterEncoding("UTF-8");
+	} catch (UnsupportedEncodingException e1) {
+	    // TODO Auto-generated catch block
+	    e1.printStackTrace();
+	}
+
+	Usuario usuario = new Usuario();
+	usuario.setNome(request.getParameter("inputNome"));
+	usuario.setEmail(request.getParameter("inputEmail"));
+	usuario.setSenha(request.getParameter("inputSenha"));
+	usuario.setExecutarWizard(true);
+	String dataString = request.getParameter("inputData");
+	if (dataString != null) {
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    try {
+		usuario.setDtNascimento(sdf.parse(dataString));
+	    } catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	}
+
+	return usuario;
+    }
+
+    @Override
+    public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	RequestDispatcher d = null;
+
+	if (resultado != null && resultado.getMsg() != null)
+	    d = request.getRequestDispatcher("view/cadastro.html");
+	else {
+	    resultado.setMsg("Cadastro realizado com sucesso!");
+	    d = request.getRequestDispatcher("view/login.html");
+	}
+	request.setAttribute("resultado", resultado);
+	d.forward(request, response);
+    }
+
+}
