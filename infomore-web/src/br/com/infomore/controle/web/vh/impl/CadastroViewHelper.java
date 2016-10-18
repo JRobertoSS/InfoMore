@@ -51,12 +51,12 @@ public class CadastroViewHelper implements IViewHelper {
 	RequestDispatcher d = null;
 
 	if (resultado != null && resultado.getMsg() != null)
-	    d = request.getRequestDispatcher("view/cadastro.html");
+	    d = request.getRequestDispatcher("view/cadastro.jsp");
 	else {
 	    resultado.setMsg("Cadastro realizado com sucesso!");
-	    d = request.getRequestDispatcher("view/login.html");
+	    d = request.getRequestDispatcher("view/login.jsp");
 	}
-	request.setAttribute("resultado", resultado);
+	request.setAttribute("mensagem", resultado.getMsg());
 	d.forward(request, response);
     }
 

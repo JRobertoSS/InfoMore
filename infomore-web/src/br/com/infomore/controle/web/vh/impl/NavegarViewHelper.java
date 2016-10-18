@@ -22,7 +22,7 @@ public class NavegarViewHelper implements IViewHelper {
     public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 	    throws IOException, ServletException {
 	// redireciona pra página do mesmo nome do parâmetro 'acao' da request
-	request.getRequestDispatcher("view/" + request.getParameter("acao") + ".html").forward(request, response);
+	request.getRequestDispatcher("view/" + request.getParameter("acao") + ".jsp").forward(request, response);
 
     }
 

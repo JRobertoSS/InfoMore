@@ -47,7 +47,7 @@ public class Filtro implements Filter {
 	    chain.doFilter(request, response); // deixa passar a request
 	} else {
 	    // redireciona para o login
-	    requisicao.getRequestDispatcher("view/login.html").forward(request, response);
+	    requisicao.getRequestDispatcher("view/login.jsp").forward(request, response);
 	}
     }
 

@@ -1,9 +1,8 @@
 package br.com.infomore.core.impl.dao;
 
-import javax.persistence.Column;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import javax.persistence.Table;
 
 import br.com.infomore.dominio.Usuario;
 
@@ -16,10 +15,13 @@ public class UsuarioDAO extends AbstractDAO<Long, Usuario> {
     public Usuario consultarPorEmail(String email) {
 	EntityManager em = entityManagerFactory.createEntityManager();
 
-	Query query = em.createQuery("SELECT * FROM " + Usuario.class.getAnnotation(Table.class).name() + "WHERE "
-		+ Usuario.class.getAnnotation(Column.class).name() + " like " + email);
-
-	return (Usuario) query.getResultList();
+	Query query = em.createQuery("from Usuario where email like :email");
+	query.setParameter("email", email);
+	try {
+	    return (Usuario) query.getSingleResult();
+	} catch (NoResultException nre) {
+	    return null;
+	}
     }
 
     @Override
