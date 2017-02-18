@@ -14,19 +14,47 @@ import br.com.infomore.dominio.Usuario;
 
 public class LoginViewHelper implements IViewHelper {
 
-	@Override
-	public EntidadeDominio getEntity(HttpServletRequest request) {
-		return null;
+    @Override
+    public EntidadeDominio getEntity(HttpServletRequest request) {
+	Usuario usuario = new Usuario();
+	usuario.setEmail(request.getParameter("inputEmail"));
+	usuario.setSenha(request.getParameter("inputSenha"));
+	return usuario;
+    }
+
+    @Override
+    public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
+	    throws IOException, ServletException {
+	RequestDispatcher d = null;
+
+	Usuario usuario = resultado.getEntidades().isEmpty() ? null : (Usuario) resultado.getEntidades().get(0);
+
+	if (usuario == null) { // não encontrou o usuário por e-mail?
+
+	    resultado.setMsg("Usuario não cadastrado!");
+	    d = request.getRequestDispatcher("view/login.jsp");
+
+	} else { // encontrou
+
+	    if (usuario.getSenha().equals(request.getParameter("inputSenha"))) { // a senha digitada corresponde à cadastrada?
+
+		request.getSession().setAttribute("usuario", usuario); // seta usuário na sessão 
+
+		if (usuario.isExecutarWizard()) { // é para executar a classificação?
+		    d = request.getRequestDispatcher("view/classificacao.jsp");
+		} else { // senão vai para escolha do local
+		    d = request.getRequestDispatcher("view/local.jsp");
+		}
+
+	    } else { // senha inválida 
+		resultado.setMsg("Senha inválida!");
+		d = request.getRequestDispatcher("view/login.jsp");
+	    }
 	}
 
-	@Override
-	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException  {
-		RequestDispatcher d = null;
-		String acao = request.getParameter("acao");
-		
-		request.setAttribute("resultado", resultado);
-		d.forward(request, response);
+	request.setAttribute("resultado", resultado);
+	d.forward(request, response);
 
-	}
+    }
 
 }

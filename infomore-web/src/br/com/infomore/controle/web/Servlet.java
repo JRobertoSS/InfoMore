@@ -1,7 +1,9 @@
 package br.com.infomore.controle.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -13,13 +15,19 @@ import br.com.infomore.controle.web.command.ICommand;
 import br.com.infomore.controle.web.command.impl.AlterarCommand;
 import br.com.infomore.controle.web.command.impl.ConsultarCommand;
 import br.com.infomore.controle.web.command.impl.ExcluirCommand;
+import br.com.infomore.controle.web.command.impl.ListarCommand;
 import br.com.infomore.controle.web.command.impl.SalvarCommand;
 import br.com.infomore.controle.web.vh.IViewHelper;
+import br.com.infomore.controle.web.vh.impl.AtualizarPontosRaioViewHelper;
 import br.com.infomore.controle.web.vh.impl.CadastroViewHelper;
+import br.com.infomore.controle.web.vh.impl.ClassificacaoViewHelper;
 import br.com.infomore.controle.web.vh.impl.LoginViewHelper;
 import br.com.infomore.controle.web.vh.impl.NavegarViewHelper;
 import br.com.infomore.controle.web.vh.impl.PerfilViewHelper;
+import br.com.infomore.controle.web.view.ClassificacaoView;
 import br.com.infomore.core.aplicacao.Resultado;
+import br.com.infomore.core.impl.controle.Fachada;
+import br.com.infomore.dominio.Categoria;
 import br.com.infomore.dominio.EntidadeDominio;
 
 /**
@@ -32,33 +40,6 @@ public class Servlet extends HttpServlet {
     private static Map<String, IViewHelper> vhs;
 
     public Servlet() {
-
-	/*
-	 * Utilizando o command para chamar a fachada e indexando cada command
-	 * pela operação garantimos que esta servelt atenderá qualquer operação
-	 */
-	commands = new HashMap<String, ICommand>();
-
-	commands.put("salvar", new SalvarCommand());
-	commands.put("alterar", new AlterarCommand());
-	commands.put("excluir", new ExcluirCommand());
-	commands.put("consultar", new ConsultarCommand());
-
-	/*
-	 * Utilizando o ViewHelper para tratar especificações de qualquer tela e
-	 * indexando cada viewhelper pela url em que esta servlet é chamada no
-	 * form garantimos que esta servelt atenderá qualquer entidade
-	 */
-
-	vhs = new HashMap<String, IViewHelper>();
-	/*
-	 * A chave do mapa é o mapeamento da servlet para cada form que está
-	 * configurado no web.xml e sendo utilizada no action do html
-	 */
-	vhs.put("/infomore/navegar", new NavegarViewHelper());
-	vhs.put("/infomore/login", new LoginViewHelper());
-	vhs.put("/infomore/cadastro", new CadastroViewHelper());
-	vhs.put("/infomore/perfil", new PerfilViewHelper());
 
     }
 
@@ -123,5 +104,64 @@ public class Servlet extends HttpServlet {
 	 */
 	vh.setView(resultado, request, response);
 
+    }
+
+    @Override
+    public void init() throws ServletException {
+	/**
+	 * Inicializa atributos necessários para a aplicação no contexto da
+	 * servlet
+	 */
+	Fachada fachada = new Fachada();
+
+	Resultado resultado = fachada.listar(new Categoria());
+
+	getServletContext().setAttribute("categorias", resultado.getEntidades());
+
+	List<ClassificacaoView> listaClassificacaoView = new ArrayList<>();
+	for (EntidadeDominio entidade : resultado.getEntidades()) {
+	    Categoria categoria = (Categoria) entidade;
+	    ClassificacaoView classificacaoView = new ClassificacaoView();
+	    classificacaoView.setCategoria(categoria);
+	    classificacaoView.setNomeIcone(ClassificacaoView.mapaIcone.get(categoria.getNome()));
+	    classificacaoView.setNomeId(ClassificacaoView.mapaNomeId.get(categoria.getNome()));
+	    listaClassificacaoView.add(classificacaoView);
+	}
+
+	getServletContext().setAttribute("listaClassificacaoView", listaClassificacaoView);
+
+	/**
+	 * 
+	 * /* Utilizando o command para chamar a fachada e indexando cada
+	 * command pela operação garantimos que esta servelt atenderá qualquer
+	 * operação
+	 */
+	commands = new HashMap<String, ICommand>();
+
+	commands.put("salvar", new SalvarCommand());
+	commands.put("alterar", new AlterarCommand());
+	commands.put("excluir", new ExcluirCommand());
+	commands.put("consultar", new ConsultarCommand());
+	commands.put("listar", new ListarCommand());
+
+	/*
+	 * Utilizando o ViewHelper para tratar especificações de qualquer tela e
+	 * indexando cada viewhelper pela url em que esta servlet é chamada no
+	 * form garantimos que esta servelt atenderá qualquer entidade
+	 */
+
+	vhs = new HashMap<String, IViewHelper>();
+	/*
+	 * A chave do mapa é o mapeamento da servlet para cada form que está
+	 * configurado no web.xml e sendo utilizada no action do html
+	 */
+	vhs.put("/infomore/navegar", new NavegarViewHelper());
+	vhs.put("/infomore/login", new LoginViewHelper());
+	vhs.put("/infomore/cadastro", new CadastroViewHelper());
+	vhs.put("/infomore/perfil", new PerfilViewHelper());
+	vhs.put("/infomore/classificacao", new ClassificacaoViewHelper(getServletContext()));
+	vhs.put("/infomore/atualizaPontosRaio", new AtualizarPontosRaioViewHelper());
+
+	super.init();
     }
 }

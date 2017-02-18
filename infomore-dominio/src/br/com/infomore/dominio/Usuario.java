@@ -14,110 +14,108 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
 @Entity
-@Table(name="usuarios")
+@Table(name = "usuarios")
 public class Usuario extends Pessoa {
 
-	public Usuario() {
-	
-	}
-	
-	@Column(name="email")
-	private String email;
-	
-	@Column(name="senha")
-	private String senha;
-	
-	@Column(name="executarWizard")
-	private boolean executarWizard;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="id_tipo_usuario", insertable=true, updatable=true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
-	private TipoUsuario tipoUsuario;
-	
-	@OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
+    public Usuario() {
+
+    }
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "senha")
+    private String senha;
+
+    @Column(name = "executarWizard")
+    private boolean executarWizard;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_tipo_usuario", insertable = true, updatable = true)
+    @Fetch(FetchMode.JOIN)
     @Cascade(CascadeType.ALL)
-	private List<Prioridade> prioridades;
-	
-	@OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
+    private TipoUsuario tipoUsuario;
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
-	private List<Avaliacao> avaliacoes;
-	
-	@OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
+    private List<Prioridade> prioridades;
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
-	private List<Confirmacao> confirmacoes;
-	
-	@OneToMany(mappedBy="usuario", fetch = FetchType.LAZY)
+    private List<Avaliacao> avaliacoes;
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
-	private List<Ponto> pontosIndicados;
+    private List<Confirmacao> confirmacoes;
 
-	public String getEmail() {
-		return email;
-	}
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @Cascade(CascadeType.ALL)
+    private List<Ponto> pontosIndicados;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+	return email;
+    }
 
-	public String getSenha() {
-		return senha;
-	}
+    public void setEmail(String email) {
+	this.email = email;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+    public String getSenha() {
+	return senha;
+    }
 
-	public boolean isExecutarWizard() {
-		return executarWizard;
-	}
+    public void setSenha(String senha) {
+	this.senha = senha;
+    }
 
-	public void setExecutarWizard(boolean executarWizard) {
-		this.executarWizard = executarWizard;
-	}
+    public boolean isExecutarWizard() {
+	return executarWizard;
+    }
 
-	public TipoUsuario getTipoUsuario() {
-		return tipoUsuario;
-	}
+    public void setExecutarWizard(boolean executarWizard) {
+	this.executarWizard = executarWizard;
+    }
 
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
+    public TipoUsuario getTipoUsuario() {
+	return tipoUsuario;
+    }
 
-	public List<Prioridade> getPrioridades() {
-		return prioridades;
-	}
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+	this.tipoUsuario = tipoUsuario;
+    }
 
-	public void setPrioridades(List<Prioridade> prioridades) {
-		this.prioridades = prioridades;
-	}
+    public List<Prioridade> getPrioridades() {
+	return prioridades;
+    }
 
-	public List<Avaliacao> getAvaliacoes() {
-		return avaliacoes;
-	}
+    public void setPrioridades(List<Prioridade> prioridades) {
+	this.prioridades = prioridades;
+    }
 
-	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-		this.avaliacoes = avaliacoes;
-	}
+    public List<Avaliacao> getAvaliacoes() {
+	return avaliacoes;
+    }
 
-	public List<Confirmacao> getConfirmacoes() {
-		return confirmacoes;
-	}
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+	this.avaliacoes = avaliacoes;
+    }
 
-	public void setConfirmacoes(List<Confirmacao> confirmacoes) {
-		this.confirmacoes = confirmacoes;
-	}
+    public List<Confirmacao> getConfirmacoes() {
+	return confirmacoes;
+    }
 
-	public List<Ponto> getPontosIndicados() {
-		return pontosIndicados;
-	}
+    public void setConfirmacoes(List<Confirmacao> confirmacoes) {
+	this.confirmacoes = confirmacoes;
+    }
 
-	public void setPontosIndicados(List<Ponto> pontosIndicados) {
-		this.pontosIndicados = pontosIndicados;
-	}
-	
-	
+    public List<Ponto> getPontosIndicados() {
+	return pontosIndicados;
+    }
 
-	
+    public void setPontosIndicados(List<Ponto> pontosIndicados) {
+	this.pontosIndicados = pontosIndicados;
+    }
+
 }

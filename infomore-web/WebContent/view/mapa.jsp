@@ -4,14 +4,16 @@
 <html ng-app="infomore">
 <head>
 <meta charset="UTF-8">
+
+<!-- Import da taglib pra uso de jstl -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	
 	<!--Import jQuery before materialize.js-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
-	<script type="text/javascript" src="js/mapa.js"></script>
+	<script type="text/javascript" src="js/mapa.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
-
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPLEj4invnE6TCsJSRR7ePqD7eAAJs4Pw"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADLLbi_ei8WPPbzyCq5_UUCN0Iy--V3Lo"></script>
 
 	<script type="text/javascript" src="js/angular.js"></script>
 
@@ -35,9 +37,9 @@
 	<nav>
 
 		<ul id="dropdownMeuLocalAtual" class="dropdown-content">
-			<li> <a class="modal-trigger" href="#modal1" >InformaÃ§Ãµes</a> </li>
+			<li> <a class="modal-trigger" href="#modal1" >Informações</a> </li>
 			<li> <a href="#!" >Inserir local</a> </li>
-			<li> <a href="#!" >Reportar ocorrÃªncia</a> </li>
+			<li> <a href="#!" >Reportar ocorrência</a> </li>
 			<li class="divider"></li>
 			<li><a href="local.html">Escolher local</a></li>
 		</ul>
@@ -48,7 +50,7 @@
 			<li> <a href="perfil.html" >Atualizar Perfil</a> </li>
 			<li> <a href="senha.html" >Atualizar Senha</a> </li>
 			<li> <a href="#!" >Meus Locais</a> </li>
-			<li> <a href="#!" >RelatÃ³rios</a> </li>
+			<li> <a href="#!" >Relatórios</a> </li>
 			<li class="divider"></li>
 			<li><a href="login.html">Sair</a></li>
 		</ul>
@@ -67,27 +69,85 @@
 		</div>
 
 	</nav>
-	
-	<!-- Modal Structure -->
-	<div id="modal1" class="modal modal-fixed-footer">
-		<div class="modal-content">
-		<h4>Modal Header</h4>
-		<p>A bunch of text</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-		</div>
-	</div>
+		
 	
 	<div id="page-content-wrapper" class="container"> 
 
 		<div id="mapa" class="mapa">
-
+			<c:set var="local" scope="request" value="${requestScope['local']}"/>
+			
+			<c:choose>
+				<c:when test="${local == null}">
+					<script type="text/javascript">
+						getLocal();
+					</script>
+				</c:when>
+		<%--	<c:otherwise>
+					<script type="text/javascript">
+			   			converteLocal(local);
+		 			</script>
+			 	</c:otherwise> --%>
+			</c:choose>
+			
 		</div>
+		
+		
+		<!-- Slides -->
+	
+	<ul id="slideSaude" class="side-nav">
+		<li><input type="checkbox" name="" class="filled-in" id="checkFarmacia"/><label for="checkFarmacia">Farmácia</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkHospital"/><label for="checkHospital">Hospital</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkPostoSaude"/><label for="checkPostoSaude">Posto de Saúde</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkClinica"/><label for="checkClinica">Clínica</label></li>
+	</ul>
 
+	<ul id="slideEducacao" class="side-nav">
+		<li><input type="checkbox" name="" class="filled-in" id="checkEscola"/><label for="checkEscola">Escola</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkFaculdade"/><label for="checkFaculdade">Faculdade</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkCreche"/><label for="checkCreche">Creche</label></li>
+	</ul>
+
+	<ul id="slideSeguranca" class="side-nav">
+		<li><input type="checkbox" name="" class="filled-in" id="checkPoliciMilitar"/><label for="checkPoliciMilitar">Polícia Militar</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkPoliciaCivil"/><label for="checkPoliciaCivil">Policia Civil</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkBombeiros"/><label for="checkBombeiros">Bombeiros</label></li>
+	</ul>
+
+	<ul id="slideComodidades" class="side-nav">
+		<li><input type="checkbox" name="" class="filled-in" id="checkSupermercado"/><label for="checkSupermercado">Supermercado</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkPadaria"/><label for="checkPadaria">Padaria</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkRestaurante"/><label for="checkRestaurante">Restaurante</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkLoja"/><label for="checkLoja">Loja</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkPostoDeServicos"/><label for="checkPostoDeServicos">Posto de Serviços</label></li>
+	</ul>
+
+	<ul id="slideLazer" class="side-nav">
+		<li><input type="checkbox" name="" class="filled-in" id="checkCinema"/><label for="checkCinema">Cinema</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkMuseu"/><label for="checkMuseu">Museu</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkTeatro"/><label for="checkTeatro">Teatro</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkBiblioteca"/><label for="checkBiblioteca">Biblioteca</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkParque"/><label for="checkParque">Parque</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkBar"/><label for="checkBar">Bar</label></li>
+	</ul>
+
+	<ul id="slideTransporte" class="side-nav">
+		<li><input type="checkbox" name="" class="filled-in" id="checkOnibus"/><label for="checkOnibus">Ônibus</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkMetro"/><label for="checkMetro">Metrô</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkTaxi"/><label for="checkTaxi">Táxi</label></li>
+	</ul>
+
+	<ul id="slideOcorrencias" class="side-nav">
+		<li><input type="checkbox" name="" class="filled-in" id="checkAssalto"/><label for="checkAssaltos">Assalto</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkHomicidio"/><label for="checkHomicidio">Homicídio</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkRouboDeVeiculo"/><label for="checkRouboDeVeiculo">Roubo de veículo</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkRouboDeImovel"/><label for="checkRouboDeImovel">Roubo de imóvel</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkAcidenteDeTransito"/><label for="checkAcidenteDeTransito">Acidentes de Trânsito</label></li>
+		<li><input type="checkbox" name="" class="filled-in" id="checkEnchentes"/><label for="checkEnchentes">Enchente</label></li>
+	</ul>
+	
 		<div class="fixed-action-btn click-to-toggle" style="bottom: 20px; right: 20px;">
-			<a class="btn-floating btn-large blue">
-		    	<i class="large material-icons">my_location</i>
+			<a class="btn-floating btn-large pink">
+		    	<img alt="filtro" src="images/infomore_button.png">
 		    </a>
 
 			<ul>
@@ -110,58 +170,7 @@
 
 	</div>
 
-	<!-- Slides -->
 	
-	<ul id="slideSaude" class="side-nav">
-		<li><input type="checkbox" name="" class="filled-in" id="checkFarmacia"/><label for="checkFarmacia">FarmÃ¡cia</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkHospital"/><label for="checkHospital">Hospital</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkPostoSaude"/><label for="checkPostoSaude">Posto de SaÃºde</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkClinica"/><label for="checkClinica">ClÃ­nica</label></li>
-	</ul>
-
-	<ul id="slideEducacao" class="side-nav">
-		<li><input type="checkbox" name="" class="filled-in" id="checkEscola"/><label for="checkEscola">Escola</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkFaculdade"/><label for="checkFaculdade">Faculdade</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkCreche"/><label for="checkCreche">Creche</label></li>
-	</ul>
-
-	<ul id="slideSeguranca" class="side-nav">
-		<li><input type="checkbox" name="" class="filled-in" id="checkPoliciMilitar"/><label for="checkPoliciMilitar">PolÃ­cia Militar</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkPoliciaCivil"/><label for="checkPoliciaCivil">Policia Civil</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkBombeiros"/><label for="checkBombeiros">Bombeiros</label></li>
-	</ul>
-
-	<ul id="slideComodidades" class="side-nav">
-		<li><input type="checkbox" name="" class="filled-in" id="checkSupermercado"/><label for="checkSupermercado">Supermercado</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkPadaria"/><label for="checkPadaria">Padaria</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkRestaurante"/><label for="checkRestaurante">Restaurante</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkLoja"/><label for="checkLoja">Loja</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkPostoDeServicos"/><label for="checkPostoDeServicos">Posto de ServiÃ§os</label></li>
-	</ul>
-
-	<ul id="slideLazer" class="side-nav">
-		<li><input type="checkbox" name="" class="filled-in" id="checkCinema"/><label for="checkCinema">Cinema</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkMuseu"/><label for="checkMuseu">Museu</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkTeatro"/><label for="checkTeatro">Teatro</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkBiblioteca"/><label for="checkBiblioteca">Biblioteca</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkParque"/><label for="checkParque">Parque</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkBar"/><label for="checkBar">Bar</label></li>
-	</ul>
-
-	<ul id="slideTransporte" class="side-nav">
-		<li><input type="checkbox" name="" class="filled-in" id="checkOnibus"/><label for="checkOnibus">Ã”nibus</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkMetro"/><label for="checkMetro">MetrÃ´</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkTaxi"/><label for="checkTaxi">TÃ¡xi</label></li>
-	</ul>
-
-	<ul id="slideOcorrencias" class="side-nav">
-		<li><input type="checkbox" name="" class="filled-in" id="checkAssalto"/><label for="checkAssaltos">Assalto</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkHomicidio"/><label for="checkHomicidio">HomicÃ­dio</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkRouboDeVeiculo"/><label for="checkRouboDeVeiculo">Roubo de veÃ­culo</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkRouboDeImovel"/><label for="checkRouboDeImovel">Roubo de imÃ³vel</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkAcidenteDeTransito"/><label for="checkAcidenteDeTransito">Acidentes de TrÃ¢nsito</label></li>
-		<li><input type="checkbox" name="" class="filled-in" id="checkEnchentes"/><label for="checkEnchentes">Enchente</label></li>
-	</ul>
 
 
 

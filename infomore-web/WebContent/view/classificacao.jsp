@@ -1,103 +1,65 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html ng-app="infomore">
 <head>
 <meta charset="UTF-8">
 
-		<!--Import jQuery before materialize.js-->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
-	<script type="text/javascript" src="js/classificacao.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
+<!-- Import da taglib pra uso de jstl -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPLEj4invnE6TCsJSRR7ePqD7eAAJs4Pw"></script>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/classificacao.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
 
-	<script type="text/javascript" src="js/angular.js"></script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADLLbi_ei8WPPbzyCq5_UUCN0Iy--V3Lo"></script>
 
-	<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/angular.js"></script>
 
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script type="text/javascript" src="js/app.js"></script>
 
-	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 
-	<link href="css/classificacao.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"
+	media="screen,projection" />
 
-	<!--Let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link href="css/classificacao.css" rel="stylesheet">
 
-	<title>Infomore</title>
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Infomore</title>
 </head>
 <body>
 
 	<div class="container">
-		
-		<form action="principal.html" method="post">
 
-		<div class="row">
-			<h4><i class="material-icons">local_hospital</i> Saúde</h4>
-			<p class="range-field">
-				Informe-nos quão importante é pra você a proximidade de farmácias, hospitais, postos de saúde e clínicas.
-				<input type="range" id="rangeSaude" min="0" max="10"/>
-			</p>
-		</div>
-		<!-- método antigo, não sei se vai precisar, achei melhor não apagar totalmente
-		<input type="range" min="1" max="10" value="5" step="1" name="rngSaude" id="rngSaude" oninput="atualizaDados(this);">
-		<output for="rngSaude" name="valorRngSaude" id="valorRngSaude">5</output>
-		-->
+		<form action="classificacao?acao=alterar" method="post">
 			
-		<div class="row">
-			<h4><i class="material-icons">school</i> Educação</h4>
-			<p class="range-field">
-				Informe-nos quão importante é pra você a proximidade de escolas, faculdades e creches.
-				<input type="range" id="rangeEducacao" min="0" max="10"/>
-			</p>
-		</div>
-		
-		<div class="row">
-			<h4><i class="material-icons">security</i> Segurança</h4>
-			<p class="range-field">
-				Informe-nos quão importante é pra você a proximidade de postos de bombeiros, polícia militar e civíl.
-				<input type="range" id="rangeSeguranca" min="0" max="10"/>
-			</p>
-		</div>
-		
-		<div class="row">
-			<h4><i class="material-icons">shopping_cart</i> Comodidades</h4>
-			<p class="range-field">
-				Informe-nos quão importante é pra você a proximidade de supermercados, padarias, restaurantes, lojas e postos de serviços.
-				<input type="range" id="rangeComodidades" min="0" max="10"/>
-			</p>
-		</div>
-			     
-		<div class="row">
-			<h4><i class="material-icons">tag_faces</i> Lazer e Cultura</h4>
-			<p class="range-field">
-				Informe-nos quão importante é pra você a proximidade de cinemas, museus, teatros, bibliotecas, parques e bares.
-				<input type="range" id="rangeLazer" min="0" max="10"/>
-			</p>
-		</div>
+			<!-- Classifica��es criadas dinamicamente ( Lista de ClassificacaoView no init() da Servlet) -->
+			<c:forEach var="classificacaoView" items="${applicationScope['listaClassificacaoView']}">
+				 <div class="row">
+					<h4>
+						<i class="material-icons">${classificacaoView.nomeIcone}</i> ${classificacaoView.categoria.nome}
+					</h4>
+					<p class="range-field">
+						${classificacaoView.categoria.descricao}
+						<input type="range" id="${classificacaoView.nomeId}" name="${classificacaoView.nomeId}" min="0" max="10" />
+					</p>
+				</div>
+			</c:forEach>
 
-		<div class="row">
-			<h4><i class="material-icons">directions_bus</i> Transportes</h4>
-			<p class="range-field">
-				Informe-nos quão importante é pra você a proximidade de pontos de onibus, metrôs, trens e taxis.
-				<input type="range" id="rangeTransporte" min="0" max="10"/>
-			</p>
-		</div>
-		
-		<div class="row">
-			<h4><i class="material-icons">report</i> Ocorrências</h4>
-			<p class="range-field">
-				Informe-nos quão importante é pra você o baixo número de ocorrências de assaltos, homicídios, roubos de veículos, roubo de imóveis, acidentes de trânsitos e enchentes.
-				<input type="range" id="rangeOcorrencias" min="0" max="10"/>
-			</p>
-		</div>
-		
-		<div class="row center-align">
-			<a href="principal.html" class="btn waves-effect waves-light botao" name="btnProsseguir" >Prosseguir</a>
-		</div>
-		
+
+			<div class="row center-align">
+				<input type="submit" class="btn waves-effect waves-light botao"
+					value="Prosseguir" />
+			</div>
+
 		</form>
 
 	</div>

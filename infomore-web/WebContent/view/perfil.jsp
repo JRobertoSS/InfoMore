@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="js/materialize.min.js"></script>	
 	<script type="text/javascript" src="js/perfil.js"></script>
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPLEj4invnE6TCsJSRR7ePqD7eAAJs4Pw"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADLLbi_ei8WPPbzyCq5_UUCN0Iy--V3Lo"></script>
 
 	<script type="text/javascript" src="js/angular.js"></script>
 
@@ -38,7 +38,7 @@
 			<li> <a href="perfil.html" >Atualizar Perfil</a> </li>
 			<li> <a href="senha.html" >Atualizar Senha</a> </li>
 			<li> <a href="#!" >Meus Locais</a> </li>
-			<li> <a href="#!" >RelatÃ³rios</a> </li>
+			<li> <a href="#!" >Relatórios</a> </li>
 			<li class="divider"></li>
 			<li><a href="login.html">Sair</a></li>
 		</ul>

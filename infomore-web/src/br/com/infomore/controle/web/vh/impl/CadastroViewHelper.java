@@ -1,7 +1,6 @@
 package br.com.infomore.controle.web.vh.impl;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -19,12 +18,6 @@ public class CadastroViewHelper implements IViewHelper {
 
     @Override
     public EntidadeDominio getEntity(HttpServletRequest request) {
-	try {
-	    request.setCharacterEncoding("UTF-8");
-	} catch (UnsupportedEncodingException e1) {
-	    // TODO Auto-generated catch block
-	    e1.printStackTrace();
-	}
 
 	Usuario usuario = new Usuario();
 	usuario.setNome(request.getParameter("inputNome"));

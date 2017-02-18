@@ -9,11 +9,17 @@ import br.com.infomore.core.IFachada;
 import br.com.infomore.core.IStrategy;
 import br.com.infomore.core.aplicacao.Resultado;
 import br.com.infomore.core.impl.dao.AbstractDAO;
+import br.com.infomore.core.impl.dao.CategoriaDAO;
+import br.com.infomore.core.impl.dao.LimiteRaioDAO;
+import br.com.infomore.core.impl.dao.PontoDAO;
 import br.com.infomore.core.impl.dao.UsuarioDAO;
 import br.com.infomore.core.impl.negocio.ValidaCamposVazios;
 import br.com.infomore.core.impl.negocio.ValidadorEmailUnico;
+import br.com.infomore.dominio.Categoria;
 import br.com.infomore.dominio.EntidadeDominio;
+import br.com.infomore.dominio.Ponto;
 import br.com.infomore.dominio.Usuario;
+import br.com.infomore.dominio.json.LimiteRaio;
 
 public class Fachada implements IFachada {
 
@@ -39,9 +45,15 @@ public class Fachada implements IFachada {
 
 	/* Criando instâncias dos DAOs a serem utilizados */
 	UsuarioDAO usuarioDao = new UsuarioDAO();
+	CategoriaDAO categoriaDao = new CategoriaDAO();
+	PontoDAO pontoDao = new PontoDAO();
+	LimiteRaioDAO limiteRaioDao = new LimiteRaioDAO();
 
 	/* Adicionando cada dao no MAP indexando pelo nome da classe */
 	daos.put(Usuario.class.getName(), usuarioDao);
+	daos.put(Categoria.class.getName(), categoriaDao);
+	daos.put(Ponto.class.getName(), pontoDao);
+	daos.put(LimiteRaio.class.getName(), limiteRaioDao);
 
 	// RNS A PARTIR DAQUI (implementar)
 	/* Criando instâncias de regras de negócio a serem utilizados */
@@ -54,11 +66,21 @@ public class Fachada implements IFachada {
 	 */
 	List<IStrategy> rnsSalvarUsuario = new ArrayList<IStrategy>();
 	/*
-	 * Adicionando as regras a serem utilizadas na operação salvar ou
-	 * alterar
+	 * Adicionando as regras a serem utilizadas na operação salvar
 	 */
 	rnsSalvarUsuario.add(validaEmail);
 	rnsSalvarUsuario.add(validaCampos);
+
+	/*
+	 * Criando uma lista para conter as regras de negócio quando a operação
+	 * for salvar
+	 */
+	List<IStrategy> rnsAlterarUsuario = new ArrayList<IStrategy>();
+	/*
+	 * Adicionando as regras a serem utilizadas na operação alterar
+	 */
+
+	rnsAlterarUsuario.add(validaCampos);
 
 	/*
 	 * Cria o mapa que poderá conter todas as listas de regras de negócio
@@ -69,7 +91,7 @@ public class Fachada implements IFachada {
 	 * Adiciona a listra de regras na operação salvar no mapa do fabricante
 	 */
 	rnsUsuario.put("salvar", rnsSalvarUsuario);
-	rnsUsuario.put("alterar", rnsSalvarUsuario);
+	rnsUsuario.put("alterar", rnsAlterarUsuario);
 
 	/*
 	 * Adiciona o mapa com as regras indexadas pelas operações no mapa geral
@@ -177,7 +199,9 @@ public class Fachada implements IFachada {
 
 	if (msg == null) {
 	    AbstractDAO<Integer, EntidadeDominio> dao = daos.get(nmClasse);
-	    consulta = dao.listar();
+
+	    consulta = dao.listar(entidade);
+
 	} else {
 	    resultado.setMsg(msg);
 	}

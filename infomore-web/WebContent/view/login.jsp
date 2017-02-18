@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 	
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPLEj4invnE6TCsJSRR7ePqD7eAAJs4Pw"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADLLbi_ei8WPPbzyCq5_UUCN0Iy--V3Lo"></script>
 
 	<script type="text/javascript" src="js/angular.js"></script>
 
@@ -33,12 +33,12 @@
 	<br>
 	<div id="page-content-wrapper" class="container"> 
 		
-		<form action="login?acao=consultar">
+		<form action="login?acao=consultar" method="post">
 
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">email</i>
-					<input id="email" type="email" class="validate" name="">
+					<input id="email" type="email" class="validate" name="inputEmail">
 					<label for="email">Email</label>
 				</div>
 			</div>
@@ -46,7 +46,7 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<i class="material-icons prefix">lock</i>
-					<input id="password" type="password" class="validate" name="">
+					<input id="password" type="password" class="validate" name="inputSenha">
 					<label for="password">Senha</label>
 				</div>
 			</div>

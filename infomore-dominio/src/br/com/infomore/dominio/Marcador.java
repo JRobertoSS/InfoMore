@@ -3,7 +3,6 @@ package br.com.infomore.dominio;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
@@ -20,82 +19,79 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-public abstract class Marcador extends EntidadeDominio{
+public abstract class Marcador extends EntidadeDominio {
 
-	public Marcador() {
-	}
-	
-	@Column(name="latitude")
-	private double latitude;
+    public Marcador() {
+    }
 
-	@Column(name="longitude")
-	private double longitude;
+    @Column(name = "latitude")
+    private double latitude;
 
-	@Column(name="descricao")
-	private String descricao;
+    @Column(name = "longitude")
+    private double longitude;
 
-	@Column(name="ocorrencia")
-	private boolean ocorrencia;
+    @Column(name = "descricao")
+    private String descricao;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="id_tipo_marcador", insertable=true, updatable=true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
-	private TipoMarcador tipoMarcador;
-	
- 
-    @OneToMany(mappedBy="marcador", fetch = FetchType.LAZY)
+    @Column(name = "ocorrencia")
+    private boolean ocorrencia;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_categoria", insertable = true, updatable = true)
+    @Fetch(FetchMode.JOIN)
     @Cascade(CascadeType.ALL)
-	private List<Avaliacao> avaliacoes;
-    
-    
-	public double getLatitude() {
-		return latitude;
-	}
+    private Categoria categoria;
 
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
+    @OneToMany(mappedBy = "marcador", fetch = FetchType.LAZY)
+    @Cascade(CascadeType.ALL)
+    private List<Avaliacao> avaliacoes;
 
-	public double getLongitude() {
-		return longitude;
-	}
+    public double getLatitude() {
+	return latitude;
+    }
 
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
+    public void setLatitude(double latitude) {
+	this.latitude = latitude;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public double getLongitude() {
+	return longitude;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public void setLongitude(double longitude) {
+	this.longitude = longitude;
+    }
 
-	public boolean isOcorrencia() {
-		return ocorrencia;
-	}
+    public String getDescricao() {
+	return descricao;
+    }
 
-	public void setOcorrencia(boolean ocorrencia) {
-		this.ocorrencia = ocorrencia;
-	}
+    public void setDescricao(String descricao) {
+	this.descricao = descricao;
+    }
 
-	public TipoMarcador getTipoMarcador() {
-		return tipoMarcador;
-	}
+    public boolean isOcorrencia() {
+	return ocorrencia;
+    }
 
-	public void setTipoMarcador(TipoMarcador tipoMarcador) {
-		this.tipoMarcador = tipoMarcador;
-	}
+    public void setOcorrencia(boolean ocorrencia) {
+	this.ocorrencia = ocorrencia;
+    }
 
-	public List<Avaliacao> getAvaliacoes() {
-		return avaliacoes;
-	}
+    public Categoria getCategoria() {
+	return categoria;
+    }
 
-	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-		this.avaliacoes = avaliacoes;
-	}
+    public void setCategoria(Categoria categoria) {
+	this.categoria = categoria;
+    }
 
-    
+    public List<Avaliacao> getAvaliacoes() {
+	return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+	this.avaliacoes = avaliacoes;
+    }
+
 }

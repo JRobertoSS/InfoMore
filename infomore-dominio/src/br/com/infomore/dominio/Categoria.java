@@ -1,57 +1,57 @@
 package br.com.infomore.dominio;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 @Entity
-@Table(name="categorias")
-public class Categoria extends EntidadeDominio{
+@Table(name = "categorias")
+public class Categoria extends EntidadeDominio {
+    public static final String SAUDE = "Saúde";
+    public static final String EDUCACAO = "Educação";
+    public static final String SEGURANCA = "Segurança";
+    public static final String COMODIDADES = "Comodidades";
+    public static final String LAZER_CULTURA = "Lazer e Cultura";
+    public static final String TRANSPORTES = "Transportes";
+    public static final String OCORRENCIAS = "Ocorrências";
 
-	public Categoria() {
-	}
-	
-	@Column(name="nome")
-	private String nome;
+    public Categoria() {
+    }
 
-	@Column(name="descricao")
-	private String descricao;
+    @Column(name = "nome")
+    private String nome;
 
-	@OneToMany(mappedBy="categoria", fetch = FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
-	private List<Categoria> categoria;
+    @Column(name = "descricao")
+    private String descricao;
 
-	public String getNome() {
-		return nome;
-	}
+    /*
+     * Isso dá problema de loop infinito no JSON....
+     * 
+     * @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
+     * 
+     * @Cascade(CascadeType.ALL) private List<Categoria> categoria;
+     */
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getNome() {
+	return nome;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setNome(String nome) {
+	this.nome = nome;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public String getDescricao() {
+	return descricao;
+    }
 
-	public List<Categoria> getCategoria() {
-		return categoria;
-	}
+    public void setDescricao(String descricao) {
+	this.descricao = descricao;
+    }
 
-	public void setCategoria(List<Categoria> categoria) {
-		this.categoria = categoria;
-	}
-	
-	
-
+    /*
+     * public List<Categoria> getCategoria() { return categoria; }
+     * 
+     * public void setCategoria(List<Categoria> categoria) { this.categoria =
+     * categoria; }
+     */
 }

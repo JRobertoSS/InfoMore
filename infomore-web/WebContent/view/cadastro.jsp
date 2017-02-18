@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="js/materialize.min.js"></script>	
 	<script type="text/javascript" src="js/cadastro.js"></script>
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPLEj4invnE6TCsJSRR7ePqD7eAAJs4Pw"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADLLbi_ei8WPPbzyCq5_UUCN0Iy--V3Lo"></script>
 
 	<script type="text/javascript" src="js/angular.js"></script>
 
