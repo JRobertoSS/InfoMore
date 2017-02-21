@@ -1,4 +1,14 @@
 
+$('.dropdown-button').dropdown();
+
+/*$("#buttonSaude").sideNav();
+$("#buttonEducacao").sideNav();
+$("#buttonSeguranca").sideNav();
+$("#buttonComodidades").sideNav();
+$("#buttonLazer").sideNav();
+$("#buttonTransporte").sideNav();
+$("#buttonOcorrencias").sideNav();*/
+
 document.mapIcones = new Map();
 
 document.mapIcones.set('Saúde', 'images/icon_saude.png').set('Educação', 'images/icon_educacao.png').set('Segurança', 'images/icon_seguranca.png').set('Comodidades', 'images/icon_comodidades.png').set('Lazer e Cultura', 'images/icon_lazer_cultura.png').set('Transportes', 'images/icon_transporte.png').set('Ocorrências', 'images/icon_ocorrencias.png');
@@ -58,14 +68,14 @@ function criarInfoWindow(conteudo, objetoParaOInfo) {
 function renderizarPontos(pontos) {
 	// JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
 	var list = pontos == null ? [] : (pontos instanceof Array ? pontos : [ pontos ]);
-	
+
 	deleteMarkers(); // remove os marcadores anteriores e reinstancia o array de marcadores
 	$.each(list, function(index, ponto) {
 		var localPonto = new google.maps.LatLng(ponto.latitude, ponto.longitude);
 		var image = {
 			url : document.mapIcones.get(ponto.categoria.nome),
 			anchor : new google.maps.Point(12, 12)
-		} 
+		}
 		var marker = new google.maps.Marker({
 			position : localPonto, // posição do ponto (LatLng)
 			map : document.map, // objeto do mapa
@@ -186,6 +196,26 @@ function inicializaMapa(latitude, longitude) {
 	})
 
 }
+/**
+ * Ao clicar em um botão de filtro de categoria, varre os marcadores e desativa/ativa todos estes marcadores pelo mapa
+ */
+function filtrarCategorias(nomeCategoria) {
+	if (document.markers != undefined && document.markers != null) {
+		// varre os marcadores
+		for (var i = 0; i < document.markers.length; i++) {
+			// compara a url do icone com o mapa de url de icones (baseado no nome da categoria)
+			if (document.markers[i].icon.url == document.mapIcones.get(nomeCategoria)) {
+				// se não está aparecendo no mapa, habilita o ícone
+				if (document.markers[i].getMap() == null)
+					document.markers[i].setMap(document.map);
+				// se está no mapa, desabilita o ícone
+				else
+					document.markers[i].setMap(null);
+			}
+		}
+	}
+}
+
 // método de callback que é chamado em caso de sucesso da recuperação da posição
 // atual
 function success(position) {
@@ -207,13 +237,3 @@ function getLocal() {
 
 // executar o método depois de carregar a página
 /* window.onload = inicializaMapa(-23.505457, -46.187097); */
-
-$('.dropdown-button').dropdown();
-
-$("#buttonSaude").sideNav();
-$("#buttonEducacao").sideNav();
-$("#buttonSeguranca").sideNav();
-$("#buttonComodidades").sideNav();
-$("#buttonLazer").sideNav();
-$("#buttonTransporte").sideNav();
-$("#buttonOcorrencias").sideNav();

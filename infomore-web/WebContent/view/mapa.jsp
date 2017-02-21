@@ -94,7 +94,7 @@
 		
 		<!-- Slides -->
 	
-	<ul id="slideSaude" class="side-nav">
+	<!-- <ul id="slideSaude" class="side-nav">
 		<li><input type="checkbox" name="" class="filled-in" id="checkFarmacia"/><label for="checkFarmacia">Farmácia</label></li>
 		<li><input type="checkbox" name="" class="filled-in" id="checkHospital"/><label for="checkHospital">Hospital</label></li>
 		<li><input type="checkbox" name="" class="filled-in" id="checkPostoSaude"/><label for="checkPostoSaude">Posto de Saúde</label></li>
@@ -143,7 +143,7 @@
 		<li><input type="checkbox" name="" class="filled-in" id="checkRouboDeImovel"/><label for="checkRouboDeImovel">Roubo de imóvel</label></li>
 		<li><input type="checkbox" name="" class="filled-in" id="checkAcidenteDeTransito"/><label for="checkAcidenteDeTransito">Acidentes de Trânsito</label></li>
 		<li><input type="checkbox" name="" class="filled-in" id="checkEnchentes"/><label for="checkEnchentes">Enchente</label></li>
-	</ul>
+	</ul> -->
 	
 		<div class="fixed-action-btn click-to-toggle" style="bottom: 20px; right: 20px;">
 			<a class="btn-floating btn-large pink">
@@ -152,19 +152,19 @@
 
 			<ul>
 				
-				<li><a id="buttonSaude" class="btn-floating red " data-activates="slideSaude"><i class="material-icons">local_hospital</i></a></li>
+				<li><a id="buttonSaude" class="btn-floating red " onclick="filtrarCategorias('Saúde');"><i class="material-icons">local_hospital</i></a></li>
 
-				<li><a id="buttonEducacao" class="btn-floating purple" data-activates="slideEducacao"><i class="material-icons">school</i></a></li>
+				<li><a id="buttonEducacao" class="btn-floating purple" onclick="filtrarCategorias('Educação');"><i class="material-icons">school</i></a></li>
 
-				<li><a id="buttonSeguranca" class="btn-floating black" data-activates="slideSeguranca"><i class="material-icons">security</i></a></li>
+				<li><a id="buttonSeguranca" class="btn-floating black" onclick="filtrarCategorias('Segurança');"><i class="material-icons">security</i></a></li>
 
-				<li><a id="buttonComodidades" class="btn-floating green" data-activates="slideComodidades"><i class="material-icons">shopping_cart</i></a></li>
+				<li><a id="buttonComodidades" class="btn-floating green" onclick="filtrarCategorias('Comodidades');"><i class="material-icons">shopping_cart</i></a></li>
 
-				<li><a id="buttonLazer" class="btn-floating yellow darken-1" data-activates="slideLazer"><i class="material-icons">tag_faces</i></a></li>
+				<li><a id="buttonLazer" class="btn-floating yellow darken-1" onclick="filtrarCategorias('Lazer e Cultura');"><i class="material-icons">tag_faces</i></a></li>
 
-				<li><a id="buttonTransporte" class="btn-floating blue darken-4" data-activates="slideTransporte"><i class="material-icons">directions_bus</i></a></li>
+				<li><a id="buttonTransporte" class="btn-floating blue darken-4" onclick="filtrarCategorias('Transportes');"><i class="material-icons">directions_bus</i></a></li>
 
-				<li><a id="buttonOcorrencias" class="btn-floating orange" data-activates="slideOcorrencias"><i class="large material-icons">report</i></a></li>
+				<li><a id="buttonOcorrencias" class="btn-floating orange" onclick="filtrarCategorias('Ocorrências');"><i class="large material-icons">report</i></a></li>
 			</ul>
 		</div>
 
