@@ -20,9 +20,12 @@
 
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
+	
 
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
+
+<link href="css/comum.css" rel="stylesheet">
 
 <link href="css/mapa.css" rel="stylesheet">
 
@@ -32,7 +35,7 @@
 
 <title>Infomore</title>
 </head>
-<body>
+<body class="corpo">
 
 	<%@include file="menu/navigator.jsp"%>
 

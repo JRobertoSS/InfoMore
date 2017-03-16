@@ -21,9 +21,12 @@
 
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
+			
 
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
+
+<link href="css/comum.css" rel="stylesheet">	
 
 <link href="css/perfil.css" rel="stylesheet">
 
@@ -34,7 +37,7 @@
 
 <title>Infomore</title>
 </head>
-<body>
+<body class="corpo">
 
 	<%@ include file="menu/navigator.jsp"%>
 
@@ -49,33 +52,32 @@
 					<c:set value="${usuario}" var="usuario" scope="request" />
 
 					<div class="input-field col s12">
-						<i class="material-icons prefix">account_circle</i> <label
-							for="inputNome" class="labels">Nome</label> <input id="inputNome"
-							name="inputNome" type="text" class="validate form-input"
+						<i class="material-icons prefix">account_circle</i> 
+						<input id="inputNome" name="inputNome" type="text" class="validate"
 							value="${usuario.nome}">
-
+						<label for="inputNome" >Nome</label> 
 					</div>
 
 					<div class="input-field col s12">
-						<i class="material-icons prefix">email</i> <label for="inputEmail"
-							class="labels">E-mail</label> <input id="inputEmail"
-							name="inputEmail" type="email" class="validate form-input"
+						<i class="material-icons prefix">email</i> 
+						<input id="inputEmail" name="inputEmail" type="email" class="validate"
 							value="${usuario.email}">
+						<label for="inputEmail">E-mail</label> 
 					</div>
 
 
 					<c:set value="${formatador}" var="formatador" scope="request" />
 
 					<div class="input-field col s12">
-						<i class="material-icons prefix">date_range</i> <label
-							for="inputData" class="labels">Data de Nascimento</label><br>
+						<i class="material-icons prefix">date_range</i>
 						<input id="inputData" name="inputData" type="date"
 							class="validate form-input"
 							value="${formatador.formataDateParaString(usuario.dtNascimento)}">
+						<label for="inputData" class="active">Data de Nascimento</label>							
 					</div>
 
 					<div class="center-align">
-						<button class="btn waves-effect waves-light top" type="submit"
+						<button class="btn waves-effect waves-light top botao-confirmar" type="submit"
 							name="action">
 							Atualizar <i class="material-icons right">send</i>
 						</button>

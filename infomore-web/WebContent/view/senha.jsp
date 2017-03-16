@@ -23,8 +23,11 @@
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
+
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
+	
+<link href="css/comum.css" rel="stylesheet">	
 
 <link href="css/perfil.css" rel="stylesheet">
 
@@ -35,7 +38,7 @@
 
 <title>Infomore</title>
 </head>
-<body>
+<body class="corpo">
 
 	<%@ include file="menu/navigator.jsp"%>
 
@@ -48,27 +51,26 @@
 				<div class="row form-content">
 
 					<div class="input-field col s12">
-						<i class="material-icons prefix">lock_outline</i> <label
-							for="inputSenhaAtual" class="labels">Senha atual</label> <input
-							id="inputSenhaAtual" name="inputSenhaAtual" type="password" class="validate form-input">
+						<i class="material-icons prefix">lock_outline</i> 
+						<input id="inputSenhaAtual" name="inputSenhaAtual" type="password" class="validate">
+						<label for="inputSenhaAtual">Senha atual</label> 
 					</div>
 
 					<div class="input-field col s12">
-						<i class="material-icons prefix">lock</i> <label
-							for="inputSenhaNova" class="labels">Senha nova</label> <input
-							id="inputSenhaNova" name="inputSenhaNova" type="password" class="validate form-input">
+						<i class="material-icons prefix">lock</i>
+						<input id="inputSenhaNova" name="inputSenhaNova" type="password" class="validate ">
+						 <label for="inputSenhaNova" >Senha nova</label> 
 					</div>
 
 					<div class="input-field col s12">
-						<i class="material-icons prefix">lock</i> <label
-							for="inputConfirmarSenhaNova" class="labels">Confirmar
-							senha nova</label> <input id="inputConfirmarSenhaNova" 
-							 name="inputConfirmarSenhaNova" type="password"
-							class="validate form-input">
+						<i class="material-icons prefix">lock</i>
+						<input id="inputConfirmarSenhaNova" name="inputConfirmarSenhaNova" type="password"
+							class="validate">
+						 <label for="inputConfirmarSenhaNova" >Confirmar senha nova</label> 							
 					</div>
 
 					<div class="center-align">
-						<button class="btn waves-effect waves-light top" type="submit" name="action">Alterar senha
+						<button class="btn waves-effect waves-light top botao-confirmar" type="submit" name="action">Alterar senha
 							<i class="material-icons right">send</i>
 						</button>
 				<!-- 		<a class="btn waves-effect waves-light top" href="principal.html">Atualizar<i

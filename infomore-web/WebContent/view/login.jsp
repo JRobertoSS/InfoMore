@@ -22,8 +22,12 @@
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet" />
 
+
+
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
+
+<link href="css/comum.css" rel="stylesheet">
 
 <link href="css/login.css" rel="stylesheet" />
 
@@ -34,7 +38,7 @@
 
 <title>Infomore</title>
 </head>
-<body>
+<body class="corpo">
 	<h3>InfoMore</h3>
 	<br>
 	<p>Logo aqui!</p>
@@ -48,22 +52,22 @@
 			<input type="hidden" name="acao" value="consultar" />
 			<div class="row">
 				<div class="input-field col s12">
-					<i class="material-icons prefix">email</i> <input id="email"
-						type="email" class="validate" name="inputEmail"> <label
-						for="email">Email</label>
+					<i class="material-icons prefix">email</i> 
+					<input id="email" type="email" class="validate" name="inputEmail">
+					<label for="email">E-mail</label>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s12">
-					<i class="material-icons prefix">lock</i> <input id="password"
-						type="password" class="validate" name="inputSenha"> <label
-						for="password">Senha</label>
+					<i class="material-icons prefix">lock</i> 
+					<input id="senha" type="password" class="validate" name="inputSenha"> 
+					<label for="senha">Senha</label>
 				</div>
 			</div>
 
 			<div class="center-align">
-				<input type="submit" class="waves-effect waves-light btn botao"
+				<input type="submit" class="waves-effect waves-light btn botao-confirma"
 					name="buttonEntrar" value="Entrar" />
 			</div>
 
@@ -74,7 +78,7 @@
 
 		</form>
 
-		<%@ include file="modal/mensagem.jsp" %>
+		<%@ include file="modal/mensagem.jsp"%>
 	</div>
 
 
