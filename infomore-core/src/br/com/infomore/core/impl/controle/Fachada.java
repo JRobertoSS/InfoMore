@@ -13,13 +13,15 @@ import br.com.infomore.core.impl.dao.CategoriaDAO;
 import br.com.infomore.core.impl.dao.LimiteRaioDAO;
 import br.com.infomore.core.impl.dao.PontoDAO;
 import br.com.infomore.core.impl.dao.UsuarioDAO;
-import br.com.infomore.core.impl.negocio.ValidaCamposVazios;
-import br.com.infomore.core.impl.negocio.ValidadorEmailUnico;
+import br.com.infomore.core.impl.negocio.usuario.ValidaAlteracaoSenhaUsuario;
+import br.com.infomore.core.impl.negocio.usuario.ValidaCamposVaziosUsuario;
+import br.com.infomore.core.impl.negocio.usuario.ValidaEmailUnicoUsuario;
+import br.com.infomore.core.impl.negocio.usuario.ValidarLoginUsuario;
 import br.com.infomore.dominio.Categoria;
 import br.com.infomore.dominio.EntidadeDominio;
+import br.com.infomore.dominio.LimiteRaio;
 import br.com.infomore.dominio.Ponto;
 import br.com.infomore.dominio.Usuario;
-import br.com.infomore.dominio.json.LimiteRaio;
 
 public class Fachada implements IFachada {
 
@@ -38,12 +40,19 @@ public class Fachada implements IFachada {
     private Resultado resultado;
 
     public Fachada() {
-	/* Instanciândo o Map de DAOS */
+
+	/**
+	 * -------------- MAPAS DE DAO E STRATEGY---------------------
+	 */
+	// mapa de Daos
 	daos = new HashMap<String, AbstractDAO>();
-	/* Instanciândo o Map de Regras de Negócio */
+	// mapa de Strategies
 	rns = new HashMap<String, Map<String, List<IStrategy>>>();
 
-	/* Criando instâncias dos DAOs a serem utilizados */
+	/**
+	 * -------------- DAOS ---------------------
+	 */
+	// instâncias
 	UsuarioDAO usuarioDao = new UsuarioDAO();
 	CategoriaDAO categoriaDao = new CategoriaDAO();
 	PontoDAO pontoDao = new PontoDAO();
@@ -55,11 +64,14 @@ public class Fachada implements IFachada {
 	daos.put(Ponto.class.getName(), pontoDao);
 	daos.put(LimiteRaio.class.getName(), limiteRaioDao);
 
-	// RNS A PARTIR DAQUI (implementar)
+	/**
+	 * -------------- REGRAS DE NEGÓCIO ---------------------
+	 */
 	/* Criando instâncias de regras de negócio a serem utilizados */
-	ValidadorEmailUnico validaEmail = new ValidadorEmailUnico();
-	ValidaCamposVazios validaCampos = new ValidaCamposVazios();
-
+	ValidaEmailUnicoUsuario validaEmail = new ValidaEmailUnicoUsuario();
+	ValidaCamposVaziosUsuario validaCampos = new ValidaCamposVaziosUsuario();
+	ValidaAlteracaoSenhaUsuario validaSenha = new ValidaAlteracaoSenhaUsuario();
+	ValidarLoginUsuario validaLogin = new ValidarLoginUsuario();
 	/*
 	 * Criando uma lista para conter as regras de negócio quando a operação
 	 * for salvar
@@ -73,31 +85,48 @@ public class Fachada implements IFachada {
 
 	/*
 	 * Criando uma lista para conter as regras de negócio quando a operação
-	 * for salvar
+	 * for alterar
 	 */
 	List<IStrategy> rnsAlterarUsuario = new ArrayList<IStrategy>();
+
 	/*
 	 * Adicionando as regras a serem utilizadas na operação alterar
 	 */
-
+	rnsAlterarUsuario.add(validaEmail);
 	rnsAlterarUsuario.add(validaCampos);
+	rnsAlterarUsuario.add(validaSenha);
 
 	/*
-	 * Cria o mapa que poderá conter todas as listas de regras de negócio
-	 * específica por operação do fabricante
+	 * Criando uma lista para conter as regras de negócio quando a operação
+	 * for consultar
 	 */
-	Map<String, List<IStrategy>> rnsUsuario = new HashMap<String, List<IStrategy>>();
+	List<IStrategy> rnsConsultarUsuario = new ArrayList<IStrategy>();
+
 	/*
-	 * Adiciona a listra de regras na operação salvar no mapa do fabricante
+	 * Adicionando as regras a serem utilizadas na operação consultar
+	 */
+	rnsConsultarUsuario.add(validaLogin);
+
+	/**
+	 * Cria o mapa que poderá conter todas as listas de regras de negócio
+	 * específica por operação
+	 */
+
+	Map<String, List<IStrategy>> rnsUsuario = new HashMap<String, List<IStrategy>>();
+	Map<String, List<IStrategy>> rnsSenha = new HashMap<String, List<IStrategy>>();
+	/*
+	 * Adiciona a listaa de regras na operação salvar no mapa do usuario
 	 */
 	rnsUsuario.put("salvar", rnsSalvarUsuario);
 	rnsUsuario.put("alterar", rnsAlterarUsuario);
+	rnsUsuario.put("consultar", rnsConsultarUsuario);
 
 	/*
 	 * Adiciona o mapa com as regras indexadas pelas operações no mapa geral
 	 * indexado pelo nome da entidade
 	 */
 	rns.put(Usuario.class.getName(), rnsUsuario);
+
     }
 
     @Override

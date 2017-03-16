@@ -21,8 +21,13 @@ public class NavegarViewHelper implements IViewHelper {
     @Override
     public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 	    throws IOException, ServletException {
+	String acao = request.getParameter("acao");
+
+	if (acao == null || acao.isEmpty())
+	    acao = "login";
+
 	// redireciona pra página do mesmo nome do parâmetro 'acao' da request
-	request.getRequestDispatcher("view/" + request.getParameter("acao") + ".jsp").forward(request, response);
+	request.getRequestDispatcher("view/" + acao + ".jsp").forward(request, response);
 
     }
 

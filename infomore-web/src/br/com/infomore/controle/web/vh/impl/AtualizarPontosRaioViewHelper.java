@@ -15,8 +15,8 @@ import com.google.gson.Gson;
 import br.com.infomore.controle.web.vh.IViewHelper;
 import br.com.infomore.core.aplicacao.Resultado;
 import br.com.infomore.dominio.EntidadeDominio;
+import br.com.infomore.dominio.LimiteRaio;
 import br.com.infomore.dominio.Ponto;
-import br.com.infomore.dominio.json.LimiteRaio;
 
 public class AtualizarPontosRaioViewHelper implements IViewHelper {
 

@@ -1,5 +1,10 @@
+// habilita o menu navigator.jsp
+$(document).ready(function() {
+	$(".dropdown-button").dropdown({
+		hover : false
+	});
+});
 
-$('.dropdown-button').dropdown();
 
 /*$("#buttonSaude").sideNav();
 $("#buttonEducacao").sideNav();
@@ -234,6 +239,8 @@ function getLocal() {
 	}
 }
 ;
+
+
 
 // executar o método depois de carregar a página
 /* window.onload = inicializaMapa(-23.505457, -46.187097); */

@@ -1,101 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html ng-app="infomore">
 <head>
 <meta charset="UTF-8">
 
+<!-- Import da taglib pra uso de jstl -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!--Import jQuery before materialize.js-->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>	
-	<script type="text/javascript" src="js/perfil.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/perfil.js"></script>
+<script type="text/javascript" src="js/comum.js"></script>
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADLLbi_ei8WPPbzyCq5_UUCN0Iy--V3Lo"></script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADLLbi_ei8WPPbzyCq5_UUCN0Iy--V3Lo"></script>
 
-	<script type="text/javascript" src="js/angular.js"></script>
 
-	<script type="text/javascript" src="js/app.js"></script>
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"
+	media="screen,projection" />
 
-	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<link href="css/perfil.css" rel="stylesheet">
 
-	<link href="css/perfil.css" rel="stylesheet">
 
-	
 
-	<!--Let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<title>Infomore</title>
+<title>Infomore</title>
 </head>
 <body>
 
-	<nav>
-		
-		<ul id="dropdownOpcoes" class="dropdown-content">
-			<li> <a href="principal.html" >Mapa</a> </li>
-			<li> <a href="perfil.html" >Atualizar Perfil</a> </li>
-			<li> <a href="senha.html" >Atualizar Senha</a> </li>
-			<li> <a href="#!" >Meus Locais</a> </li>
-			<li> <a href="#!" >Relatórios</a> </li>
-			<li class="divider"></li>
-			<li><a href="login.html">Sair</a></li>
-		</ul>
-
-		<div class="nav-wrapper teal menuNav">
-			
-			<ul id="nav-mobile" class="left">
-				<li><h3 class="meuPerfil">Meu Perfil</h3></li>
-			</ul>
-
-			<ul id="nav-mobile" class="right">
-				<li><a href="#" id="dropdownButtonOpcoes" class="dropdown-button" data-beloworigin="true" data-activates="dropdownOpcoes"><i class="material-icons">settings</i></a></li>
-			</ul>
-
-		</div>
-
-	</nav>
+	<%@ include file="menu/navigator.jsp"%>
 
 	<div class="container">
 		<div class="row">
-		    <form class="col s12">
+			<form class="col s12" action="perfil" method="post">
+
+				<input type="hidden" name="acao" value="alterar">
 
 				<div class="row form-content">
 
+					<c:set value="${usuario}" var="usuario" scope="request" />
+
 					<div class="input-field col s12">
-						<i class="material-icons prefix">account_circle</i>
-						<label for="inputNome" class="labels">Nome</label>
-						<input id="inputNome" type="text" class="validate form-input">
+						<i class="material-icons prefix">account_circle</i> <label
+							for="inputNome" class="labels">Nome</label> <input id="inputNome"
+							name="inputNome" type="text" class="validate form-input"
+							value="${usuario.nome}">
+
 					</div>
 
 					<div class="input-field col s12">
-						<i class="material-icons prefix">email</i>
-						<label for="inputEmail" class="labels">E-mail</label>
-						<input id="inputEmail" type="tel" class="validate form-input">
+						<i class="material-icons prefix">email</i> <label for="inputEmail"
+							class="labels">E-mail</label> <input id="inputEmail"
+							name="inputEmail" type="email" class="validate form-input"
+							value="${usuario.email}">
 					</div>
 
+
+					<c:set value="${formatador}" var="formatador" scope="request" />
+
 					<div class="input-field col s12">
-						<i class="material-icons prefix">date_range</i>
-						<label for="inputData" class="labels">Data de Nascimento</label><br>
-						<input id="inputData" type="date" class="validate form-input">
+						<i class="material-icons prefix">date_range</i> <label
+							for="inputData" class="labels">Data de Nascimento</label><br>
+						<input id="inputData" name="inputData" type="date"
+							class="validate form-input"
+							value="${formatador.formataDateParaString(usuario.dtNascimento)}">
 					</div>
 
 					<div class="center-align">
-						<!--<button class="btn waves-effect waves-light top" type="submit" name="action">Atualizar
-							<i class="material-icons right">send</i>
-						</button>-->
-						<a class="btn waves-effect waves-light top" href="principal.html">Atualizar<i class="material-icons right">send</i></a>
+						<button class="btn waves-effect waves-light top" type="submit"
+							name="action">
+							Atualizar <i class="material-icons right">send</i>
+						</button>
+						<!-- <a class="btn waves-effect waves-light top" href="principal.html">Atualizar<i class="material-icons right">send</i></a> -->
 					</div>
+
+					<%@ include file="modal/mensagem.jsp" %>
 				</div>
 
-		    </form>
-	  	</div>
+			</form>
+		</div>
 
 	</div>
 
-	
-	
+
+
 
 </body>
 </html>

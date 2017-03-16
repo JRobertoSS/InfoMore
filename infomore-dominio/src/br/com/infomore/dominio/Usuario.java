@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -22,6 +23,9 @@ public class Usuario extends Pessoa {
     public Usuario() {
 
     }
+
+    @Transient
+    private SenhaUsuario senhaUsuario;
 
     @Column(name = "email")
     private String email;
@@ -53,6 +57,14 @@ public class Usuario extends Pessoa {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)
     private List<Ponto> pontosIndicados;
+
+    public SenhaUsuario getSenhaUsuario() {
+	return senhaUsuario;
+    }
+
+    public void setSenhaUsuario(SenhaUsuario senhaUsuario) {
+	this.senhaUsuario = senhaUsuario;
+    }
 
     public String getEmail() {
 	return email;

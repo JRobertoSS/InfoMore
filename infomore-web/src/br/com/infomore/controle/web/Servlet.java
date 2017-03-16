@@ -24,6 +24,7 @@ import br.com.infomore.controle.web.vh.impl.ClassificacaoViewHelper;
 import br.com.infomore.controle.web.vh.impl.LoginViewHelper;
 import br.com.infomore.controle.web.vh.impl.NavegarViewHelper;
 import br.com.infomore.controle.web.vh.impl.PerfilViewHelper;
+import br.com.infomore.controle.web.vh.impl.SenhaViewHelper;
 import br.com.infomore.controle.web.view.ClassificacaoView;
 import br.com.infomore.core.aplicacao.Resultado;
 import br.com.infomore.core.impl.controle.Fachada;
@@ -71,6 +72,8 @@ public class Servlet extends HttpServlet {
 
     protected void doProcessRequest(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
+	// Limpa o objeto de mensagem da request
+	request.setAttribute("mensagem", null);
 
 	// Obtêm a uri que invocou esta servlet (O que foi definido no method do
 	// form html)
@@ -155,11 +158,13 @@ public class Servlet extends HttpServlet {
 	 * A chave do mapa é o mapeamento da servlet para cada form que está
 	 * configurado no web.xml e sendo utilizada no action do html
 	 */
+	vhs.put("/infomore/", new NavegarViewHelper());
 	vhs.put("/infomore/navegar", new NavegarViewHelper());
-	vhs.put("/infomore/login", new LoginViewHelper());
 	vhs.put("/infomore/cadastro", new CadastroViewHelper());
+	vhs.put("/infomore/login", new LoginViewHelper());
 	vhs.put("/infomore/perfil", new PerfilViewHelper());
-	vhs.put("/infomore/classificacao", new ClassificacaoViewHelper(getServletContext()));
+	vhs.put("/infomore/senha", new SenhaViewHelper());
+	vhs.put("/infomore/classificacao", new ClassificacaoViewHelper(getServletContext())); // este VH precisa do contexto da servlet para montar a página dinamicamente
 	vhs.put("/infomore/atualizaPontosRaio", new AtualizarPontosRaioViewHelper());
 
 	super.init();

@@ -1,0 +1,17 @@
+
+.btn-small {
+	text-transform: none;
+	height: 18px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #2EA9AB;
+	padding-left: 0px;
+	margin-left: 0px;
+
+}
+
+
+.divider {
+	color: #AAA;
+	background: #AAA;
+}

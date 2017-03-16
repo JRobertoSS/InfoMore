@@ -115,7 +115,7 @@ public class ClassificacaoViewHelper implements IViewHelper {
     @Override
     public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
-	RequestDispatcher d = request.getRequestDispatcher("view/local.jsp");
+	RequestDispatcher d = request.getRequestDispatcher("view/mapa.jsp");
 
 	d.forward(request, response);
     }

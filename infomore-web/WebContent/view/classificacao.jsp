@@ -13,14 +13,12 @@
 	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="js/classificacao.js"></script>
+<script type="text/javascript" src="js/comum.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADLLbi_ei8WPPbzyCq5_UUCN0Iy--V3Lo"></script>
 
-<script type="text/javascript" src="js/angular.js"></script>
-
-<script type="text/javascript" src="js/app.js"></script>
 
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">

@@ -6,8 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.infomore.dominio.EntidadeDominio;
+import br.com.infomore.dominio.LimiteRaio;
 import br.com.infomore.dominio.Ponto;
-import br.com.infomore.dominio.json.LimiteRaio;
 
 public class LimiteRaioDAO extends AbstractDAO<Long, Ponto> {
 

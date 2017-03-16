@@ -9,7 +9,7 @@ import javax.persistence.Query;
 import br.com.infomore.dominio.EntidadeDominio;
 import br.com.infomore.dominio.Usuario;
 
-public class UsuarioDAO extends AbstractDAO<Long, Usuario> {
+public class UsuarioDAO extends AbstractDAO<Integer, Usuario> {
 
     public UsuarioDAO() {
 	super(Usuario.class);
@@ -28,9 +28,10 @@ public class UsuarioDAO extends AbstractDAO<Long, Usuario> {
     }
 
     @Override
-    public Usuario consultar(Usuario usuario, Long chave) {
-	// TODO Auto-generated method stub
-	return consultarPorEmail(usuario.getEmail());
+    public Usuario consultar(Usuario usuario, Integer chave) {
+	if (chave == null)
+	    return consultarPorEmail(usuario.getEmail());
+	return super.consultar(usuario, chave);
     }
 
     @Override

@@ -15,9 +15,7 @@
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADLLbi_ei8WPPbzyCq5_UUCN0Iy--V3Lo"></script>
 
-<script type="text/javascript" src="js/angular.js"></script>
 
-<script type="text/javascript" src="js/app.js"></script>
 
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">

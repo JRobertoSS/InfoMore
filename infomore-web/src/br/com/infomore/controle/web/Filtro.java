@@ -39,14 +39,19 @@ public class Filtro implements Filter {
 	HttpServletRequest requisicao = (HttpServletRequest) request;
 	String uri = requisicao.getRequestURI();
 	String acao = requisicao.getParameter("acao");
+
+	if (uri.equals("/infomore/")) {
+	    requisicao.getRequestDispatcher("view/login.jsp").forward(request, response);
+	}
 	// deixar passar a requisição ?
-	if (requisicao.getSession().getAttribute("usuario") != null
+	else if (requisicao.getSession().getAttribute("usuario") != null
 		|| uri.matches(".*(css|jpg|png|gif|js|woff|woff2|ttf)$")
 		|| (uri.contains("/navegar") && "cadastro".equals(acao) || "login".equals(acao))
 		|| uri.contains("/cadastro") || uri.contains("/login")) {
 	    chain.doFilter(request, response); // deixa passar a request
 	} else {
 	    // redireciona para o login
+	    requisicao.getSession().setAttribute("usuario", null);
 	    requisicao.getRequestDispatcher("view/login.jsp").forward(request, response);
 	}
     }
