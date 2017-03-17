@@ -26,73 +26,81 @@
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
 
-<link href="css/comum.css" rel="stylesheet">	
+<link href="css/comum.css" rel="stylesheet">
 
 <link href="css/perfil.css" rel="stylesheet">
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Infomore</title>
+<title>Cadastro</title>
 </head>
 <body class="corpo">
-	<nav>
-	<div class="nav-wrapper teal menuNav">
-		<ul id="nav-mobile" class="left">
-			<h4 class="cadastro">Cadastro</h4>
-		</ul>
-	</div>
-	</nav>
+	<h3>InfoMore Logo</h3>
 
-	<div class="container">
+	<div id="page-content-wrapper" class="container">
 		<form action="cadastro" method="post" class="col s12">
-		
-			<input type="hidden" name="acao" value="salvar">
-			
 			<div class="row form-content">
-				<div class="input-field col s12">
-					<i class="material-icons prefix">account_circle</i> 
-					<input id="inputNome" name="inputNome" type="text" class="validate">
-					<label for="inputNome" >Nome</label> 
+				<div class="input-field col s10">
+					<i class="material-icons prefix">account_circle</i> <input
+						id="inputNome" name="inputNome" type="text" class="validate">
+					<label for="inputNome">Nome</label>
 				</div>
 
-				<div class="input-field col s12">
-					<i class="material-icons prefix">email</i> 
-					<input id="inputEmail" name="inputEmail" type="email" class="validate">
-					<label for="inputEmail">E-mail</label> 
+				<div class="input-field col s10">
+					<i class="material-icons prefix">email</i> <input id="inputEmail"
+						name="inputEmail" type="email" class="validate"> <label
+						for="inputEmail">E-mail</label>
 				</div>
 
-				<div class="input-field col s12">
-					<i class="material-icons prefix">date_range</i> 
-					<input id="inputData" name="inputData" type="date" class="datepicker">
+				<div class="input-field col s10">
+					<i class="material-icons prefix">date_range</i> <input
+						id="inputData" name="inputData" type="date" class="datepicker">
 					<label for="inputData" class="active">Data de Nascimento</label>
-						
+
 				</div>
 
-				<div class="input-field col s12">
-					<i class="material-icons prefix">lock</i> 
-					<input id="inputSenha" name="inputSenha" type="password" class="validate">
-					<label for="Senha">Senha</label> 
+				<div class="input-field col s10">
+					<i class="material-icons prefix">lock</i> <input id="inputSenha"
+						name="inputSenha" type="password" class="validate"> <label
+						for="inputSenha">Senha</label>
+				</div>
+
+				<div class="input-field col s10">
+					<i class="material-icons prefix">lock</i> <input
+						id="inputConfirmaSenha" name="inputConfirmaSenha" type="password"
+						class="validate"> <label for="inputConfirmaSenha">Confirma
+						Senha</label>
+				</div>
+
+			</div>
+
+			<div class="row form-content">
+				<div class="row col s12 center-align">
+					<div class="col s6">
+						<input
+							class="waves-effect waves-light btn botao-cadastrar center-align"
+							name="buttonCadastrar" type="submit" value="Cadastrar" />
+					</div>
+					<div class="col s6">
+						<a class="waves-effect waves-light btn botao-cancelar"
+							href="navegar?acao=login">Cancelar</a>
+					</div>
+
+				</div>
+				<div class="row col s12 center-align">
+					<div class="col s12">
+						<a class="waves-effect waves-light btn botao-limpar"
+							href="navegar?acao=cadastro">Limpar dados</a>
+					</div>
 				</div>
 			</div>
 
-			<div class="row center-align">
-				<div class="col s6">
-					<input class="waves-effect waves-light btn botao-confirma" type="submit"
-						value="Cadastrar" />
-				</div>
-				<div class="col s6">
-					<a class="btn waves-effect waves-teal white black-text"
-						href="navegar?acao=cadastro">Limpar</a>
-				</div>
-			</div>
-			<div class="center-align">
-				<a class="btn waves-effect waves-teal lighten-1 blue"
-					href="navegar?acao=login">Cancelar</a>
-			</div>
+
+			<input type="hidden" name="acao" value="salvar">
 		</form>
 
-		<%@ include file="modal/mensagem.jsp" %>
+		<%@ include file="modal/mensagem.jsp"%>
 
 	</div>
 

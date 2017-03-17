@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <!-- Import da taglib pra uso de jstl -->
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript"
@@ -26,10 +26,10 @@
 
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
-	
-<link href="css/comum.css" rel="stylesheet">	
 
-<link href="css/perfil.css" rel="stylesheet">
+<link href="css/comum.css" rel="stylesheet">
+
+<link href="css/senha.css" rel="stylesheet">
 
 
 
@@ -42,38 +42,46 @@
 
 	<%@ include file="menu/navigator.jsp"%>
 
-	<div class="container">
+	<div class="container espacamento-container">
 		<div class="row">
 			<form class="col s12" action="senha" method="post">
-				
-				<input type="hidden" name="acao" value="alterar"/>
+
+				<input type="hidden" name="acao" value="alterar" />
 
 				<div class="row form-content">
 
-					<div class="input-field col s12">
-						<i class="material-icons prefix">lock_outline</i> 
-						<input id="inputSenhaAtual" name="inputSenhaAtual" type="password" class="validate">
-						<label for="inputSenhaAtual">Senha atual</label> 
+					<div class="input-field col s10">
+						<i class="material-icons prefix">lock_outline</i> <input
+							id="inputSenhaAtual" name="inputSenhaAtual" type="password"
+							class="validate"> <label for="inputSenhaAtual">Senha
+							atual</label>
 					</div>
 
-					<div class="input-field col s12">
-						<i class="material-icons prefix">lock</i>
-						<input id="inputSenhaNova" name="inputSenhaNova" type="password" class="validate ">
-						 <label for="inputSenhaNova" >Senha nova</label> 
+					<div class="input-field col s10">
+						<i class="material-icons prefix">lock</i> <input
+							id="inputSenhaNova" name="inputSenhaNova" type="password"
+							class="validate "> <label for="inputSenhaNova">Senha
+							nova</label>
 					</div>
 
-					<div class="input-field col s12">
-						<i class="material-icons prefix">lock</i>
-						<input id="inputConfirmarSenhaNova" name="inputConfirmarSenhaNova" type="password"
-							class="validate">
-						 <label for="inputConfirmarSenhaNova" >Confirmar senha nova</label> 							
+					<div class="input-field col s10">
+						<i class="material-icons prefix">lock</i> <input
+							id="inputConfirmarSenhaNova" name="inputConfirmarSenhaNova"
+							type="password" class="validate"> <label
+							for="inputConfirmarSenhaNova">Confirmar senha nova</label>
 					</div>
 
-					<div class="center-align">
-						<button class="btn waves-effect waves-light top botao-confirmar" type="submit" name="action">Alterar senha
-							<i class="material-icons right">send</i>
+
+				</div>
+
+				<div class="row col s12 center-align">
+					<div class="col s12">
+						
+						<button class="btn waves-effect waves-light top botao-alterar"
+							type="submit" name="action">
+							Alterar senha <i class="material-icons right">send</i>
 						</button>
-				<!-- 		<a class="btn waves-effect waves-light top" href="principal.html">Atualizar<i
+						<!-- 		<a class="btn waves-effect waves-light top" href="principal.html">Atualizar<i
 							class="material-icons right">send</i></a> -->
 					</div>
 				</div>
@@ -81,7 +89,7 @@
 			</form>
 		</div>
 
-			<%@ include file="modal/mensagem.jsp" %>
+		<%@ include file="modal/mensagem.jsp"%>
 	</div>
 
 

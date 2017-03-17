@@ -25,7 +25,8 @@ public class CadastroViewHelper implements IViewHelper {
 	usuario.setExecutarWizard(true);
 
 	String dataString = request.getParameter("inputData");
-	usuario.setDtNascimento(FormatadorUtil.formataStringParaDate(dataString));
+	if (dataString != null)
+	    usuario.setDtNascimento(FormatadorUtil.formataStringParaDate(dataString));
 
 	return usuario;
     }

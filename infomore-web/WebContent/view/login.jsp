@@ -39,43 +39,47 @@
 <title>Infomore</title>
 </head>
 <body class="corpo">
-	<h3>InfoMore</h3>
-	<br>
-	<p>Logo aqui!</p>
-	<br>
+	<h3>InfoMore Logo</h3>
 	<br>
 	<br>
 	<div id="page-content-wrapper" class="container">
 
 		<form action="login" method="post">
 
+			<div class="form-content">
+				<div class="row">
+					<div class="input-field col s10">
+						<i class="material-icons prefix">email</i> <input id="email"
+							type="email" class="validate" name="inputEmail"> <label
+							for="email">E-mail</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s10">
+						<i class="material-icons prefix">lock</i> <input id="senha"
+							type="password" class="validate" name="inputSenha"> <label
+							for="senha">Senha</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="center-align">
+						<input type="submit"
+							class="waves-effect waves-light btn botao-entrar"
+							name="buttonEntrar" value="Entrar" />
+					</div>
+				</div>
+				<br>
+
+				<div class="row">
+					<div class="center-align">
+						<a class="waves-effect waves-light links"
+							href="navegar?acao=cadastro">Sou novo por aqui!</a>
+					</div>
+				</div>
+			</div>
 			<input type="hidden" name="acao" value="consultar" />
-			<div class="row">
-				<div class="input-field col s12">
-					<i class="material-icons prefix">email</i> 
-					<input id="email" type="email" class="validate" name="inputEmail">
-					<label for="email">E-mail</label>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="input-field col s12">
-					<i class="material-icons prefix">lock</i> 
-					<input id="senha" type="password" class="validate" name="inputSenha"> 
-					<label for="senha">Senha</label>
-				</div>
-			</div>
-
-			<div class="center-align">
-				<input type="submit" class="waves-effect waves-light btn botao-confirma"
-					name="buttonEntrar" value="Entrar" />
-			</div>
-
-			<div class="center-align">
-				<a class="waves-effect" href="navegar?acao=cadastro">Sou novo
-					por aqui!</a>
-			</div>
-
 		</form>
 
 		<%@ include file="modal/mensagem.jsp"%>

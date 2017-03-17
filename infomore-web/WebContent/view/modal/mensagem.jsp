@@ -9,7 +9,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('.modal').openModal();
+			$('.modal').modal().modal('open');
 		});
 	</script>
 </c:if>

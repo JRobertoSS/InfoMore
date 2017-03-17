@@ -1,13 +1,26 @@
+/* cor de funto, aplicado ao body*/
 .corpo {
 	background-color: #2EA9AB;
 }
 
+/* dá um espaçamento nos inputs, excluindo os botões (submit) */
+.input-field input {
+	padding-left: 50px;
+}
+
+.input-field input[type=submit] {
+	padding-left: 0px;
+}
+
+/* segue agora todas as configurações de inputs*/
 .input-field input[type=text] {
 	height: 30px;
 }
+
 .input-field input[type=date] {
 	height: 30px;
 }
+
 .input-field input[type=email] {
 	height: 30px;
 }
@@ -64,22 +77,22 @@
 /* label underline focus color */
 .input-field input[type=text]:focus {
 	border-bottom: 1px solid #FFF;
-	box-shadow: 0 1px 0 0 #FFF;
+	box-shadow: 0 0 0 0 #FFF;
 }
 /* label underline focus color */
 .input-field input[type=date]:focus {
 	border-bottom: 1px solid #FFF;
-	box-shadow: 0 1px 0 0 #FFF;
+	box-shadow: 0 0 0 0 #FFF;
 }
 /* label underline focus color */
 .input-field input[type=email]:focus {
 	border-bottom: 1px solid #FFF;
-	box-shadow: 0 1px 0 0 #FFF;
+	box-shadow: 0 0 0 0 #FFF;
 }
 /* label underline focus color */
 .input-field input[type=password]:focus {
 	border-bottom: 1px solid #FFF;
-	box-shadow: 0 1px 0 0 #FFF;
+	box-shadow: 0 0 0 0 #FFF;
 }
 /* valid color */
 .input-field input[type=text].valid {
@@ -126,20 +139,58 @@
 	color: #FFF;
 }
 
-.botao-confirma {
-	background-color: #DE2E76;
+.btn {
 	text-transform: none;
+	font-size: 15px;
+	width: 110px;
+}
+
+.btn:hover {
+	background-color: #509090;
+	font-size: 17px;
+	font-weight: bold;
+	width: 120px;
+}
+.botao-entrar {
+	background-color: #DE2E76;
 	font-size: 16px;
+	font-weight: bold;
 	padding-top: 5px;
+	padding-left: 23px;
+	
+}
+.botao-cadastrar {
+	background-color: #DE2E76;
+	padding-top: 7px;
+	padding-left: 18px;
+	
+}
+.botao-limpar {
+	width: 160px;
+	background-color: #FFF;
+	color: #000;
 }
 
-input.botao {
-	top: 20px;
-	width: 200px;
-}
-
-a {
+.botao-cancelar{
+	background-color: #408080;
 	color: #FFF;
-	font-size: 18px;
-	margin-top: 25px;
 }
+
+
+.links {
+	text-transform: none;
+	font-size: 18px;
+	font-weight: bold;
+	color: #FFF;
+}
+
+a:hover {
+	text-transform: none;
+	font-size: 20px;
+	font-weight: bolder;
+	color: #EEE;
+}
+.espacamento-container{
+	padding-top: 130px;	
+}
+

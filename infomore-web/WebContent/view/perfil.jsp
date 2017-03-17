@@ -21,12 +21,12 @@
 
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-			
+
 
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
 
-<link href="css/comum.css" rel="stylesheet">	
+<link href="css/comum.css" rel="stylesheet">
 
 <link href="css/perfil.css" rel="stylesheet">
 
@@ -41,7 +41,7 @@
 
 	<%@ include file="menu/navigator.jsp"%>
 
-	<div class="container">
+	<div class="container espacamento-container">
 		<div class="row">
 			<form class="col s12" action="perfil" method="post">
 
@@ -51,42 +51,45 @@
 
 					<c:set value="${usuario}" var="usuario" scope="request" />
 
-					<div class="input-field col s12">
-						<i class="material-icons prefix">account_circle</i> 
-						<input id="inputNome" name="inputNome" type="text" class="validate"
-							value="${usuario.nome}">
-						<label for="inputNome" >Nome</label> 
+					<div class="input-field col s10">
+						<i class="material-icons prefix">account_circle</i> <input
+							id="inputNome" name="inputNome" type="text" class="validate"
+							value="${usuario.nome}"> <label for="inputNome">Nome</label>
 					</div>
 
-					<div class="input-field col s12">
-						<i class="material-icons prefix">email</i> 
-						<input id="inputEmail" name="inputEmail" type="email" class="validate"
-							value="${usuario.email}">
-						<label for="inputEmail">E-mail</label> 
+					<div class="input-field col s10">
+						<i class="material-icons prefix">email</i> <input id="inputEmail"
+							name="inputEmail" type="email" class="validate"
+							value="${usuario.email}"> <label for="inputEmail">E-mail</label>
 					</div>
 
 
 					<c:set value="${formatador}" var="formatador" scope="request" />
 
-					<div class="input-field col s12">
-						<i class="material-icons prefix">date_range</i>
-						<input id="inputData" name="inputData" type="date"
+					<div class="input-field col s10">
+						<i class="material-icons prefix">date_range</i> <input
+							id="inputData" name="inputData" type="date"
 							class="validate form-input"
 							value="${formatador.formataDateParaString(usuario.dtNascimento)}">
-						<label for="inputData" class="active">Data de Nascimento</label>							
+						<label for="inputData" class="active">Data de Nascimento</label>
 					</div>
 
-					<div class="center-align">
-						<button class="btn waves-effect waves-light top botao-confirmar" type="submit"
-							name="action">
+
+
+				</div>
+
+				<div class="row col s12 form-content center-align">
+					<div class="col s12">
+						
+						<button class="btn waves-effect waves-light top botao-atualizar"
+							type="submit" name="action">
 							Atualizar <i class="material-icons right">send</i>
 						</button>
 						<!-- <a class="btn waves-effect waves-light top" href="principal.html">Atualizar<i class="material-icons right">send</i></a> -->
 					</div>
-
-					<%@ include file="modal/mensagem.jsp" %>
 				</div>
 
+				<%@ include file="modal/mensagem.jsp"%>
 			</form>
 		</div>
 

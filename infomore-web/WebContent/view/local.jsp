@@ -33,15 +33,15 @@
 <body>
 
 	<div class="container center-align">
-		</br> 
+		<br> 
 		<a href="navegar?acao=mapa" class="btn waves-effect waves-light botao"
 				id="buttonMeuLocal" value="Usar meu local atual" />
-		</br> 
+		<br> 
 		
 		<a href="#!" class="btn waves-effect waves-light botao"
 			id="buttonEscolherLocal" data-activates="slideEscolherLocal">Escolher um local </a>
-		</br> 
-		</br>
+		<br> 
+		<br>
 
 		<form action="mapa?acao=escolherlocal" method="post">
 
@@ -51,12 +51,12 @@
 					<li><select id="cbEstado">
 							<option value="" disabled selected>Estado</option>
 							<option value="1">São Paulo</option>
-					</select></li> </br>
+					</select></li> <br>
 
 					<li><select id="cbCidade">
 							<option value="" disabled selected>Cidade</option>
 							<option value="1">Mogi das Cruzes</option>
-					</select></li> </br>
+					</select></li> <br>
 
 					<li>
 						<div class="input-field">
@@ -64,7 +64,7 @@
 							<label for="inputEndereco">Endereço</label> <input type="text"
 								name="" class="texto" id="inputEndereco" />
 						</div>
-					</li> </br>
+					</li> <br>
 					<li><input type="submit"
 						class="btn waves-effect waves-light botao" id="buttonEnviar"
 						value="Ir!" /></li>
