@@ -5,12 +5,12 @@ import br.com.infomore.core.aplicacao.Resultado;
 import br.com.infomore.dominio.EntidadeDominio;
 
 
-public class AlterarCommand extends AbstractCommand{
+public class AlterarClassificacaoCommand extends AbstractCommand{
 
 	
 	public Resultado execute(EntidadeDominio entidade) {
 		
-		return fachada.alterar(entidade, "alterar");
+		return fachada.alterar(entidade, "alterarClassificacao");
 	}
 
 }

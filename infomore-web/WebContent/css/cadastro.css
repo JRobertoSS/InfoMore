@@ -1,0 +1,20 @@
+.botao-cadastrar {
+	background-color: #DE2E76;
+	padding-top: 7px;
+	padding-left: 18px;
+	
+}
+.botao-limpar {
+	width: 155px;
+	background-color: #FFF;
+	color: #000;
+}
+.botao-limpar:hover {
+	width: 170px;
+}
+
+.botao-cancelar{
+	padding-left: 25px;
+	background-color: #2faaab;
+	color: #FFF;
+}

@@ -26,6 +26,8 @@
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
 
+<link href="css/bootstrap.css" rel="stylesheet">
+
 <link href="css/classificacao.css" rel="stylesheet">
 
 <!--Let browser know website is optimized for mobile-->
@@ -37,7 +39,7 @@
 
 	<div class="container">
 
-		<form action="classificacao?acao=alterar" method="post">
+		<form action="classificacao?acao=alterarClassificacao" method="post">
 			
 			<!-- Classificações criadas dinamicamente ( Lista de ClassificacaoView no init() da Servlet) -->
 			<c:forEach var="classificacaoView" items="${applicationScope['listaClassificacaoView']}">

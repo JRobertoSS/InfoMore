@@ -43,3 +43,10 @@ Thumbs.db
 bin/
 **/target/*
 *.orig
+
+infomore-dominio/src/META-INF/persistence.xml
+
+infomore-core/.gitignore
+infomore-dominio/.gitignore
+infomore-web/.gitignore
+

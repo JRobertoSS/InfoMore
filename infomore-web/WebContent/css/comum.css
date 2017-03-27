@@ -1,6 +1,34 @@
+/* imagem de fundo */
+/* body {
+    background-image: url("../images/background_infomore.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    
+} */
+
+body {
+  background: url("../images/background_infomore.png") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.logo-infomore{
+    max-width: 230px;
+    height: auto;
+    position: relative;
+    top: 70px;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 40px; 
+}
+
 /* cor de funto, aplicado ao body*/
 .corpo {
-	background-color: #2EA9AB;
+	background-color: #6ec4c2;
 }
 
 /* dá um espaçamento nos inputs, excluindo os botões (submit) */
@@ -146,35 +174,12 @@
 }
 
 .btn:hover {
-	background-color: #509090;
 	font-size: 17px;
 	font-weight: bold;
 	width: 120px;
 }
-.botao-entrar {
-	background-color: #DE2E76;
-	font-size: 16px;
-	font-weight: bold;
-	padding-top: 5px;
-	padding-left: 23px;
-	
-}
-.botao-cadastrar {
-	background-color: #DE2E76;
-	padding-top: 7px;
-	padding-left: 18px;
-	
-}
-.botao-limpar {
-	width: 160px;
-	background-color: #FFF;
-	color: #000;
-}
 
-.botao-cancelar{
-	background-color: #408080;
-	color: #FFF;
-}
+
 
 
 .links {

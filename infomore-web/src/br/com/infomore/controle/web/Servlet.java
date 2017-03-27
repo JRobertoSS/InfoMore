@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.infomore.controle.web.command.ICommand;
+import br.com.infomore.controle.web.command.impl.AlterarClassificacaoCommand;
 import br.com.infomore.controle.web.command.impl.AlterarCommand;
+import br.com.infomore.controle.web.command.impl.AlterarPerfilCommand;
+import br.com.infomore.controle.web.command.impl.AlterarSenhaCommand;
 import br.com.infomore.controle.web.command.impl.ConsultarCommand;
 import br.com.infomore.controle.web.command.impl.ExcluirCommand;
 import br.com.infomore.controle.web.command.impl.ListarCommand;
@@ -142,7 +145,12 @@ public class Servlet extends HttpServlet {
 	commands = new HashMap<String, ICommand>();
 
 	commands.put("salvar", new SalvarCommand());
+	
 	commands.put("alterar", new AlterarCommand());
+	commands.put("alterarPerfil", new AlterarPerfilCommand());
+	commands.put("alterarSenha", new AlterarSenhaCommand());
+	commands.put("alterarClassificacao", new AlterarClassificacaoCommand());
+	
 	commands.put("excluir", new ExcluirCommand());
 	commands.put("consultar", new ConsultarCommand());
 	commands.put("listar", new ListarCommand());

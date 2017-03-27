@@ -11,6 +11,8 @@
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="js/perfil.js"></script>
 <script type="text/javascript" src="js/comum.js"></script>
@@ -45,7 +47,7 @@
 		<div class="row">
 			<form class="col s12" action="perfil" method="post">
 
-				<input type="hidden" name="acao" value="alterar">
+				<input type="hidden" name="acao" value="alterarPerfil">
 
 				<div class="row form-content">
 
@@ -74,13 +76,20 @@
 						<label for="inputData" class="active">Data de Nascimento</label>
 					</div>
 
+					<div class="input-field col s10">
+						<i class="material-icons prefix">lock</i> <input
+							id="inputConfirmarSenha" name="inputConfirmarSenha"
+							type="password" class="validate"> <label
+							for="inputConfirmarSenha">Confirme a sua senha </label>
+					</div>
+
 
 
 				</div>
 
 				<div class="row col s12 form-content center-align">
 					<div class="col s12">
-						
+
 						<button class="btn waves-effect waves-light top botao-atualizar"
 							type="submit" name="action">
 							Atualizar <i class="material-icons right">send</i>

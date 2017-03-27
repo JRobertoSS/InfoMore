@@ -11,6 +11,7 @@
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
 <script type="text/javascript" src="js/comum.js"></script>
@@ -39,11 +40,11 @@
 <title>Infomore</title>
 </head>
 <body class="corpo">
-	<h3>InfoMore Logo</h3>
-	<br>
-	<br>
+	
 	<div id="page-content-wrapper" class="container">
-
+		
+		<img src="images/logo_infomore.png" alt="InfoMore" class="logo-infomore" />
+		
 		<form action="login" method="post">
 
 			<div class="form-content">

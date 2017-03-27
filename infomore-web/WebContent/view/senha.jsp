@@ -11,9 +11,11 @@
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="js/perfil.js"></script>
 <script type="text/javascript" src="js/comum.js"></script>
+<script type="text/javascript" src="js/senha.js"></script>
 
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADLLbi_ei8WPPbzyCq5_UUCN0Iy--V3Lo"></script>
@@ -46,7 +48,7 @@
 		<div class="row">
 			<form class="col s12" action="senha" method="post">
 
-				<input type="hidden" name="acao" value="alterar" />
+				<input type="hidden" name="acao" value="alterarSenha" />
 
 				<div class="row form-content">
 

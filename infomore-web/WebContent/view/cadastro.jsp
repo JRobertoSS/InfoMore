@@ -11,6 +11,7 @@
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="js/cadastro.js"></script>
 <script type="text/javascript" src="js/comum.js"></script>
@@ -28,7 +29,7 @@
 
 <link href="css/comum.css" rel="stylesheet">
 
-<link href="css/perfil.css" rel="stylesheet">
+<link href="css/cadastro.css" rel="stylesheet">
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,10 +37,12 @@
 <title>Cadastro</title>
 </head>
 <body class="corpo">
-	<h3>InfoMore Logo</h3>
-
+	
 	<div id="page-content-wrapper" class="container">
-		<form action="cadastro" method="post" class="col s12">
+		
+		<img src="images/logo_infomore.png" alt="InfoMore" class="logo-infomore"/>
+		
+		<form action="cadastro" method="post" class="col s12" id="formCadastro">
 			<div class="row form-content">
 				<div class="input-field col s10">
 					<i class="material-icons prefix">account_circle</i> <input

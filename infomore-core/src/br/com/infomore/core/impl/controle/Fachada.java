@@ -13,10 +13,14 @@ import br.com.infomore.core.impl.dao.CategoriaDAO;
 import br.com.infomore.core.impl.dao.LimiteRaioDAO;
 import br.com.infomore.core.impl.dao.PontoDAO;
 import br.com.infomore.core.impl.dao.UsuarioDAO;
-import br.com.infomore.core.impl.negocio.usuario.ValidaAlteracaoSenhaUsuario;
-import br.com.infomore.core.impl.negocio.usuario.ValidaCamposVaziosUsuario;
+import br.com.infomore.core.impl.negocio.usuario.PreencheSenhaNovaUsuario;
+import br.com.infomore.core.impl.negocio.usuario.ValidaCamposAlteracaoPerfilUsuario;
+import br.com.infomore.core.impl.negocio.usuario.ValidaCamposAlteracaoSenhaUsuario;
+import br.com.infomore.core.impl.negocio.usuario.ValidaCamposCadastroUsuario;
+import br.com.infomore.core.impl.negocio.usuario.ValidaConfirmacaoSenhaUsuario;
 import br.com.infomore.core.impl.negocio.usuario.ValidaEmailUnicoUsuario;
-import br.com.infomore.core.impl.negocio.usuario.ValidarLoginUsuario;
+import br.com.infomore.core.impl.negocio.usuario.ValidaLoginUsuario;
+import br.com.infomore.core.impl.negocio.usuario.ValidaSenhaAtualUsuario;
 import br.com.infomore.dominio.Categoria;
 import br.com.infomore.dominio.EntidadeDominio;
 import br.com.infomore.dominio.LimiteRaio;
@@ -25,246 +29,272 @@ import br.com.infomore.dominio.Usuario;
 
 public class Fachada implements IFachada {
 
-    /**
-     * Mapa de DAOS, será indexado pelo nome da entidade O valor é uma instância
-     * do DAO para uma dada entidade;
-     */
-    private Map<String, AbstractDAO> daos;
-
-    /**
-     * Mapa para conter as regras de negócio de todas operações por entidade; O
-     * valor é um mapa que de regras de negócio indexado pela operação
-     */
-    private Map<String, Map<String, List<IStrategy>>> rns;
-
-    private Resultado resultado;
-
-    public Fachada() {
+	/**
+	 * Mapa de DAOS, será indexado pelo nome da entidade O valor é uma instância
+	 * do DAO para uma dada entidade;
+	 */
+	private Map<String, AbstractDAO> daos;
 
 	/**
-	 * -------------- MAPAS DE DAO E STRATEGY---------------------
+	 * Mapa para conter as regras de negócio de todas operações por entidade; O
+	 * valor é um mapa que de regras de negócio indexado pela operação
 	 */
-	// mapa de Daos
-	daos = new HashMap<String, AbstractDAO>();
-	// mapa de Strategies
-	rns = new HashMap<String, Map<String, List<IStrategy>>>();
+	private Map<String, Map<String, List<IStrategy>>> rns;
 
-	/**
-	 * -------------- DAOS ---------------------
-	 */
-	// instâncias
-	UsuarioDAO usuarioDao = new UsuarioDAO();
-	CategoriaDAO categoriaDao = new CategoriaDAO();
-	PontoDAO pontoDao = new PontoDAO();
-	LimiteRaioDAO limiteRaioDao = new LimiteRaioDAO();
+	private Resultado resultado;
 
-	/* Adicionando cada dao no MAP indexando pelo nome da classe */
-	daos.put(Usuario.class.getName(), usuarioDao);
-	daos.put(Categoria.class.getName(), categoriaDao);
-	daos.put(Ponto.class.getName(), pontoDao);
-	daos.put(LimiteRaio.class.getName(), limiteRaioDao);
+	public Fachada() {
 
-	/**
-	 * -------------- REGRAS DE NEGÓCIO ---------------------
-	 */
-	/* Criando instâncias de regras de negócio a serem utilizados */
-	ValidaEmailUnicoUsuario validaEmail = new ValidaEmailUnicoUsuario();
-	ValidaCamposVaziosUsuario validaCampos = new ValidaCamposVaziosUsuario();
-	ValidaAlteracaoSenhaUsuario validaSenha = new ValidaAlteracaoSenhaUsuario();
-	ValidarLoginUsuario validaLogin = new ValidarLoginUsuario();
-	/*
-	 * Criando uma lista para conter as regras de negócio quando a operação
-	 * for salvar
-	 */
-	List<IStrategy> rnsSalvarUsuario = new ArrayList<IStrategy>();
-	/*
-	 * Adicionando as regras a serem utilizadas na operação salvar
-	 */
-	rnsSalvarUsuario.add(validaEmail);
-	rnsSalvarUsuario.add(validaCampos);
+		/**
+		 * -------------- MAPAS DE DAO E STRATEGY---------------------
+		 */
+		// mapa de Daos
+		daos = new HashMap<String, AbstractDAO>();
+		// mapa de Strategies
+		rns = new HashMap<String, Map<String, List<IStrategy>>>();
 
-	/*
-	 * Criando uma lista para conter as regras de negócio quando a operação
-	 * for alterar
-	 */
-	List<IStrategy> rnsAlterarUsuario = new ArrayList<IStrategy>();
+		/**
+		 * -------------- DAOS ---------------------
+		 */
+		// instâncias
+		UsuarioDAO usuarioDao = new UsuarioDAO();
+		CategoriaDAO categoriaDao = new CategoriaDAO();
+		PontoDAO pontoDao = new PontoDAO();
+		LimiteRaioDAO limiteRaioDao = new LimiteRaioDAO();
 
-	/*
-	 * Adicionando as regras a serem utilizadas na operação alterar
-	 */
-	rnsAlterarUsuario.add(validaEmail);
-	rnsAlterarUsuario.add(validaCampos);
-	rnsAlterarUsuario.add(validaSenha);
+		/* Adicionando cada dao no MAP indexando pelo nome da classe */
+		daos.put(Usuario.class.getName(), usuarioDao);
+		daos.put(Categoria.class.getName(), categoriaDao);
+		daos.put(Ponto.class.getName(), pontoDao);
+		daos.put(LimiteRaio.class.getName(), limiteRaioDao);
 
-	/*
-	 * Criando uma lista para conter as regras de negócio quando a operação
-	 * for consultar
-	 */
-	List<IStrategy> rnsConsultarUsuario = new ArrayList<IStrategy>();
+		/**
+		 * -------------- REGRAS DE NEGÓCIO ---------------------
+		 */
+		/* Criando instâncias de regras de negócio a serem utilizados */
+		ValidaEmailUnicoUsuario validaEmail = new ValidaEmailUnicoUsuario();
+		ValidaCamposCadastroUsuario validaCamposCadastro = new ValidaCamposCadastroUsuario();
+		ValidaLoginUsuario validaLogin = new ValidaLoginUsuario();
+		ValidaCamposAlteracaoPerfilUsuario validaCamposAlteracaoPerfil = new ValidaCamposAlteracaoPerfilUsuario();
+		ValidaCamposAlteracaoSenhaUsuario validaCamposAlteracaoSenha = new ValidaCamposAlteracaoSenhaUsuario();
+		ValidaConfirmacaoSenhaUsuario validaConfirmacaoSenha = new ValidaConfirmacaoSenhaUsuario();
+		ValidaSenhaAtualUsuario validaSenhaAtualUsuario = new ValidaSenhaAtualUsuario();
+		PreencheSenhaNovaUsuario preencheSenhaNova = new PreencheSenhaNovaUsuario();
+		/*
+		 * Criando uma lista para conter as regras de negócio quando a operação
+		 * for salvar
+		 */
+		List<IStrategy> rnsSalvarUsuario = new ArrayList<IStrategy>();
+		/*
+		 * Adicionando as regras a serem utilizadas na operação salvar
+		 */
+		rnsSalvarUsuario.add(validaEmail);
+		rnsSalvarUsuario.add(validaCamposCadastro);
+		rnsSalvarUsuario.add(validaConfirmacaoSenha);
 
-	/*
-	 * Adicionando as regras a serem utilizadas na operação consultar
-	 */
-	rnsConsultarUsuario.add(validaLogin);
+		/*
+		 * Criando uma lista para conter as regras de negócio quando a operação
+		 * for alterarPerfil
+		 */
+		List<IStrategy> rnsAlterarPerfilUsuario = new ArrayList<IStrategy>();
 
-	/**
-	 * Cria o mapa que poderá conter todas as listas de regras de negócio
-	 * específica por operação
-	 */
+		/*
+		 * Adicionando as regras a serem utilizadas na operação alterarPerfil
+		 */
+		rnsAlterarPerfilUsuario.add(validaEmail);
+		rnsAlterarPerfilUsuario.add(validaCamposAlteracaoPerfil);
+		rnsAlterarPerfilUsuario.add(validaConfirmacaoSenha);
 
-	Map<String, List<IStrategy>> rnsUsuario = new HashMap<String, List<IStrategy>>();
-	Map<String, List<IStrategy>> rnsSenha = new HashMap<String, List<IStrategy>>();
-	/*
-	 * Adiciona a listaa de regras na operação salvar no mapa do usuario
-	 */
-	rnsUsuario.put("salvar", rnsSalvarUsuario);
-	rnsUsuario.put("alterar", rnsAlterarUsuario);
-	rnsUsuario.put("consultar", rnsConsultarUsuario);
+		/*
+		 * Criando uma lista para conter as regras de negócio quando a operação
+		 * for alterarSenha
+		 */
+		List<IStrategy> rnsAlterarSenhaUsuario = new ArrayList<IStrategy>();
+		/*
+		 * Adicionando as regras a serem utilizadas na operação alterarSenha
+		 */
+		rnsAlterarSenhaUsuario.add(validaCamposAlteracaoSenha);
+		rnsAlterarSenhaUsuario.add(validaSenhaAtualUsuario);
+		rnsAlterarSenhaUsuario.add(validaConfirmacaoSenha);
+		rnsAlterarSenhaUsuario.add(preencheSenhaNova);
 
-	/*
-	 * Adiciona o mapa com as regras indexadas pelas operações no mapa geral
-	 * indexado pelo nome da entidade
-	 */
-	rns.put(Usuario.class.getName(), rnsUsuario);
+		/*
+		 * Criando uma lista para conter as regras de negócio quando a operação
+		 * for consultar
+		 */
+		List<IStrategy> rnsConsultarUsuario = new ArrayList<IStrategy>();
 
-    }
+		/*
+		 * Adicionando as regras a serem utilizadas na operação consultar
+		 */
+		rnsConsultarUsuario.add(validaLogin);
 
-    @Override
-    public Resultado salvar(EntidadeDominio entidade) {
-	resultado = new Resultado();
-	String nmClasse = entidade.getClass().getName();
+		/**
+		 * Cria o mapa que poderá conter todas as listas de regras de negócio
+		 * específica por operação
+		 */
 
-	String msg = executarRegras(entidade, "salvar"); // validações
+		Map<String, List<IStrategy>> rnsUsuario = new HashMap<String, List<IStrategy>>();
+		Map<String, List<IStrategy>> rnsSenha = new HashMap<String, List<IStrategy>>();
+		/*
+		 * Adiciona a listaa de regras na operação salvar no mapa do usuario
+		 */
+		rnsUsuario.put("salvar", rnsSalvarUsuario);
 
-	if (msg == null) {
-	    AbstractDAO dao = daos.get(nmClasse);
-	    dao.salvar(entidade);
-	    List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-	    entidades.add(entidade);
-	    resultado.setEntidades(entidades);
-	} else {
-	    resultado.setMsg(msg);
-	}
-	return resultado;
-    }
+		rnsUsuario.put("alterarPerfil", rnsAlterarPerfilUsuario);
+		rnsUsuario.put("alterarSenha", rnsAlterarSenhaUsuario);
+		/*
+		 * rnsUsuario.put("alterarClassificacao",
+		 * rnsAlterarClassificacaoUsuario); // por hora não há regras
+		 */
 
-    @Override
-    public Resultado alterar(EntidadeDominio entidade) {
-	resultado = new Resultado();
-	String nmClasse = entidade.getClass().getName();
+		rnsUsuario.put("consultar", rnsConsultarUsuario);
 
-	String msg = executarRegras(entidade, "alterar");
-
-	if (msg == null) {
-	    AbstractDAO dao = daos.get(nmClasse);
-	    dao.alterar(entidade);
-	    List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-	    entidades.add(entidade);
-	    resultado.setEntidades(entidades);
-	} else {
-	    resultado.setMsg(msg);
+		/*
+		 * Adiciona o mapa com as regras indexadas pelas operações no mapa geral
+		 * indexado pelo nome da entidade
+		 */
+		rns.put(Usuario.class.getName(), rnsUsuario);
 
 	}
 
-	return resultado;
+	@Override
+	public Resultado salvar(EntidadeDominio entidade) {
+		resultado = new Resultado();
+		String nmClasse = entidade.getClass().getName();
 
-    }
+		String msg = executarRegras(entidade, "salvar"); // validações
 
-    @Override
-    public Resultado excluir(EntidadeDominio entidade) {
-	resultado = new Resultado();
-	String nmClasse = entidade.getClass().getName();
-
-	String msg = executarRegras(entidade, "excluir");
-
-	if (msg == null) {
-	    AbstractDAO dao = daos.get(nmClasse);
-	    dao.excluir(entidade);
-	    List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
-	    entidades.add(entidade);
-	    resultado.setEntidades(entidades);
-	} else {
-	    resultado.setMsg(msg);
-
-	}
-
-	return resultado;
-
-    }
-
-    @Override
-    public Resultado consultar(EntidadeDominio entidade) {
-	resultado = new Resultado();
-	resultado.setEntidades(new ArrayList<EntidadeDominio>(1));
-
-	String nmClasse = entidade.getClass().getName();
-
-	String msg = executarRegras(entidade, "consultar");
-
-	List<EntidadeDominio> consulta = new ArrayList<EntidadeDominio>();
-
-	if (msg == null) {
-	    AbstractDAO<Integer, EntidadeDominio> dao = daos.get(nmClasse);
-	    consulta.add((EntidadeDominio) dao.consultar(entidade, entidade.getId()));
-	} else {
-	    resultado.setMsg(msg);
-	}
-
-	resultado.setEntidades(consulta);
-	return resultado;
-
-    }
-
-    @Override
-    public Resultado listar(EntidadeDominio entidade) {
-	resultado = new Resultado();
-	resultado.setEntidades(new ArrayList<EntidadeDominio>(1));
-
-	String nmClasse = entidade.getClass().getName();
-
-	String msg = executarRegras(entidade, "consultar");
-
-	List<EntidadeDominio> consulta = new ArrayList<EntidadeDominio>();
-
-	if (msg == null) {
-	    AbstractDAO<Integer, EntidadeDominio> dao = daos.get(nmClasse);
-
-	    consulta = dao.listar(entidade);
-
-	} else {
-	    resultado.setMsg(msg);
-	}
-
-	resultado.setEntidades(consulta);
-	return resultado;
-
-    }
-
-    private String executarRegras(EntidadeDominio entidade, String operacao) {
-	String nmClasse = entidade.getClass().getName();
-	StringBuilder msg = new StringBuilder();
-
-	Map<String, List<IStrategy>> regrasOperacao = rns.get(nmClasse);
-
-	if (regrasOperacao != null) {
-	    List<IStrategy> regras = regrasOperacao.get(operacao);
-
-	    if (regras != null) {
-		for (IStrategy s : regras) {
-		    String m = s.processar(entidade);
-
-		    if (m != null) {
-			msg.append(m);
-			msg.append("\n");
-		    }
+		if (msg == null) {
+			AbstractDAO dao = daos.get(nmClasse);
+			dao.salvar(entidade);
+			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+			entidades.add(entidade);
+			resultado.setEntidades(entidades);
+		} else {
+			resultado.setMsg(msg);
 		}
-	    }
+		return resultado;
+	}
+
+	@Override
+	public Resultado alterar(EntidadeDominio entidade, String tipoAlteracao) {
+		resultado = new Resultado();
+		String nmClasse = entidade.getClass().getName();
+
+		String msg = executarRegras(entidade, tipoAlteracao);
+
+		if (msg == null) {
+			AbstractDAO dao = daos.get(nmClasse);
+			dao.alterar(entidade);
+			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+			entidades.add(entidade);
+			resultado.setEntidades(entidades);
+		} else {
+			resultado.setMsg(msg);
+
+		}
+
+		return resultado;
 
 	}
 
-	if (msg.length() > 0)
-	    return msg.toString();
-	else
-	    return null;
-    }
+	@Override
+	public Resultado excluir(EntidadeDominio entidade) {
+		resultado = new Resultado();
+		String nmClasse = entidade.getClass().getName();
+
+		String msg = executarRegras(entidade, "excluir");
+
+		if (msg == null) {
+			AbstractDAO dao = daos.get(nmClasse);
+			dao.excluir(entidade);
+			List<EntidadeDominio> entidades = new ArrayList<EntidadeDominio>();
+			entidades.add(entidade);
+			resultado.setEntidades(entidades);
+		} else {
+			resultado.setMsg(msg);
+
+		}
+
+		return resultado;
+
+	}
+
+	@Override
+	public Resultado consultar(EntidadeDominio entidade) {
+		resultado = new Resultado();
+		resultado.setEntidades(new ArrayList<EntidadeDominio>(1));
+
+		String nmClasse = entidade.getClass().getName();
+
+		String msg = executarRegras(entidade, "consultar");
+
+		List<EntidadeDominio> consulta = new ArrayList<EntidadeDominio>();
+
+		if (msg == null) {
+			AbstractDAO<Integer, EntidadeDominio> dao = daos.get(nmClasse);
+			consulta.add((EntidadeDominio) dao.consultar(entidade, entidade.getId()));
+		} else {
+			resultado.setMsg(msg);
+		}
+
+		resultado.setEntidades(consulta);
+		return resultado;
+
+	}
+
+	@Override
+	public Resultado listar(EntidadeDominio entidade) {
+		resultado = new Resultado();
+		resultado.setEntidades(new ArrayList<EntidadeDominio>(1));
+
+		String nmClasse = entidade.getClass().getName();
+
+		String msg = executarRegras(entidade, "consultar");
+
+		List<EntidadeDominio> consulta = new ArrayList<EntidadeDominio>();
+
+		if (msg == null) {
+			AbstractDAO<Integer, EntidadeDominio> dao = daos.get(nmClasse);
+
+			consulta = dao.listar(entidade);
+
+		} else {
+			resultado.setMsg(msg);
+		}
+
+		resultado.setEntidades(consulta);
+		return resultado;
+
+	}
+
+	private String executarRegras(EntidadeDominio entidade, String operacao) {
+		String nmClasse = entidade.getClass().getName();
+		StringBuilder msg = new StringBuilder();
+
+		Map<String, List<IStrategy>> regrasOperacao = rns.get(nmClasse);
+
+		if (regrasOperacao != null) {
+			List<IStrategy> regras = regrasOperacao.get(operacao);
+
+			if (regras != null) {
+				for (IStrategy s : regras) {
+					String m = s.processar(entidade);
+
+					if (m != null) {
+						msg.append(m);
+						msg.append("\n");
+						break; // parar as validações para somente uma mensagem de erro
+					}
+				}
+			}
+
+		}
+
+		if (msg.length() > 0)
+			return msg.toString();
+		else
+			return null;
+	}
 }

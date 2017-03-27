@@ -1,0 +1,19 @@
+.mensagem-info {
+	background-color: #45ebff;
+	color: #1d72f1;
+}
+
+.mensagem-sucesso {
+	background-color: #4af91a;
+	color: #389461;
+}
+
+.mensagem-alerta {
+	background-color: #ffc038;
+	color: #e9823e;
+}
+
+.mensagem-erro {
+	background-color: #ff3333;
+	color: #c51e26;
+}
