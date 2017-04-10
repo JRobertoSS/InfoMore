@@ -1,8 +1,18 @@
+.menuNav{
+	background-color: #2EA9AB;
+	width: 100vw;
+	height: 10vh;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
 .navigator-item {
 	font-weight: bold;
 	color: #2EA9AB;
-	font-size: 1.5rem;
-	left: 0px;
+	text-indent: -18px;
 }
 
 .divider {
@@ -13,3 +23,4 @@
 .dropdown-content {
 	clear: right;
 }
+

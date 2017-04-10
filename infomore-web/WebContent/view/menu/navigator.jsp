@@ -12,10 +12,12 @@
 
 		<li class="collection-item"><a href="meuLocal?acao=salvar"
 			class="navigator-item">Salvar este local</a></li>
-
 		<li class="collection-item"><a href="meuLocal?acao=listar"
 			class="navigator-item">Meus locais</a></li>
-
+			
+			
+		<li class="collection-item"><a href="navegar?acao=classificacao"
+			class="navigator-item">Prioridades</a></li>
 		<li class="divider"></li>
 
 		<li class="collection-item"><a href="login?acao=sair"

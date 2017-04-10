@@ -40,7 +40,7 @@ public abstract class Marcador extends EntidadeDominio {
     @JoinColumn(name = "id_categoria", insertable = true, updatable = true)
     @Fetch(FetchMode.JOIN)
     @Cascade(CascadeType.ALL)
-    private Categoria categoria;
+    private Categoria categoria; // inserir uma nova categoria 'Local' para os locais do usuario?
 
     @OneToMany(mappedBy = "marcador", fetch = FetchType.LAZY)
     @Cascade(CascadeType.ALL)

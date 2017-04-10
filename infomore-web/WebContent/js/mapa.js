@@ -16,7 +16,7 @@ $("#buttonOcorrencias").sideNav();*/
 
 document.mapIcones = new Map();
 
-document.mapIcones.set('Saúde', 'images/icon_saude.png').set('Educação', 'images/icon_educacao.png').set('Segurança', 'images/icon_seguranca.png').set('Comodidades', 'images/icon_comodidades.png').set('Lazer e Cultura', 'images/icon_lazer_cultura.png').set('Transportes', 'images/icon_transporte.png').set('Ocorrências', 'images/icon_ocorrencias.png');
+document.mapIcones.set('Saúde', 'images/icon_saude.png').set('Educação', 'images/icon_educacao.png').set('Segurança', 'images/icon_seguranca.png').set('Comodidades', 'images/icon_comodidades.png').set('Lazer e Cultura', 'images/icon_lazer_cultura.png').set('Transportes', 'images/icon_transporte.png').set('Ocorrências', 'images/icon_ocorrencias.png').set('Meu Local', 'images/icon_person.png');
 
 
 // varre a lista de marcadores e seta o valor do map
@@ -128,7 +128,7 @@ function inicializaMapa(latitude, longitude) {
 
 	// define a imagem customizada do marcador 'meu local'
 	var image = {
-		url : 'images/icon_person.png',
+		url : document.mapIcones.get('Meu Local'),
 		anchor : new google.maps.Point(25, 50)
 	};
 

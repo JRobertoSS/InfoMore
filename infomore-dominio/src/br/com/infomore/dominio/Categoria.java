@@ -14,6 +14,7 @@ public class Categoria extends EntidadeDominio {
     public static final String LAZER_CULTURA = "Lazer e Cultura";
     public static final String TRANSPORTES = "Transportes";
     public static final String OCORRENCIAS = "Ocorrências";
+    public static final String MEU_LOCAL = "Meu Local";
 
     public Categoria() {
     }

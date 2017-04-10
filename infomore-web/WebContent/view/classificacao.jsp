@@ -41,15 +41,26 @@
 
 		<form action="classificacao?acao=alterarClassificacao" method="post">
 			
+			<c:set value="${usuario}" var="usuario" scope="session" />
+			
 			<!-- Classificações criadas dinamicamente ( Lista de ClassificacaoView no init() da Servlet) -->
 			<c:forEach var="classificacaoView" items="${applicationScope['listaClassificacaoView']}">
 				 <div class="row">
 					<h4>
 						<i class="material-icons">${classificacaoView.nomeIcone}</i> ${classificacaoView.categoria.nome}
 					</h4>
+					
+					<!-- Varre as prioridades do usuário e binda no valor da classificação (para o caso de ser um update) -->
+					<c:forEach var="prioridade" items="${usuario.prioridades}" >
+						<c:if test="${ prioridade.categoria.nome == classificacaoView.categoria.nome }">
+							<c:set value="${prioridade}" var="prioridadeEquivalente"/>
+						</c:if>
+					</c:forEach>
+					
 					<p class="range-field">
 						${classificacaoView.categoria.descricao}
-						<input type="range" id="${classificacaoView.nomeId}" name="${classificacaoView.nomeId}" min="0" max="10" />
+						<input type="range" id="${classificacaoView.nomeId}" name="${classificacaoView.nomeId}"
+							min="0" max="10" value="${prioridadeEquivalente.peso}"/>
 					</p>
 				</div>
 			</c:forEach>
