@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,58 +28,31 @@ public class MeuLocalViewHelper implements IViewHelper {
 	@Override
 	public EntidadeDominio getEntity(HttpServletRequest request) {
 
-		try {
-			StringBuilder sb = new StringBuilder();
-			BufferedReader br = request.getReader();
-			String str = new String();
-			while ((str = br.readLine()) != null) {
-				sb.append(str);
-			}
-
-			String jsonString = sb.toString();
-
-			HashMap<String, Object> limiteRaioMap = new Gson().fromJson(jsonString, HashMap.class);
-
-			MeuLocal meuLocal = new MeuLocal();
-			meuLocal.setNome((String) limiteRaioMap.get("nomeLocal"));
-			meuLocal.setRaio((Double) limiteRaioMap.get("latitude"));
-			meuLocal.setLatitude((Double) limiteRaioMap.get("latitude"));
-			meuLocal.setLongitude((Double) limiteRaioMap.get("longitude"));
-
-			LinkedTreeMap<String, LinkedTreeMap<String, Double>> mapLimiteRaio = (LinkedTreeMap<String, LinkedTreeMap<String, Double>>) limiteRaioMap
-					.get("limiteRaio");
-			LinkedTreeMap<String, Double> mapaPontoNE = mapLimiteRaio.get("pontoNE");
-			LinkedTreeMap<String, Double> mapaPontoSW = mapLimiteRaio.get("pontoSW");
-
-			LimiteRaio limiteRaio = new LimiteRaio();
-
-			limiteRaio.setPontoNE(new Ponto());
-			limiteRaio.getPontoNE().setLatitude(mapaPontoNE.get("latitude"));
-			limiteRaio.getPontoNE().setLongitude(mapaPontoNE.get("longitude"));
-
-			limiteRaio.setPontoSW(new Ponto());
-			limiteRaio.getPontoSW().setLatitude(mapaPontoSW.get("latitude"));
-			limiteRaio.getPontoSW().setLongitude(mapaPontoSW.get("longitude"));
-
-			meuLocal.setLimiteRaio(limiteRaio);
-
-			return meuLocal;
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return null;
+		MeuLocal meuLocal = (MeuLocal) request.getSession().getAttribute("meuLocal");
+		meuLocal.setNome(request.getParameter("inputNome"));
+		meuLocal.setDescricao(request.getParameter("inputDescricao"));
+		
+		request.getSession().setAttribute("meuLocal", meuLocal);
+		
+		return meuLocal;
 	}
 
 	@Override
 	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-
-		request.setAttribute("mensagem", "Local salvo com sucesso!");
-		request.setAttribute("tipoMensagem", TipoMensagemView.MSG_SUCESSO);
-
+		
+		RequestDispatcher d = null;
+		if( resultado.getMsg() == null ){
+			request.setAttribute("mensagem", "Local salvo com sucesso!");
+			request.setAttribute("tipoMensagem", TipoMensagemView.MSG_SUCESSO);
+			request.getSession().setAttribute("meuLocal", null);
+			d = request.getRequestDispatcher("view/mapa.jsp");
+		} else {
+			request.setAttribute("mensagem", resultado.getMsg());
+			request.setAttribute("tipoMensagem", TipoMensagemView.MSG_ALERTA);
+			d = request.getRequestDispatcher("view/detalhesMeuLocal.jsp");
+		}
+		d.forward(request, response);
 	}
 
 }

@@ -31,7 +31,7 @@ public class Confirmacao extends EntidadeDominio{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_usuario", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.DETACH)
 	private Usuario usuario;
 	
 	

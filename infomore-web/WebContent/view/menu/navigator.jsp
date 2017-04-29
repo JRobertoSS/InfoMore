@@ -10,7 +10,7 @@
 
 		<li class="divider"></li>
 
-		<li class="collection-item"><a id="linkSalvarMeuLocal"
+		<li class="collection-item"><a id="linkSalvarMeuLocal" href="navegar?acao=detalhesMeuLocal"
 			class="navigator-item">Salvar este local</a></li>
 		<li class="collection-item"><a href="meuLocal?acao=listar"
 			class="navigator-item">Meus locais</a></li>
@@ -42,8 +42,8 @@
 	window.onload = function() {
 		var a = document.getElementById("linkSalvarMeuLocal");
 		a.onclick = function() {
-			salvarEsteLocal("Teste");
-			return false;
+			salvarEsteLocal("Meu Local");
+			return true;
 		}
 	}
 </script>

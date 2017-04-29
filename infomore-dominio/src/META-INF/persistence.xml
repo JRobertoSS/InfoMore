@@ -27,7 +27,7 @@
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.password" value="123" />
 			<property name="javax.persistence.schema-generation.database.action"
-				value="none" />
+				value="update" />
 		</properties>
 	</persistence-unit>
 </persistence>

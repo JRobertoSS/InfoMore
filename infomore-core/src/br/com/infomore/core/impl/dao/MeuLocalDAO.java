@@ -22,4 +22,12 @@ public class MeuLocalDAO extends AbstractDAO<Integer, MeuLocal> {
 	return (List<MeuLocal>) query.getResultList();
     }
 
+	public List<MeuLocal> listarLocaisUsuario(MeuLocal meuLocal) {
+		EntityManager em = entityManagerFactory.createEntityManager();
+		Query query = em.createQuery("SELECT T FROM " + (MeuLocal.class.getSimpleName() + " T "
+				+ "WHERE id_usuario = :id_usuario"));
+		query.setParameter("id_usuario", meuLocal.getUsuario().getId());
+		return (List<MeuLocal>) query.getResultList();
+	}
+
 }

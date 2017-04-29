@@ -60,6 +60,14 @@ function criarInfoWindow(conteudo, objetoParaOInfo) {
 	})
 }
 
+function criarInfoWindowMeuLocal(marcador){
+	var conteudo = "<p>Este é seu local atual! </p><p></p><p>Info:</p>";
+	conteudo += "<p>Raio: " + document.circle.radius.toFixed(3) + "</p>";
+	conteudo += "<p>Latitude: " + document.meuLocal.lat() + "</p>";
+	conteudo += "<p>Longitude: " + document.meuLocal.lng() + "</p>";
+	criarInfoWindow(conteudo, marcador);
+};
+
 // renderiza os pontos no objeto global de circle
 function renderizarPontos(pontos) {
 	// JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
@@ -166,14 +174,21 @@ function salvarEsteLocal(nomeLocal) {
 	meuLocal.limiteRaio.pontoSW.latitude =  document.circle.getBounds().getSouthWest().lat();
 	meuLocal.limiteRaio.pontoSW.longitude =  document.circle.getBounds().getSouthWest().lng();
 	
-	$.ajax({
+	xhr = new XMLHttpRequest();
+	var url = '/infomore/detalhesMeuLocal';
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	var data = meuLocalToJSON(meuLocal);
+	xhr.send(data);
+	
+	/*$.ajax({
 		type : 'POST',
 		contentType : 'application/json',
-		url : '/infomore/meuLocal?acao=salvar',
+		url : '/infomore/detalhesMeuLocal',
 		dataType : 'json',
 		data : meuLocalToJSON(meuLocal), // função para converter em JSON
-		/* success : renderizarPontos // função para atualizar os pontos no raio*/
-	});
+		 success : renderizarPontos // função para atualizar os pontos no raio
+	});*/
 }
 
 
@@ -244,6 +259,7 @@ function inicializaMapa(latitude, longitude) {
 		 * 
 		 */
 		atualizarPontosRaio(document.circle);
+		criarInfoWindowMeuLocal(meuLocalmarker);
 
 	})
 	// adicionar o listener do evento de mover o círculo
@@ -251,6 +267,7 @@ function inicializaMapa(latitude, longitude) {
 		// mover o marcador para o novo local do círculo
 		meuLocalmarker.setPosition(document.circle.getCenter());
 		atualizarPontosRaio(document.circle);
+		criarInfoWindowMeuLocal(meuLocalmarker);
 	/*
 	 * document.getElementById("lat").innerHTML = "Latitude: " +
 	 * circle.getCenter().lat(); // mostra a latitude alterada no conteiner
@@ -261,7 +278,8 @@ function inicializaMapa(latitude, longitude) {
 	})
 
 	// criar infoWindow do marcador 'meu local'
-	criarInfoWindow("Este é seu local atual!", meuLocalmarker);
+	criarInfoWindowMeuLocal(meuLocalmarker);
+	
 
 	/**
 	 * Para testes - ao clicar no mapa (fora do circulo) printa no console de debug as coordenadas ( para exploração e inserts de pontos de teste)

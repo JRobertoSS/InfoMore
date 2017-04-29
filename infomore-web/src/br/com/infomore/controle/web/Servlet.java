@@ -24,6 +24,7 @@ import br.com.infomore.controle.web.vh.IViewHelper;
 import br.com.infomore.controle.web.vh.impl.AtualizarPontosRaioViewHelper;
 import br.com.infomore.controle.web.vh.impl.CadastroViewHelper;
 import br.com.infomore.controle.web.vh.impl.ClassificacaoViewHelper;
+import br.com.infomore.controle.web.vh.impl.DetalhesMeuLocalViewHelper;
 import br.com.infomore.controle.web.vh.impl.LoginViewHelper;
 import br.com.infomore.controle.web.vh.impl.MeuLocalViewHelper;
 import br.com.infomore.controle.web.vh.impl.NavegarViewHelper;
@@ -102,7 +103,7 @@ public class Servlet extends HttpServlet {
 		 * conter mensagens derro ou entidades de retorno
 		 */
 		Resultado resultado = null;
-		if (entidade != null)
+		if (entidade != null && command != null)
 			resultado = command.execute(entidade);
 
 		/*
@@ -179,6 +180,7 @@ public class Servlet extends HttpServlet {
 		vhs.put("/infomore/classificacao", new ClassificacaoViewHelper(getServletContext())); // este VH precisa do contexto da servelt
 		vhs.put("/infomore/atualizaPontosRaio", new AtualizarPontosRaioViewHelper());
 		vhs.put("/infomore/meuLocal", new MeuLocalViewHelper());
+		vhs.put("/infomore/detalhesMeuLocal", new DetalhesMeuLocalViewHelper());
 
 		super.init();
 	}

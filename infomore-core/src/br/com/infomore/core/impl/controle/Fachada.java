@@ -15,6 +15,8 @@ import br.com.infomore.core.impl.dao.MeuLocalDAO;
 import br.com.infomore.core.impl.dao.PontoDAO;
 import br.com.infomore.core.impl.dao.UsuarioDAO;
 import br.com.infomore.core.impl.negocio.local.PreencherCategoriaMeuLocal;
+import br.com.infomore.core.impl.negocio.local.VerificaNomeRepetidoMeuLocal;
+import br.com.infomore.core.impl.negocio.local.VerificaNomeVazioMeuLocal;
 import br.com.infomore.core.impl.negocio.usuario.PreencheSenhaNovaUsuario;
 import br.com.infomore.core.impl.negocio.usuario.ValidaCamposAlteracaoPerfilUsuario;
 import br.com.infomore.core.impl.negocio.usuario.ValidaCamposAlteracaoSenhaUsuario;
@@ -158,9 +160,13 @@ public class Fachada implements IFachada {
 		
 		/* Meu Local*/
 		PreencherCategoriaMeuLocal preencherCategoriaMeuLocal = new PreencherCategoriaMeuLocal();
+		VerificaNomeVazioMeuLocal verificanomeVazioMeuLocal = new VerificaNomeVazioMeuLocal();
+		VerificaNomeRepetidoMeuLocal verificaNomeRepetidoMeuLocal = new VerificaNomeRepetidoMeuLocal();
 		
 		List<IStrategy> rnsSalvarMeuLocal = new ArrayList<IStrategy>();
 		rnsSalvarMeuLocal.add(preencherCategoriaMeuLocal);
+		rnsSalvarMeuLocal.add(verificanomeVazioMeuLocal);
+		rnsSalvarMeuLocal.add(verificaNomeRepetidoMeuLocal);
 		
 		Map<String, List<IStrategy>> rnsMeuLocal = new HashMap<String, List<IStrategy>>();
 		rnsMeuLocal.put("salvar", rnsSalvarMeuLocal);
