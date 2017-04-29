@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import br.com.infomore.dominio.EntidadeDominio;
 import br.com.infomore.dominio.Ponto;
 
-public class PontoDAO extends AbstractDAO<Long, Ponto> {
+public class PontoDAO extends AbstractDAO<Integer, Ponto> {
 
     public PontoDAO() {
 	super(Ponto.class);

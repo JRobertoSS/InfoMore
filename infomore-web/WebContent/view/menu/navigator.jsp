@@ -10,12 +10,12 @@
 
 		<li class="divider"></li>
 
-		<li class="collection-item"><a href="meuLocal?acao=salvar"
+		<li class="collection-item"><a id="linkSalvarMeuLocal"
 			class="navigator-item">Salvar este local</a></li>
 		<li class="collection-item"><a href="meuLocal?acao=listar"
 			class="navigator-item">Meus locais</a></li>
-			
-			
+
+
 		<li class="collection-item"><a href="navegar?acao=classificacao"
 			class="navigator-item">Prioridades</a></li>
 		<li class="divider"></li>
@@ -37,3 +37,13 @@
 			src="images/icon_mapa.png" /></a>
 	</div>
 </nav>
+
+<script type="text/javascript">
+	window.onload = function() {
+		var a = document.getElementById("linkSalvarMeuLocal");
+		a.onclick = function() {
+			salvarEsteLocal("Teste");
+			return false;
+		}
+	}
+</script>

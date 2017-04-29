@@ -56,4 +56,8 @@
 		<servlet-name>Servlet</servlet-name>
 		<url-pattern>/atualizaPontosRaio</url-pattern>
 	</servlet-mapping>
+		<servlet-mapping>
+		<servlet-name>Servlet</servlet-name>
+		<url-pattern>/meuLocal</url-pattern>
+	</servlet-mapping>
 </web-app>

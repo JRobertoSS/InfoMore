@@ -44,15 +44,6 @@ function deleteMarkers() {
 	document.markers = [];
 }
 
-// função que converte o objeto em JSON para envio de ajax
-function circleBoundsToJSON(bounds) {
-	return JSON.stringify({
-		"latNE" : bounds.getNorthEast().lat(), // latitude do ponto nordeste
-		"lngNE" : bounds.getNorthEast().lng(), // longitude do ponto nordeste
-		"latSW" : bounds.getSouthWest().lat(), // latitude do ponto sudoeste
-		"lngSW" : bounds.getSouthWest().lng() // longitude do ponto sudoeste
-	});
-}
 
 //função que cria um InfoWindow no evento de click no objetoParaOInfo, mostrando o conteudo
 function criarInfoWindow(conteudo, objetoParaOInfo) {
@@ -91,6 +82,19 @@ function renderizarPontos(pontos) {
 		criarInfoWindow(ponto.descricao, marker); // cria um infoWindow para ao clicar no marcador, mostrar a descrição
 	});
 }
+
+
+//função que converte o objeto de bounds em JSON para envio de ajax
+function circleBoundsToJSON(bounds) {
+	return JSON.stringify({
+		"latNE" : bounds.getNorthEast().lat(), // latitude do ponto nordeste
+		"lngNE" : bounds.getNorthEast().lng(), // longitude do ponto nordeste
+		"latSW" : bounds.getSouthWest().lat(), // latitude do ponto sudoeste
+		"lngSW" : bounds.getSouthWest().lng() // longitude do ponto sudoeste
+	});
+}
+
+
 // função que realiza uma chamada ajax para o servidor, recuperando os pontos dentro de um determinado raio ( objeto google maps circle)
 function atualizarPontosRaio(circle) {
 	var bounds = circle.getBounds(); // objeto de LatLngBouunds https://developers.google.com/maps/documentation/javascript/reference#LatLngBounds
@@ -102,6 +106,73 @@ function atualizarPontosRaio(circle) {
 		dataType : 'json',
 		data : circleBoundsToJSON(bounds), // função para converter em JSON
 		success : renderizarPontos // função para atualizar os pontos no raio
+	});
+}
+
+//função que converte o objeto meuLocal em JSON para envio de ajax
+function meuLocalToJSON(meuLocal){
+	return JSON.stringify({
+		"nomeLocal" : meuLocal.nomeLocal,
+		"raio" : meuLocal.raio,
+		"latitude" : meuLocal.latitude,
+		"longitude" : meuLocal.longitude,
+		
+		"limiteRaio" :{
+			"pontoNE" : {
+				"latitude" : meuLocal.limiteRaio.pontoNE.latitude,
+				"longitude" : meuLocal.limiteRaio.pontoNE.longitude
+			},
+			"pontoSW" : {
+				"latitude" : meuLocal.limiteRaio.pontoSW.latitude,
+				"longitude" : meuLocal.limiteRaio.pontoSW.longitude
+			}
+		}
+	});
+	
+}
+
+//função que retorna um novo objeto de meuLocal
+function getMeuLocalObject(){
+	var meuLocal = {
+			nomeLocal: "",
+		    raio: 0.0,
+		    latitude: 0.0,
+		    longitude: 0.0,
+		    limiteRaio: {
+		    	pontoNE:{
+		    		latitude: 0.0,
+		    		longitude: 0.0,
+		    	},
+		    	pontoSW: {
+					latitude: 0.0,
+		    		longitude: 0.0,
+		    	}
+		    }
+		}; 
+	return meuLocal;
+}
+
+//função que realiza uma chamada ajax para o servidor, salvando o local atual do usuário
+function salvarEsteLocal(nomeLocal) {
+	var meuLocal = getMeuLocalObject();
+	
+	meuLocal.nomeLocal = nomeLocal,
+	meuLocal.raio = document.circle.radius;
+	meuLocal.latitude = document.meuLocal.lat();
+	meuLocal.longitude = document.meuLocal.lng();
+	
+	meuLocal.limiteRaio.pontoNE.latitude =  document.circle.getBounds().getNorthEast().lat();
+	meuLocal.limiteRaio.pontoNE.longitude =  document.circle.getBounds().getNorthEast().lng();
+	meuLocal.limiteRaio.pontoSW.latitude =  document.circle.getBounds().getSouthWest().lat();
+	meuLocal.limiteRaio.pontoSW.longitude =  document.circle.getBounds().getSouthWest().lng();
+	
+	$.ajax({
+		type : 'POST',
+		contentType : 'application/json',
+		url : '/infomore/meuLocal?acao=salvar',
+		dataType : 'json',
+		data : meuLocalToJSON(meuLocal), // função para converter em JSON
+		/* success : renderizarPontos // função para atualizar os pontos no raio*/
 	});
 }
 
@@ -140,7 +211,7 @@ function inicializaMapa(latitude, longitude) {
 		icon : image
 	});
 	// criar um objeto de Círculo para determinar o raio inicial
-	var circle = new google.maps.Circle({
+	document.circle = new google.maps.Circle({
 		map : document.map, // objeto do mapa
 		radius : 300, // raio inicial (em 'm')
 		center : meuLocalmarker.position, // centro do circulo no marcador
@@ -153,7 +224,7 @@ function inicializaMapa(latitude, longitude) {
 	});
 
 	// recuperar os pontos dentro dos limites do círculo
-	atualizarPontosRaio(circle);
+	atualizarPontosRaio(document.circle);
 
 	/*
 	 * document.getElementById("raio").innerHTML = "Raio: " +
@@ -165,21 +236,21 @@ function inicializaMapa(latitude, longitude) {
 	 */
 
 	// adicionar o listener do evento de mudança de raio
-	google.maps.event.addListener(circle, "radius_changed", function() {
+	google.maps.event.addListener(document.circle, "radius_changed", function() {
 
 		/*
 		 * Aqui irá mandar uma requisição ajax, atualizando os
 		 * pontos dentro do raio
 		 * 
 		 */
-		atualizarPontosRaio(circle);
+		atualizarPontosRaio(document.circle);
 
 	})
 	// adicionar o listener do evento de mover o círculo
-	google.maps.event.addListener(circle, "center_changed", function() {
+	google.maps.event.addListener(document.circle, "center_changed", function() {
 		// mover o marcador para o novo local do círculo
-		meuLocalmarker.setPosition(circle.getCenter());
-		atualizarPontosRaio(circle);
+		meuLocalmarker.setPosition(document.circle.getCenter());
+		atualizarPontosRaio(document.circle);
 	/*
 	 * document.getElementById("lat").innerHTML = "Latitude: " +
 	 * circle.getCenter().lat(); // mostra a latitude alterada no conteiner

@@ -9,7 +9,7 @@ import br.com.infomore.dominio.EntidadeDominio;
 import br.com.infomore.dominio.LimiteRaio;
 import br.com.infomore.dominio.Ponto;
 
-public class LimiteRaioDAO extends AbstractDAO<Long, Ponto> {
+public class LimiteRaioDAO extends AbstractDAO<Integer, Ponto> {
 
     public LimiteRaioDAO() {
 	super(Ponto.class);

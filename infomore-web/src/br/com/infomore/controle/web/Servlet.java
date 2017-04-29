@@ -25,6 +25,7 @@ import br.com.infomore.controle.web.vh.impl.AtualizarPontosRaioViewHelper;
 import br.com.infomore.controle.web.vh.impl.CadastroViewHelper;
 import br.com.infomore.controle.web.vh.impl.ClassificacaoViewHelper;
 import br.com.infomore.controle.web.vh.impl.LoginViewHelper;
+import br.com.infomore.controle.web.vh.impl.MeuLocalViewHelper;
 import br.com.infomore.controle.web.vh.impl.NavegarViewHelper;
 import br.com.infomore.controle.web.vh.impl.PerfilViewHelper;
 import br.com.infomore.controle.web.vh.impl.SenhaViewHelper;
@@ -175,19 +176,9 @@ public class Servlet extends HttpServlet {
 		vhs.put("/infomore/login", new LoginViewHelper());
 		vhs.put("/infomore/perfil", new PerfilViewHelper());
 		vhs.put("/infomore/senha", new SenhaViewHelper());
-		vhs.put("/infomore/classificacao", new ClassificacaoViewHelper(getServletContext())); // este
-																								// VH
-																								// precisa
-																								// do
-																								// contexto
-																								// da
-																								// servlet
-																								// para
-																								// montar
-																								// a
-																								// página
-																								// dinamicamente
+		vhs.put("/infomore/classificacao", new ClassificacaoViewHelper(getServletContext())); // este VH precisa do contexto da servelt
 		vhs.put("/infomore/atualizaPontosRaio", new AtualizarPontosRaioViewHelper());
+		vhs.put("/infomore/meuLocal", new MeuLocalViewHelper());
 
 		super.init();
 	}

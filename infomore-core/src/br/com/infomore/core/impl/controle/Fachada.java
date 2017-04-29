@@ -11,8 +11,10 @@ import br.com.infomore.core.aplicacao.Resultado;
 import br.com.infomore.core.impl.dao.AbstractDAO;
 import br.com.infomore.core.impl.dao.CategoriaDAO;
 import br.com.infomore.core.impl.dao.LimiteRaioDAO;
+import br.com.infomore.core.impl.dao.MeuLocalDAO;
 import br.com.infomore.core.impl.dao.PontoDAO;
 import br.com.infomore.core.impl.dao.UsuarioDAO;
+import br.com.infomore.core.impl.negocio.local.PreencherCategoriaMeuLocal;
 import br.com.infomore.core.impl.negocio.usuario.PreencheSenhaNovaUsuario;
 import br.com.infomore.core.impl.negocio.usuario.ValidaCamposAlteracaoPerfilUsuario;
 import br.com.infomore.core.impl.negocio.usuario.ValidaCamposAlteracaoSenhaUsuario;
@@ -24,6 +26,7 @@ import br.com.infomore.core.impl.negocio.usuario.ValidaSenhaAtualUsuario;
 import br.com.infomore.dominio.Categoria;
 import br.com.infomore.dominio.EntidadeDominio;
 import br.com.infomore.dominio.LimiteRaio;
+import br.com.infomore.dominio.MeuLocal;
 import br.com.infomore.dominio.Ponto;
 import br.com.infomore.dominio.Usuario;
 
@@ -61,17 +64,20 @@ public class Fachada implements IFachada {
 		CategoriaDAO categoriaDao = new CategoriaDAO();
 		PontoDAO pontoDao = new PontoDAO();
 		LimiteRaioDAO limiteRaioDao = new LimiteRaioDAO();
+		MeuLocalDAO meuLocalDao = new MeuLocalDAO();
 
 		/* Adicionando cada dao no MAP indexando pelo nome da classe */
 		daos.put(Usuario.class.getName(), usuarioDao);
 		daos.put(Categoria.class.getName(), categoriaDao);
 		daos.put(Ponto.class.getName(), pontoDao);
 		daos.put(LimiteRaio.class.getName(), limiteRaioDao);
+		daos.put(MeuLocal.class.getName(), meuLocalDao);
 
 		/**
 		 * -------------- REGRAS DE NEGÓCIO ---------------------
 		 */
 		/* Criando instâncias de regras de negócio a serem utilizados */
+		/* USUARIO */
 		ValidaEmailUnicoUsuario validaEmail = new ValidaEmailUnicoUsuario();
 		ValidaCamposCadastroUsuario validaCamposCadastro = new ValidaCamposCadastroUsuario();
 		ValidaLoginUsuario validaLogin = new ValidaLoginUsuario();
@@ -80,6 +86,7 @@ public class Fachada implements IFachada {
 		ValidaConfirmacaoSenhaUsuario validaConfirmacaoSenha = new ValidaConfirmacaoSenhaUsuario();
 		ValidaSenhaAtualUsuario validaSenhaAtualUsuario = new ValidaSenhaAtualUsuario();
 		PreencheSenhaNovaUsuario preencheSenhaNova = new PreencheSenhaNovaUsuario();
+		
 		/*
 		 * Criando uma lista para conter as regras de negócio quando a operação
 		 * for salvar
@@ -135,7 +142,6 @@ public class Fachada implements IFachada {
 		 */
 
 		Map<String, List<IStrategy>> rnsUsuario = new HashMap<String, List<IStrategy>>();
-		Map<String, List<IStrategy>> rnsSenha = new HashMap<String, List<IStrategy>>();
 		/*
 		 * Adiciona a listaa de regras na operação salvar no mapa do usuario
 		 */
@@ -149,12 +155,22 @@ public class Fachada implements IFachada {
 		 */
 
 		rnsUsuario.put("consultar", rnsConsultarUsuario);
+		
+		/* Meu Local*/
+		PreencherCategoriaMeuLocal preencherCategoriaMeuLocal = new PreencherCategoriaMeuLocal();
+		
+		List<IStrategy> rnsSalvarMeuLocal = new ArrayList<IStrategy>();
+		rnsSalvarMeuLocal.add(preencherCategoriaMeuLocal);
+		
+		Map<String, List<IStrategy>> rnsMeuLocal = new HashMap<String, List<IStrategy>>();
+		rnsMeuLocal.put("salvar", rnsSalvarMeuLocal);
 
 		/*
 		 * Adiciona o mapa com as regras indexadas pelas operações no mapa geral
 		 * indexado pelo nome da entidade
 		 */
 		rns.put(Usuario.class.getName(), rnsUsuario);
+		rns.put(MeuLocal.class.getName(), rnsMeuLocal);
 
 	}
 

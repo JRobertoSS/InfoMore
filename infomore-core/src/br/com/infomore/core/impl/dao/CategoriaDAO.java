@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import br.com.infomore.dominio.Categoria;
 import br.com.infomore.dominio.EntidadeDominio;
 
-public class CategoriaDAO extends AbstractDAO<Long, Categoria> {
+public class CategoriaDAO extends AbstractDAO<Integer, Categoria> {
 
     public CategoriaDAO() {
 	super(Categoria.class);
