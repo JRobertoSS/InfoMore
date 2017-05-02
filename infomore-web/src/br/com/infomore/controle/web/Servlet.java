@@ -25,8 +25,10 @@ import br.com.infomore.controle.web.vh.impl.AtualizarPontosRaioViewHelper;
 import br.com.infomore.controle.web.vh.impl.CadastroViewHelper;
 import br.com.infomore.controle.web.vh.impl.ClassificacaoViewHelper;
 import br.com.infomore.controle.web.vh.impl.DetalhesMeuLocalViewHelper;
+import br.com.infomore.controle.web.vh.impl.ExcluirLocalViewHelper;
 import br.com.infomore.controle.web.vh.impl.LoginViewHelper;
 import br.com.infomore.controle.web.vh.impl.MeuLocalViewHelper;
+import br.com.infomore.controle.web.vh.impl.MeusLocaisViewHelper;
 import br.com.infomore.controle.web.vh.impl.NavegarViewHelper;
 import br.com.infomore.controle.web.vh.impl.PerfilViewHelper;
 import br.com.infomore.controle.web.vh.impl.SenhaViewHelper;
@@ -77,8 +79,6 @@ public class Servlet extends HttpServlet {
 
 	protected void doProcessRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Limpa o objeto de mensagem da request
-		request.setAttribute("mensagem", null);
 
 		// Obtêm a uri que invocou esta servlet (O que foi definido no method do
 		// form html)
@@ -181,7 +181,8 @@ public class Servlet extends HttpServlet {
 		vhs.put("/infomore/atualizaPontosRaio", new AtualizarPontosRaioViewHelper());
 		vhs.put("/infomore/meuLocal", new MeuLocalViewHelper());
 		vhs.put("/infomore/detalhesMeuLocal", new DetalhesMeuLocalViewHelper());
-
+		vhs.put("/infomore/meusLocais", new MeusLocaisViewHelper());
+		vhs.put("/infomore/excluirLocal", new ExcluirLocalViewHelper());
 		super.init();
 	}
 }

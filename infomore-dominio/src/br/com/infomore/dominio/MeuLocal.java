@@ -23,7 +23,6 @@ public class MeuLocal extends Regiao {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_usuario", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.DETACH)
 	private Usuario usuario;
 
 	public String getNome() {

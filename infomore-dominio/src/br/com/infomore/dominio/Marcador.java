@@ -39,11 +39,9 @@ public abstract class Marcador extends EntidadeDominio {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_categoria", insertable = true, updatable = true)
     @Fetch(FetchMode.JOIN)
-    @Cascade(CascadeType.DETACH)
-    private Categoria categoria; // inserir uma nova categoria 'Local' para os locais do usuario?
+    private Categoria categoria; 
 
     @OneToMany(mappedBy = "marcador", fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
     private List<Avaliacao> avaliacoes;
 
     public double getLatitude() {

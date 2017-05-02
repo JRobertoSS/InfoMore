@@ -7,3 +7,25 @@
 .espacamento-container{
 	padding-top: 60px;	
 }
+
+.espacamento-botoes{
+	padding-top: 50px;	
+}
+
+.botao-salvar {
+	background-color: #DE2E76;
+	padding-left: 18px;
+	margin-right: 25px;
+	
+}
+
+.botao-cancelar{
+	padding-left: 25px;
+	background-color: #2faaab;
+	color: #FFF;
+}
+
+.tabela{
+	padding-left: 50px;
+}
+

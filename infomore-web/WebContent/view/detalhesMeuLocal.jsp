@@ -52,49 +52,51 @@
 					<div class="row form-content">
 
 						<div class="input-field col s10">
-							<p class="label ">Nome deste local:</p> 
+							<p class="label ">Nome deste local:</p>
 						</div>
-						</br>
-						</br>
+						</br> </br>
 						<div class="input-field col s10">
-							<input id="inputNome"
-								name="inputNome" type="text" value="${meuLocal.nome}">
+							<input id="inputNome" name="inputNome" type="text"
+								value="${meuLocal.nome}">
 						</div>
-						
+
 						<div class="input-field col s10">
-							<p class="label">Descreva este local:</p> 
+							<p class="label">Descreva este local:</p>
 						</div>
-						
+
 						<div class="input-field col s10">
-							<input id="inputDescricao"
-								name="inputDescricao" type="text"
+							<input id="inputDescricao" name="inputDescricao" type="text"
 								value="${meuLocal.descricao}">
 						</div>
-						
-						
-						<div class="input-field col s10 center">
-							<h5>Informações do Local</h5> 
+
+
+						<div class="input-field col s12 center">
+							<h5><b>Informações adicionais</b></h5>
 						</div>
+						<div class="tabela">
+							<table class="input-field col s8 ">
 
-						<div class="input-field col s10">
-							<p><span class="label">Raio:</span> ${meuLocal.raio}</p>
+								<tr>
+									<th class="label">Raio:</th>
+									<td>${meuLocal.raio}</td>
+								</tr>
+								<tr>
+									<th class="label">Latitude:</th>
+									<td>${meuLocal.latitude}</td>
+								</tr>
+								<tr>
+									<th class="label">Longitude:</th>
+									<td>${meuLocal.longitude}</td>
+								</tr>
+							</table>
 						</div>
+						<div class="row col s12 form-content center-align ">
+							<div class="espacamento-botoes">
 
-						<div class="input-field col s10">
-							<p><span class="label">Latitude:</span> ${meuLocal.latitude}</p>
-						</div>
+								<button class="btn waves-effect waves-light top botao-salvar"
+									type="submit" name="action">Salvar</button>
 
-						<div class="input-field col s10">
-							<p><span class="label">Longitude:</span> ${meuLocal.longitude}</p>
-						</div>
-
-						<div class="row col s12 form-content center-align">
-							<div class="col s12">
-
-								<button class="btn waves-effect waves-light top botao-atualizar"
-									type="submit" name="action">Salvar </button>
-									
-								<a class="btn waves-effect waves-light top"
+								<a class="btn waves-effect waves-light top botao-cancelar"
 									href="navegar?acao=mapa">Cancelar</a>
 							</div>
 						</div>

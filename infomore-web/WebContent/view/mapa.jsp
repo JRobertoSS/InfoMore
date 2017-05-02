@@ -26,20 +26,26 @@
 
 <link href="css/comum.css" rel="stylesheet">
 
-<link href="css/mapa.css" rel="stylesheet">
+<link href="css/mapa.css" rel="stylesheet"> 
 
 
 <!--Let browser know website is optimized for mobile-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"
+	charset="UTF-8" />
 
 <title>Infomore</title>
 </head>
 <body class="corpo">
 
+
 	<%@include file="menu/navigator.jsp"%>
 
 	<%@include file="modal/mensagem.jsp"%>
 
+	<script>
+		mostraSalvarMeuLocal ();
+	</script>
+	
 	<div id="page-content-wrapper" class="container">
 
 		<div id="mapa" class="mapa">

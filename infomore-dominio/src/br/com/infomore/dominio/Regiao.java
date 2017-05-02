@@ -25,9 +25,9 @@ public class Regiao extends Marcador {
 	private double raio;
 	
 	@OneToOne(orphanRemoval = true)
-    @JoinColumn(name="id_limite_raio", nullable=false, insertable = true, updatable = true)
+    @JoinColumn(name="id_limite_raio", insertable = true, updatable = true, nullable=true)
     @Fetch(FetchMode.JOIN)
-    @Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.ALL)
 	private LimiteRaio limiteRaio;
 	
 	public double getRaio() {

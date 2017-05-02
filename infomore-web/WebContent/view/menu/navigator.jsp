@@ -10,9 +10,9 @@
 
 		<li class="divider"></li>
 
-		<li class="collection-item"><a id="linkSalvarMeuLocal" href="navegar?acao=detalhesMeuLocal"
-			class="navigator-item">Salvar este local</a></li>
-		<li class="collection-item"><a href="meuLocal?acao=listar"
+		<!-- <li class="collection-item"><a id="linkSalvarMeuLocal" href="navegar?acao=detalhesMeuLocal"
+			class="navigator-item">Salvar este local</a></li> -->
+		<li class="collection-item"><a href="meusLocais?acao=listar"
 			class="navigator-item">Meus locais</a></li>
 
 
@@ -27,14 +27,33 @@
 
 	<div class="nav-wrapper teal menuNav">
 
-		<ul id="nav-mobile" class="left">
-			<li><a href="#!" id="dropdownButtonOpcoes"
+		<ul id="nav-mobile">
+			<li class="left"><a href="#!" id="dropdownButtonOpcoes"
 				class="dropdown-button" data-beloworigin="true"
 				data-constrainwidth="false" data-activates="dropdownOpcoes"><i
 					class="material-icons">settings</i></a></li>
+					
+			<li class="right"><a href="navegar?acao=mapa" ><img
+					src="images/icon_mapa.png" /></a></li>
+
 		</ul>
-		<a href="navegar?acao=mapa" class="right"><img
-			src="images/icon_mapa.png" /></a>
+		
+		<div id="divBotaoMeuLocal" style="visibility:hidden">
+			<a class="center" href="navegar?acao=detalhesMeuLocal" id="linkSalvarMeuLocal"><i
+				class="material-icons">my_location</i></a>
+
+			<script type="text/javascript">
+				window.onload = function() {
+					var a = document
+							.getElementById("linkSalvarMeuLocal");
+					a.onclick = function() {
+						salvarEsteLocal("Meu Local");
+						return true;
+					}
+				}
+			</script>
+		</div>
+
 	</div>
 </nav>
 

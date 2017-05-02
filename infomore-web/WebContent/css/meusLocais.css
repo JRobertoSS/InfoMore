@@ -1,0 +1,31 @@
+.espacamento-botoes{
+	padding-top: 30px;	
+}
+
+.botao-comparar {
+	background-color: #DE2E76;
+	padding-left: 18px;
+	margin-right: 25px;
+	
+}
+
+.botao-cancelar{
+	padding-left: 25px;
+	background-color: #2faaab;
+	color: #FFF;
+	
+}
+
+.icone-excluir{
+	color: #CCC;
+	text-shadow: 0px 1px black;
+}
+
+.tabela>thead{
+	border-bottom:1px solid;
+	border-color: #000;
+}
+.tabela>tbody{
+	border-bottom:1px solid;
+	border-color: #000;
+}

@@ -7,7 +7,7 @@
 	<welcome-file-list>
 		<welcome-file>/login</welcome-file>
 	</welcome-file-list>
-	
+
 	<!-- definição da Servlet que atenderá todas requisições -->
 	<servlet>
 		<description></description>
@@ -15,9 +15,9 @@
 		<servlet-name>Servlet</servlet-name>
 		<servlet-class>br.com.infomore.controle.web.Servlet</servlet-class>
 	</servlet>
-	
+
 	<!-- mapeamentos de requisição síncrona (form, href e etc) -->
-	
+
 	<servlet-mapping>
 		<servlet-name>Servlet</servlet-name>
 		<url-pattern>/login</url-pattern>
@@ -50,17 +50,25 @@
 		<servlet-name>Servlet</servlet-name>
 		<url-pattern>/navegar</url-pattern>
 	</servlet-mapping>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>Servlet</servlet-name>
 		<url-pattern>/meuLocal</url-pattern>
 	</servlet-mapping>
-	
+	<servlet-mapping>
+		<servlet-name>Servlet</servlet-name>
+		<url-pattern>/meusLocais</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Servlet</servlet-name>
+		<url-pattern>/excluirLocal</url-pattern>
+	</servlet-mapping>
+
 	<!-- mapeamentos de requisição assíncrona (ajax) -->
 	<servlet-mapping>
 		<servlet-name>Servlet</servlet-name>
 		<url-pattern>/atualizaPontosRaio</url-pattern>
 	</servlet-mapping>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>Servlet</servlet-name>
 		<url-pattern>/detalhesMeuLocal</url-pattern>
 	</servlet-mapping>

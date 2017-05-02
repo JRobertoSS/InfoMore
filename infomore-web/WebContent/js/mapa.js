@@ -71,8 +71,8 @@ function fechaInfoMeuLocal() {
 function criarInfoWindowMeuLocal(marcador) {
 	fechaInfoMeuLocal();
 
-	var conteudo = "<p><b>Este é seu local atual!</b> </p><p><b>Info:</b></p>";
-	conteudo += "<p><b>Raio: </b>" + document.circle.radius.toFixed(3) + "</p>";
+	var conteudo = "<p><b>Este é seu local atual!</b>";
+	conteudo += "<p><b>Raio: </b>" + document.circle.radius.toFixed(2) + " m</p>";
 	conteudo += "<p><b>Latitude: </b>" + document.meuLocal.lat() + "</p>";
 	conteudo += "<p><b>Longitude: </b>" + document.meuLocal.lng() + "</p>";
 
@@ -366,3 +366,8 @@ function getLocal() {
 
 // executar o método depois de carregar a página
 /* window.onload = inicializaMapa(-23.505457, -46.187097); */
+
+// executa para mostrar o botão nesta página
+function mostraSalvarMeuLocal (){
+	document.getElementById('divBotaoMeuLocal').style.visibility = "visible";
+}
