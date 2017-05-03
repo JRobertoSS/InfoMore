@@ -31,26 +31,42 @@ public class MeuLocalViewHelper implements IViewHelper {
 		MeuLocal meuLocal = (MeuLocal) request.getSession().getAttribute("meuLocal");
 		meuLocal.setNome(request.getParameter("inputNome"));
 		meuLocal.setDescricao(request.getParameter("inputDescricao"));
-		
+
 		request.getSession().setAttribute("meuLocal", meuLocal);
-		
+
 		return meuLocal;
 	}
 
 	@Override
 	public void setView(Resultado resultado, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		
+
+		String acao = request.getParameter("acao");
 		RequestDispatcher d = null;
-		if( resultado.getMsg() == null ){
-			request.setAttribute("mensagem", "Local salvo com sucesso!");
-			request.setAttribute("tipoMensagem", TipoMensagemView.MSG_SUCESSO);
-			request.getSession().setAttribute("meuLocal", null);
-			d = request.getRequestDispatcher("view/mapa.jsp");
-		} else {
-			request.setAttribute("mensagem", resultado.getMsg());
-			request.setAttribute("tipoMensagem", TipoMensagemView.MSG_ALERTA);
-			d = request.getRequestDispatcher("view/detalhesMeuLocal.jsp");
+
+		if (acao.equals("salvar")) {
+			if (resultado.getMsg() == null) {
+				request.setAttribute("mensagem", "Local salvo com sucesso!");
+				request.setAttribute("tipoMensagem", TipoMensagemView.MSG_SUCESSO);
+				request.getSession().setAttribute("meuLocal", null);
+				d = request.getRequestDispatcher("view/mapa.jsp");
+			} else {
+				request.setAttribute("mensagem", resultado.getMsg());
+				request.setAttribute("tipoMensagem", TipoMensagemView.MSG_ALERTA);
+				d = request.getRequestDispatcher("view/detalhesMeuLocal.jsp");
+			}
+		}
+		if(acao.equals("alterar")){
+			if (resultado.getMsg() == null) {
+				request.setAttribute("mensagem", "Local salvo com sucesso!");
+				request.setAttribute("tipoMensagem", TipoMensagemView.MSG_SUCESSO);
+				request.getSession().setAttribute("meuLocal", null);
+				d = request.getRequestDispatcher("/meusLocais?acao=listar");
+			} else {
+				request.setAttribute("mensagem", resultado.getMsg());
+				request.setAttribute("tipoMensagem", TipoMensagemView.MSG_ALERTA);
+				d = request.getRequestDispatcher("view/editarMeuLocal.jsp");
+			}
 		}
 		d.forward(request, response);
 	}

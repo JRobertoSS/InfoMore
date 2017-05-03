@@ -168,8 +168,13 @@ public class Fachada implements IFachada {
 		rnsSalvarMeuLocal.add(verificanomeVazioMeuLocal);
 		rnsSalvarMeuLocal.add(verificaNomeRepetidoMeuLocal);
 		
+		List<IStrategy> rnsAlterarMeuLocal = new ArrayList<IStrategy>();
+		rnsAlterarMeuLocal.add(verificanomeVazioMeuLocal);
+		rnsAlterarMeuLocal.add(verificaNomeRepetidoMeuLocal);
+		
 		Map<String, List<IStrategy>> rnsMeuLocal = new HashMap<String, List<IStrategy>>();
 		rnsMeuLocal.put("salvar", rnsSalvarMeuLocal);
+		rnsMeuLocal.put("alterar", rnsAlterarMeuLocal);
 
 		/*
 		 * Adiciona o mapa com as regras indexadas pelas operações no mapa geral

@@ -21,6 +21,11 @@
 	text-shadow: 0px 1px black;
 }
 
+.icone-editar{
+	color: #CCC;
+	text-shadow: 0px 1px black;
+}
+
 .tabela>thead{
 	border-bottom:1px solid;
 	border-color: #000;

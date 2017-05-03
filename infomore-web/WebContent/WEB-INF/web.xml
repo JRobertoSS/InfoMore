@@ -62,6 +62,10 @@
 		<servlet-name>Servlet</servlet-name>
 		<url-pattern>/excluirLocal</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Servlet</servlet-name>
+		<url-pattern>/editarLocal</url-pattern>
+	</servlet-mapping>
 
 	<!-- mapeamentos de requisição assíncrona (ajax) -->
 	<servlet-mapping>

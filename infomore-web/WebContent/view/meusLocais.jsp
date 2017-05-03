@@ -57,6 +57,7 @@
 							<th>Descrição</th>
 
 							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<c:forEach var="local" items="${requestScope['meusLocais']}">
@@ -70,8 +71,13 @@
 
 								<td>${local.descricao}</td>
 
+								<td><a
+									href="editarLocal?acao=consultar&idLocal=${local.id}"><i
+										class="material-icons icone-editar">mode edit</i></a></td>
+
 								<td><a href="excluirLocal?acao=excluir&idLocal=${local.id}"><i
-										class="material-icons icone-excluir" onclick="return confirm('Deseja realmente remover este local de sua lista?');">delete_forever</i></a></td>
+										class="material-icons icone-excluir"
+										onclick="return confirm('Deseja realmente remover este local de sua lista?');">delete_forever</i></a></td>
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -84,15 +90,14 @@
 						href="navegar?acao=mapa">Voltar</a>
 				</div>
 			</div>
-	</div>
-
-	</div>
-	</form>
-	</div>
 
 
 
+		</form>
+
 	</div>
+
+
 </body>
 
 </html>

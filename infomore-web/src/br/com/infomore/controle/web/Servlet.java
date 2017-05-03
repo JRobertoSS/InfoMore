@@ -25,6 +25,7 @@ import br.com.infomore.controle.web.vh.impl.AtualizarPontosRaioViewHelper;
 import br.com.infomore.controle.web.vh.impl.CadastroViewHelper;
 import br.com.infomore.controle.web.vh.impl.ClassificacaoViewHelper;
 import br.com.infomore.controle.web.vh.impl.DetalhesMeuLocalViewHelper;
+import br.com.infomore.controle.web.vh.impl.EditarLocalViewHelper;
 import br.com.infomore.controle.web.vh.impl.ExcluirLocalViewHelper;
 import br.com.infomore.controle.web.vh.impl.LoginViewHelper;
 import br.com.infomore.controle.web.vh.impl.MeuLocalViewHelper;
@@ -183,6 +184,7 @@ public class Servlet extends HttpServlet {
 		vhs.put("/infomore/detalhesMeuLocal", new DetalhesMeuLocalViewHelper());
 		vhs.put("/infomore/meusLocais", new MeusLocaisViewHelper());
 		vhs.put("/infomore/excluirLocal", new ExcluirLocalViewHelper());
+		vhs.put("/infomore/editarLocal", new EditarLocalViewHelper());
 		super.init();
 	}
 }
