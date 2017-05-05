@@ -7,6 +7,7 @@ import java.util.Map;
 
 import br.com.infomore.core.IFachada;
 import br.com.infomore.core.IStrategy;
+import br.com.infomore.core.IStrategyProcesso;
 import br.com.infomore.core.aplicacao.Resultado;
 import br.com.infomore.core.impl.dao.AbstractDAO;
 import br.com.infomore.core.impl.dao.CategoriaDAO;
@@ -17,6 +18,9 @@ import br.com.infomore.core.impl.dao.UsuarioDAO;
 import br.com.infomore.core.impl.negocio.local.PreencherCategoriaMeuLocal;
 import br.com.infomore.core.impl.negocio.local.VerificaNomeRepetidoMeuLocal;
 import br.com.infomore.core.impl.negocio.local.VerificaNomeVazioMeuLocal;
+import br.com.infomore.core.impl.negocio.local.processo.OrdenarLocaisPontuacao;
+import br.com.infomore.core.impl.negocio.local.processo.PesquisarLocaisComparacao;
+import br.com.infomore.core.impl.negocio.local.processo.ProcessoCompararLocais;
 import br.com.infomore.core.impl.negocio.usuario.PreencheSenhaNovaUsuario;
 import br.com.infomore.core.impl.negocio.usuario.ValidaCamposAlteracaoPerfilUsuario;
 import br.com.infomore.core.impl.negocio.usuario.ValidaCamposAlteracaoSenhaUsuario;
@@ -26,6 +30,7 @@ import br.com.infomore.core.impl.negocio.usuario.ValidaEmailUnicoUsuario;
 import br.com.infomore.core.impl.negocio.usuario.ValidaLoginUsuario;
 import br.com.infomore.core.impl.negocio.usuario.ValidaSenhaAtualUsuario;
 import br.com.infomore.dominio.Categoria;
+import br.com.infomore.dominio.CompararLocais;
 import br.com.infomore.dominio.EntidadeDominio;
 import br.com.infomore.dominio.LimiteRaio;
 import br.com.infomore.dominio.MeuLocal;
@@ -45,7 +50,13 @@ public class Fachada implements IFachada {
 	 * valor é um mapa que de regras de negócio indexado pela operação
 	 */
 	private Map<String, Map<String, List<IStrategy>>> rns;
-
+	
+	/**
+	 * Mapa para conter as regras de negócio de todas operações por entidade; O
+	 * valor é um mapa que de regras de negócio indexado pela operação
+	 */
+	private Map<String, Map<String, List<IStrategyProcesso>>> rnsProcesso;
+	
 	private Resultado resultado;
 
 	public Fachada() {
@@ -57,7 +68,10 @@ public class Fachada implements IFachada {
 		daos = new HashMap<String, AbstractDAO>();
 		// mapa de Strategies
 		rns = new HashMap<String, Map<String, List<IStrategy>>>();
-
+		
+		// mapa de Strategies de Processo
+		rnsProcesso = new HashMap<String, Map<String, List<IStrategyProcesso>>>();
+		
 		/**
 		 * -------------- DAOS ---------------------
 		 */
@@ -88,7 +102,7 @@ public class Fachada implements IFachada {
 		ValidaConfirmacaoSenhaUsuario validaConfirmacaoSenha = new ValidaConfirmacaoSenhaUsuario();
 		ValidaSenhaAtualUsuario validaSenhaAtualUsuario = new ValidaSenhaAtualUsuario();
 		PreencheSenhaNovaUsuario preencheSenhaNova = new PreencheSenhaNovaUsuario();
-		
+
 		/*
 		 * Criando uma lista para conter as regras de negócio quando a operação
 		 * for salvar
@@ -157,21 +171,21 @@ public class Fachada implements IFachada {
 		 */
 
 		rnsUsuario.put("consultar", rnsConsultarUsuario);
-		
-		/* Meu Local*/
+
+		/* Meu Local */
 		PreencherCategoriaMeuLocal preencherCategoriaMeuLocal = new PreencherCategoriaMeuLocal();
 		VerificaNomeVazioMeuLocal verificanomeVazioMeuLocal = new VerificaNomeVazioMeuLocal();
 		VerificaNomeRepetidoMeuLocal verificaNomeRepetidoMeuLocal = new VerificaNomeRepetidoMeuLocal();
-		
+
 		List<IStrategy> rnsSalvarMeuLocal = new ArrayList<IStrategy>();
 		rnsSalvarMeuLocal.add(preencherCategoriaMeuLocal);
 		rnsSalvarMeuLocal.add(verificanomeVazioMeuLocal);
 		rnsSalvarMeuLocal.add(verificaNomeRepetidoMeuLocal);
-		
+
 		List<IStrategy> rnsAlterarMeuLocal = new ArrayList<IStrategy>();
 		rnsAlterarMeuLocal.add(verificanomeVazioMeuLocal);
 		rnsAlterarMeuLocal.add(verificaNomeRepetidoMeuLocal);
-		
+
 		Map<String, List<IStrategy>> rnsMeuLocal = new HashMap<String, List<IStrategy>>();
 		rnsMeuLocal.put("salvar", rnsSalvarMeuLocal);
 		rnsMeuLocal.put("alterar", rnsAlterarMeuLocal);
@@ -182,7 +196,20 @@ public class Fachada implements IFachada {
 		 */
 		rns.put(Usuario.class.getName(), rnsUsuario);
 		rns.put(MeuLocal.class.getName(), rnsMeuLocal);
-
+		
+		/**
+		 * PROCESSOS
+		 */
+		List<IStrategyProcesso> rnsCompararLocal = new ArrayList<IStrategyProcesso>();
+		rnsCompararLocal.add(new PesquisarLocaisComparacao());
+		rnsCompararLocal.add(new ProcessoCompararLocais());
+		rnsCompararLocal.add(new OrdenarLocaisPontuacao());
+		
+		
+		Map<String, List<IStrategyProcesso>> rnsComparacaoLocal = new HashMap<String, List<IStrategyProcesso>>();
+		rnsComparacaoLocal.put("processar", rnsCompararLocal);
+		
+		rnsProcesso.put(CompararLocais.class.getName(), rnsComparacaoLocal);
 	}
 
 	@Override
@@ -312,7 +339,8 @@ public class Fachada implements IFachada {
 					if (m != null) {
 						msg.append(m);
 						msg.append("\n");
-						break; // parar as validações para somente uma mensagem de erro
+						break; // parar as validações para somente uma mensagem
+								// de erro
 					}
 				}
 			}
@@ -323,5 +351,31 @@ public class Fachada implements IFachada {
 			return msg.toString();
 		else
 			return null;
+	}
+
+	@Override
+	public Resultado processar(EntidadeDominio entidade) {
+		resultado = new Resultado();
+		resultado.setEntidades(new ArrayList<EntidadeDominio>(1));
+		return processar(entidade, "processar", resultado);
+
+	}
+
+	private Resultado processar(EntidadeDominio entidade, String operacao, Resultado resultado) {
+		String nmClasse = entidade.getClass().getName();
+
+		Map<String, List<IStrategyProcesso>> regrasProcesso = rnsProcesso.get(nmClasse);
+		if(regrasProcesso != null){
+			List<IStrategyProcesso> regras = regrasProcesso.get(operacao);
+			if(regras != null){
+				for(IStrategyProcesso sp: regras){
+					sp.processar(entidade, resultado);
+					if(resultado.getMsg() != null)
+						break;
+				}
+				return resultado;
+			}
+		}
+		return null;
 	}
 }

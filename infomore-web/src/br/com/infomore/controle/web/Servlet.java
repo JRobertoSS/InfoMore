@@ -19,6 +19,7 @@ import br.com.infomore.controle.web.command.impl.AlterarSenhaCommand;
 import br.com.infomore.controle.web.command.impl.ConsultarCommand;
 import br.com.infomore.controle.web.command.impl.ExcluirCommand;
 import br.com.infomore.controle.web.command.impl.ListarCommand;
+import br.com.infomore.controle.web.command.impl.ProcessarCommand;
 import br.com.infomore.controle.web.command.impl.SalvarCommand;
 import br.com.infomore.controle.web.vh.IViewHelper;
 import br.com.infomore.controle.web.vh.impl.AtualizarPontosRaioViewHelper;
@@ -160,6 +161,8 @@ public class Servlet extends HttpServlet {
 		commands.put("excluir", new ExcluirCommand());
 		commands.put("consultar", new ConsultarCommand());
 		commands.put("listar", new ListarCommand());
+		
+		commands.put("processar", new ProcessarCommand());
 
 		/*
 		 * Utilizando o ViewHelper para tratar especificações de qualquer tela e

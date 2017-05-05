@@ -43,7 +43,7 @@
 
 		<form class="col s12" action="meusLocais" method="post">
 
-			<input type="hidden" name="acao" value="comparar">
+			<input type="hidden" name="acao" value="processar">
 
 			<div class="row form-content">
 				<table class="tabela">

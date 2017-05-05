@@ -10,6 +10,6 @@ public interface IFachada {
 	public Resultado excluir(EntidadeDominio entidade);
 	public Resultado consultar(EntidadeDominio entidade);
 	public Resultado listar(EntidadeDominio entidade);
-	
+	public Resultado processar(EntidadeDominio entidade);
 	
 }

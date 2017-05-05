@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,22 +32,25 @@ public class MeusLocaisViewHelper implements IViewHelper {
 	@Override
 	public EntidadeDominio getEntity(HttpServletRequest request) {
 
-		if (request.getParameter("acao").equals("comparar")) {
+		if (request.getParameter("acao").equals("processar")) {
 			String[] checkboxes = request.getParameterValues("checkComparar");
-			
+
 			CompararLocais compararLocais = new CompararLocais();
-			compararLocais.setIdsComparacao(new ArrayList<String>());
-			
-			if(checkboxes.length > 0){
-				for(String id : checkboxes){
-					compararLocais.getIdsComparacao().add(id);
+			compararLocais.setIdsComparacao(new ArrayList<Integer>());
+
+			if (checkboxes.length > 0) {
+				for (String id : checkboxes) {
+					compararLocais.getIdsComparacao().add(Integer.valueOf(id));
 				}
-				
+
 			}
-			// baseado nessa entidade, irá pesquisar os ids (strings) dos locais para comparar
+			compararLocais.setUsuarioLogado( (Usuario) request.getSession().getAttribute("usuario"));
+
+			// baseado nessa entidade, irá pesquisar os ids dos locais para
+			// comparar
 			return compararLocais;
 		}
-		
+
 		MeuLocal meuLocal = new MeuLocal();
 		meuLocal.setUsuario((Usuario) request.getSession().getAttribute("usuario"));
 		return meuLocal;
@@ -57,13 +61,23 @@ public class MeusLocaisViewHelper implements IViewHelper {
 			throws IOException, ServletException {
 
 		RequestDispatcher d = null;
-		
-		if (request.getParameter("acao").equals("listar"))
-			request.setAttribute("meusLocais", resultado.getEntidades());
-		
-		d = request.getRequestDispatcher("view/meusLocais.jsp");
 
+		if (request.getParameter("acao").equals("listar")) {
+			request.setAttribute("meusLocais", resultado.getEntidades());
+			d = request.getRequestDispatcher("view/meusLocais.jsp");
+		}
+		
+
+		if (request.getParameter("acao").equals("processar")) {
+			request.setAttribute("comparacao", resultado.getEntidades().get(0));
+			
+			d = request.getRequestDispatcher("view/resultadoComparacao.jsp");
+		}
+		
 		d.forward(request, response);
 	}
+
+	
+
 
 }

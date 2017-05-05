@@ -1,0 +1,25 @@
+.espacamento-botoes{
+	padding-top: 30px;	
+}
+
+
+.botao-voltar{
+	padding-left: 25px;
+	background-color: #2faaab;
+	color: #FFF;
+	
+}
+
+.icone-detalhes{
+	color: #CCC;
+	text-shadow: 0px 1px black;
+}
+
+.tabela>thead{
+	border-bottom:1px solid;
+	border-color: #000;
+}
+.tabela>tbody{
+	border-bottom:1px solid;
+	border-color: #000;
+}
