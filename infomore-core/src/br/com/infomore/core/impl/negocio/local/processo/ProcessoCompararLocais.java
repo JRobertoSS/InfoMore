@@ -61,7 +61,7 @@ public class ProcessoCompararLocais implements IStrategyProcesso {
 				// se for uma ocorrência, subtrair pontos no total
 				// se não for uma ocorrência, adicionar pontos no total
 				// em ambos os casos, os pontos são da classificação do usuário
-				if(categoriaDoPonto.equals(Categoria.OCORRENCIAS)){
+				if( ponto.isOcorrencia() ){
 					pontuacaoDoLocal -= mapaPrioridadePeso.get(categoriaDoPonto);
 				} else {
 					pontuacaoDoLocal += mapaPrioridadePeso.get(categoriaDoPonto);

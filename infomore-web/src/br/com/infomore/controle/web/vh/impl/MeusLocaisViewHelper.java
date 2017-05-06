@@ -70,11 +70,17 @@ public class MeusLocaisViewHelper implements IViewHelper {
 
 		if (request.getParameter("acao").equals("processar")) {
 			request.setAttribute("comparacao", resultado.getEntidades().get(0));
-			
+			request.setAttribute("jsonMap", getJsonMap( resultado.getEntidades().get(0) ) );
 			d = request.getRequestDispatcher("view/resultadoComparacao.jsp");
 		}
 		
 		d.forward(request, response);
+	}
+
+	private Object getJsonMap(EntidadeDominio entidadeDominio) {
+		CompararLocais comparacao = (CompararLocais) entidadeDominio;
+		Gson gson = new Gson();
+		return gson.toJson(comparacao.getMapaIdCategoriaQuantidade());
 	}
 
 	

@@ -1,25 +1,50 @@
-.espacamento-botoes{
-	padding-top: 30px;	
+.detalhes-modal {
+	background: url("../images/background_infomore.png") no-repeat center
+		center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
+.espacamento-botoes {
+	padding-top: 30px;
+}
 
-.botao-voltar{
+.botao-voltar {
 	padding-left: 25px;
 	background-color: #2faaab;
 	color: #FFF;
-	
 }
 
-.icone-detalhes{
+.icone-detalhes {
 	color: #CCC;
 	text-shadow: 0px 1px black;
 }
 
-.tabela>thead{
-	border-bottom:1px solid;
+.tabela>thead {
+	border-bottom: 1px solid;
 	border-color: #000;
 }
-.tabela>tbody{
-	border-bottom:1px solid;
+
+.tabela>tbody {
+	border-bottom: 1px solid;
 	border-color: #000;
+}
+
+.icone{
+	float: left;
+}
+.x {
+	
+	font-size: 20px;
+	font-weight: bolder;
+	text-shadow: 1px 1px #E0E0E0;
+}
+
+.quantidade{
+	
+	font-size: 22px;
+	font-weight: bolder;
+	text-shadow: 1px 1px #E0E0E0;
 }

@@ -32,6 +32,11 @@
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<script>
+
+</script>
+
+
 <title>Infomore - Resultado da Comparação</title>
 </head>
 <body class="corpo">
@@ -43,6 +48,12 @@
 	<div id="page-content-wrapper" class="container espacamento-container">
 
 		<c:set value="${comparacao}" var="comparacao" scope="request" />
+		<c:set value="${jsonMap}" var="jsonMap" scope="request" />
+		
+		<script>
+			document.mapaCategoriaQuantidade = JSON.parse('${jsonMap}');
+		</script>
+		
 		<div class="row form-content">
 			<table class="tabela">
 				<thead>
@@ -63,34 +74,12 @@
 
 							<td>${comparacao.mapaIdPontuacaoLocal.get(local.id)}</td>
 
-							<td>
-								<a href="#"
-									onclick="atualizarDetalhesDoLocal(${local.id})"> <img
-										alt="detalhes" src="images/infomore_icon.png">
-								</a>
-							</td>
+							<td><a href="#" class="button-collapse"
+								onclick="atualizarDetalhesCategorias(${local.id})"> <img alt="detalhes"
+									src="images/infomore_icon.png">
+							</a></td>
 
 
-							<div id="page-content-wrapper"
-								class="container espacamento-container">
-								<ul>
-									<li><i class="material-icons">local_hospital</i> <span
-										class="x"> X </span> <span id="quantidadeSaude"></span></li>
-									<li><i class="material-icons">school</i> <span class="x">
-											X </span> <span id="quantidadeEducacao"></span></li>
-									<li><i class="material-icons">security</i> <span class="x">
-											X </span> <span id="quantidadeSeguranca"></span></li>
-									<li><i class="material-icons">shopping_cart</i> <span
-										class="x"> X </span> <span id="quantidadeComodidades"></span></li>
-									<li><i class="material-icons">tag_faces</i> <span
-										class="x"> X </span> <span id="quantidadeLazerCultura"></span></li>
-									<li><i class="material-icons">directions_bus</i> <span
-										class="x"> X </span> <span id="quantidadeTransportes"></span></li>
-									<li><i class="material-icons">report</i> <span class="x">
-											X </span> <span id="quantidadeOcorrencias"></span></li>
-								</ul>
-
-							</div>
 						</tr>
 					</tbody>
 				</c:forEach>
@@ -104,8 +93,28 @@
 		</div>
 	</div>
 
+	 <div class="modal center" id="modalDetalhes">
+		<div id="page-content-wrapper" class="modal-content detalhes-modal">
+			<ul>
+				<li><i class="material-icons icone">local_hospital</i> <span
+					class="x"> X </span> <span id="quantidadeSaude" class="quantidade"></span></li>
+				<li><i class="material-icons icone">school</i> <span class="x">
+						X </span> <span id="quantidadeEducacao" class="quantidade"></span></li>
+				<li><i class="material-icons icone">security</i> <span class="x">
+						X </span> <span id="quantidadeSeguranca" class="quantidade"></span></li>
+				<li><i class="material-icons icone">shopping_cart</i> <span class="x">
+						X </span> <span id="quantidadeComodidades" class="quantidade"></span></li>
+				<li><i class="material-icons icone">tag_faces</i> <span class="x">
+						X </span> <span id="quantidadeLazerCultura" class="quantidade"></span></li>
+				<li><i class="material-icons icone">directions_bus</i> <span
+					class="x"> X </span> <span id="quantidadeTransportes" class="quantidade"></span></li>
+				<li><i class="material-icons icone">report</i> <span class="x">
+						X </span> <span id="quantidadeOcorrencias" class="quantidade"></span></li>
+			</ul>
 
-
+		</div>
+	</div>
+	
 	<%@include file="detalhesComparacao.jsp"%>
 
 

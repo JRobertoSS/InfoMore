@@ -23,6 +23,7 @@ public abstract class AbstractDAO<K, T> {
 		em.getTransaction().begin();
 		em.persist(objeto);
 		em.getTransaction().commit();
+		em.close();
 	}
 
 	public void alterar(T objeto) {
@@ -30,6 +31,7 @@ public abstract class AbstractDAO<K, T> {
 		em.getTransaction().begin();
 		em.merge(objeto);
 		em.getTransaction().commit();
+		em.close();
 	}
 
 	public void excluir(T objeto) {
@@ -38,17 +40,24 @@ public abstract class AbstractDAO<K, T> {
 		Object obj = em.merge(objeto);
 		em.remove(obj);
 		em.getTransaction().commit();
+		em.close();
 	}
 
 	public T consultar(T objeto, K chave) {
 		EntityManager em = entityManagerFactory.createEntityManager();
-		return (T) em.find(classeObjeto, chave);
+		T consulta =  em.find(classeObjeto, chave);
+		em.close();
+		return consulta;
+		
 	}
 
 	public List<T> listar() {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		Query query = em.createQuery("SELECT T FROM " + (classeObjeto.getSimpleName() + " T"));
-		return (List<T>) query.getResultList();
+		List<T> listagem = query.getResultList();
+		em.close();
+		return listagem;
+		
 	}
 
 	public abstract List<T> listar(EntidadeDominio entidade);
