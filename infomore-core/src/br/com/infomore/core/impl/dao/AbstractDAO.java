@@ -54,6 +54,7 @@ public abstract class AbstractDAO<K, T> {
 	public List<T> listar() {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		Query query = em.createQuery("SELECT T FROM " + (classeObjeto.getSimpleName() + " T"));
+		@SuppressWarnings("unchecked")
 		List<T> listagem = query.getResultList();
 		em.close();
 		return listagem;

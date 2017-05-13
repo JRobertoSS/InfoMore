@@ -9,3 +9,9 @@
 ul.dropdown-content{
     width:160px !important;
 }
+
+.fechar-modal{
+	position:absolute;
+	top:0;
+	right:0;
+}

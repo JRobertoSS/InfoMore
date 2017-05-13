@@ -76,18 +76,18 @@
 
 			<ul>
 
-				<li><a id="buttonSaude" class="btn-floating red "
+				<li><a id="buttonSaude" class="btn-floating green"
 					onclick="filtrarCategorias('Saúde');"><i class="material-icons">local_hospital</i></a></li>
 
-				<li><a id="buttonEducacao" class="btn-floating purple"
+				<li><a id="buttonEducacao" class="btn-floating blue"
 					onclick="filtrarCategorias('Educação');"><i
 						class="material-icons">school</i></a></li>
 
-				<li><a id="buttonSeguranca" class="btn-floating black"
+				<li><a id="buttonSeguranca" class="btn-floating grey darken-1"
 					onclick="filtrarCategorias('Segurança');"><i
 						class="material-icons">security</i></a></li>
 
-				<li><a id="buttonComodidades" class="btn-floating green"
+				<li><a id="buttonComodidades" class="btn-floating purple"
 					onclick="filtrarCategorias('Comodidades');"><i
 						class="material-icons">shopping_cart</i></a></li>
 
@@ -95,16 +95,27 @@
 					onclick="filtrarCategorias('Lazer e Cultura');"><i
 						class="material-icons">tag_faces</i></a></li>
 
-				<li><a id="buttonTransporte" class="btn-floating blue darken-4"
+				<li><a id="buttonTransporte" class="btn-floating black"
 					onclick="filtrarCategorias('Transportes');"><i
 						class="material-icons">directions_bus</i></a></li>
 
-				<li><a id="buttonOcorrencias" class="btn-floating orange"
+				<li><a id="buttonOcorrencias" class="btn-floating red darken-1"
 					onclick="filtrarCategorias('Ocorrências');"><i
 						class="large material-icons">report</i></a></li>
 			</ul>
 		</div>
 
+	</div>
+	
+	 <div class="modal" id="modalRaio">
+	 	<button class="modal-close btn-flat fechar-modal" onclick="fecharModalRaio();">X</button>
+	 	
+		<div id="page-content-wrapper" class="modal-content raio-modal">
+			
+			Valor do raio (m): <input type="text" id="inputRaioModal" >
+			
+			<a href="#" onclick="atualizarValorRaio();" class="right">Atualizar</a>
+		</div>
 	</div>
 
 

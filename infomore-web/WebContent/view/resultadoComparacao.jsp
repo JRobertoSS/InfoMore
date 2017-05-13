@@ -12,9 +12,13 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
+
 <script type="text/javascript" src="js/resultadoComparacao.js"
 	charset="UTF-8"></script>
 <script type="text/javascript" src="js/comum.js"></script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 
 
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
@@ -32,9 +36,6 @@
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<script>
-
-</script>
 
 
 <title>Infomore - Resultado da Comparação</title>
@@ -64,6 +65,8 @@
 						<th>Pontuação</th>
 
 						<th></th>
+						
+						<th></th>
 
 					</tr>
 				</thead>
@@ -78,6 +81,11 @@
 								onclick="atualizarDetalhesCategorias(${local.id})"> <img alt="detalhes"
 									src="images/infomore_icon.png">
 							</a></td>
+							
+							<td><a href="#" class="button-collapse"
+								onclick="atualizarGraficoCategorias(${local.id}, '${local.nome}')"> <img alt="grafico"
+									src="images/pie_chart_icon.png">
+							</a></td>
 
 
 						</tr>
@@ -86,33 +94,42 @@
 			</table>
 
 			<div class="center espacamento-botoes">
-				<a class="btn waves-effect waves-light top botao-voltar"
-					href="meusLocais?acao=listar">Voltar</a>
+			<p> <a class="btn waves-effect waves-light top botao-comparacao"
+					href="#" onclick="atualizarGraficoComparacao();">Comparação Gráfica</a> </p>
+				<p><a class="btn waves-effect waves-light top botao-voltar"
+					href="meusLocais?acao=listar">Voltar</a></p>
 			</div>
 
 		</div>
 	</div>
 
-	 <div class="modal center" id="modalDetalhes">
+	 <div class="modal" id="modalDetalhes">
 		<div id="page-content-wrapper" class="modal-content detalhes-modal">
 			<ul>
-				<li><i class="material-icons icone">local_hospital</i> <span
-					class="x"> X </span> <span id="quantidadeSaude" class="quantidade"></span></li>
-				<li><i class="material-icons icone">school</i> <span class="x">
-						X </span> <span id="quantidadeEducacao" class="quantidade"></span></li>
-				<li><i class="material-icons icone">security</i> <span class="x">
-						X </span> <span id="quantidadeSeguranca" class="quantidade"></span></li>
-				<li><i class="material-icons icone">shopping_cart</i> <span class="x">
-						X </span> <span id="quantidadeComodidades" class="quantidade"></span></li>
-				<li><i class="material-icons icone">tag_faces</i> <span class="x">
-						X </span> <span id="quantidadeLazerCultura" class="quantidade"></span></li>
-				<li><i class="material-icons icone">directions_bus</i> <span
-					class="x"> X </span> <span id="quantidadeTransportes" class="quantidade"></span></li>
-				<li><i class="material-icons icone">report</i> <span class="x">
-						X </span> <span id="quantidadeOcorrencias" class="quantidade"></span></li>
+				<li class="item-resultado"><img src="images/icon_saude.png"> <label class="nome-categoria">Saúde</label> <span id="quantidadeSaude" class="quantidade right"></span></li>
+					
+				<li class="item-resultado"><img src="images/icon_educacao.png"> <label class="nome-categoria">Educação</label> <span id="quantidadeEducacao" class="quantidade right"></span></li>
+						
+				<li class="item-resultado"><img src="images/icon_seguranca.png"> <label class="nome-categoria">Segurança</label> <span id="quantidadeSeguranca" class="quantidade right"></span></li>
+						
+				<li class="item-resultado"><img src="images/icon_comodidades.png"> <label class="nome-categoria">Comodidades</label> <span id="quantidadeComodidades" class="quantidade right"></span></li>
+						
+				<li class="item-resultado"><img src="images/icon_lazer_cultura.png">  <label class="nome-categoria">Lazer e Cultura</label> <span id="quantidadeLazerCultura" class="quantidade right"></span></li>
+						
+				<li class="item-resultado"><img src="images/icon_transporte.png"> <label class="nome-categoria">Transportes</label><span id="quantidadeTransportes" class="quantidade right"></span></li>
+					
+				<li class="item-resultado"><img src="images/icon_ocorrencias.png"> <label class="nome-categoria">Ocorrências</label> <span id="quantidadeOcorrencias" class="quantidade right"></span></li>
+						
+				<li class="item-resultado"> <label class="total">Total: </label><span id="quantidadeTotal" class="quantidade right"></span></li>
 			</ul>
 
 		</div>
+	</div>
+	
+	<div id="chartCategorias" class="modal chart" >
+	</div>
+	
+	<div id="chartComparacao" class="modal chart" >
 	</div>
 	
 	<%@include file="detalhesComparacao.jsp"%>

@@ -72,7 +72,8 @@ function criarInfoWindowMeuLocal(marcador) {
 	fechaInfoMeuLocal();
 
 	var conteudo = "<p><b>Este é seu local atual!</b>";
-	conteudo += "<p><b>Raio: </b>" + document.circle.radius.toFixed(2) + " m</p>";
+	conteudo += "<p><b>Raio: </b>" + document.circle.radius.toFixed(2)
+			+ " m</p>";
 	conteudo += "<p><b>Latitude: </b>" + document.meuLocal.lat() + "</p>";
 	conteudo += "<p><b>Longitude: </b>" + document.meuLocal.lng() + "</p>";
 
@@ -112,7 +113,7 @@ function renderizarPontos(pontos) {
 			});
 			document.markers.push(marker); // adiciona o marker ao array
 			criarInfoWindow(ponto.descricao, marker); // cria um infoWindow
-														// para
+			// para
 			// ao clicar no marcador,
 			// mostrar a descrição
 		}
@@ -133,15 +134,22 @@ function circleBoundsToJSON(bounds) {
 // função que realiza uma chamada ajax para o servidor, recuperando os pontos
 // dentro de um determinado raio ( objeto google maps circle)
 function atualizarPontosRaio(circle) {
-	var bounds = circle.getBounds(); // objeto de LatLngBouunds
-	// https://developers.google.com/maps/documentation/javascript/reference#LatLngBounds
-
+	/*
+	 * var bounds = circle.getBounds(); // objeto de LatLngBouunds
+	 */// https://developers.google.com/maps/documentation/javascript/reference#LatLngBounds
+	var novoRaio = Math.sqrt(circle.getRadius() * circle.getRadius() / 2);
+	var novoCirculo = new google.maps.Circle({
+		center : circle.getCenter(),
+		radius : novoRaio
+	});
+	var boundsNovoCirculo = novoCirculo.getBounds();
 	$.ajax({
 		type : 'POST',
 		contentType : 'application/json',
 		url : '/infomore/atualizaPontosRaio?acao=listar',
 		dataType : 'json',
-		data : circleBoundsToJSON(bounds), // função para converter em JSON
+		data : circleBoundsToJSON(boundsNovoCirculo), // função para converter
+														// em JSON
 		success : renderizarPontos
 	// função para atualizar os pontos no raio
 	});
@@ -271,7 +279,8 @@ function inicializaMapa(latitude, longitude) {
 
 	// recuperar os pontos dentro dos limites do círculo
 	atualizarPontosRaio(document.circle);
-
+	atualizarFronteirasMapa();
+	
 	/*
 	 * document.getElementById("raio").innerHTML = "Raio: " +
 	 * circle.getRadius(); // mostra o raio no conteiner raio
@@ -292,6 +301,7 @@ function inicializaMapa(latitude, longitude) {
 				 */
 				atualizarPontosRaio(document.circle);
 				criarInfoWindowMeuLocal(document.meuLocalmarker);
+				atualizarFronteirasMapa();
 
 			})
 	// adicionar o listener do evento de mover o círculo
@@ -302,6 +312,7 @@ function inicializaMapa(latitude, longitude) {
 				document.meuLocalmarker.setPosition(document.meuLocal);
 				atualizarPontosRaio(document.circle);
 				criarInfoWindowMeuLocal(document.meuLocalmarker);
+				atualizarFronteirasMapa();
 				/*
 				 * document.getElementById("lat").innerHTML = "Latitude: " +
 				 * circle.getCenter().lat(); // mostra a latitude alterada no
@@ -309,6 +320,13 @@ function inicializaMapa(latitude, longitude) {
 				 * "Longitude: " + circle.getCenter().lng(); // mostra a
 				 * longitude alterada no conteiner lng
 				 */
+			})
+
+	// adicionar o listener do evento de click no circulo
+	google.maps.event.addListener(document.circle, "click",
+			function() {
+				// mostrar modal de raio
+				$('#modalRaio').modal().modal('open');
 			})
 
 	// criar infoWindow do marcador 'meu local'
@@ -363,11 +381,27 @@ function getLocal() {
 		// atual
 	}
 };
+function fecharModalRaio(){
+	$('#modalRaio').modal().modal('close');
+}
+function atualizarValorRaio(){
+	var valorRaio = document.getElementById('inputRaioModal').value;
+	if( valorRaio != null && valorRaio > 0){
+		document.circle.setRadius(Number(valorRaio));
+		atualizarFronteirasMapa();
+		$('#modalRaio').modal().modal('close');
+	}
+	
+}
+
+function atualizarFronteirasMapa(){
+	document.map.fitBounds(document.circle.getBounds());
+}
 
 // executar o método depois de carregar a página
 /* window.onload = inicializaMapa(-23.505457, -46.187097); */
 
 // executa para mostrar o botão nesta página
-function mostraSalvarMeuLocal (){
+function mostraSalvarMeuLocal() {
 	document.getElementById('divBotaoMeuLocal').style.visibility = "visible";
 }

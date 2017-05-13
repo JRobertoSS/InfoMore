@@ -17,6 +17,13 @@
 	color: #FFF;
 }
 
+.botao-comparacao {
+	width: 230px;
+	padding-left: 25px;
+	background-color: #DE2E76;
+	color: #FFF;
+}
+
 .icone-detalhes {
 	color: #CCC;
 	text-shadow: 0px 1px black;
@@ -32,19 +39,55 @@
 	border-color: #000;
 }
 
-.icone{
+.icone {
 	float: left;
 }
+
 .x {
-	
+	font-size: 18px;
+	font-weight: bolder;
+	text-shadow: 1px 1px #E0E0E0;
+}
+
+.nome-categoria {
+	float: left;
+	padding-left: 15px;
+	padding-top: 3px; 
+	color : black;
+	font-size: 18px;
+	font-weight: bold;
+	text-shadow: 1px 1px #E0E0E0;
+	color: black;
+}
+
+.total {
+	color: black;
+	font-size: 20px;
+	font-weight: bold;
+	text-shadow: 1px 1px #E0E0E0;	
+	padding-left: 50%;
+}
+
+.quantidade {
 	font-size: 20px;
 	font-weight: bolder;
 	text-shadow: 1px 1px #E0E0E0;
 }
 
-.quantidade{
-	
-	font-size: 22px;
-	font-weight: bolder;
-	text-shadow: 1px 1px #E0E0E0;
+img {
+	float: left;
+	padding-top: 5px;
 }
+
+.item-resultado{
+	clear: both;
+	border-top: thin;
+	border-top-style: solid;
+	border-top-color: black;
+}
+
+.chart{
+	width: 95vw;
+}
+
+	
