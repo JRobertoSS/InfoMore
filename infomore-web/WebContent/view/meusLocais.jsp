@@ -39,7 +39,7 @@
 
 	<%@include file="modal/mensagem.jsp"%>
 
-	<div id="page-content-wrapper" class="container espacamento-container">
+	<div id="page-content-wrapper" class="container">
 
 		<form class="col s12" action="meusLocais" method="post">
 

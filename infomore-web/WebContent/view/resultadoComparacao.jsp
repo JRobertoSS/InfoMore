@@ -46,14 +46,24 @@
 
 	<%@include file="modal/mensagem.jsp"%>
 
-	<div id="page-content-wrapper" class="container espacamento-container">
+	<div id="page-content-wrapper" class="container">
 
 		<c:set value="${comparacao}" var="comparacao" scope="request" />
 		<c:set value="${jsonMap}" var="jsonMap" scope="request" />
 		
 		<script>
 			document.mapaCategoriaQuantidade = JSON.parse('${jsonMap}');
+			document.idLocais = ${comparacao.idsComparacao};
+			document.locais = new Map();
 		</script>
+		
+		<c:forEach var="local" items="${comparacao.meusLocaisComparacao}">
+			<script>
+				var id = Number(${local.id});
+				var nome = '${local.nome}';
+				document.locais.set(id, nome);
+			</script>
+		</c:forEach>
 		
 		<div class="row form-content">
 			<table class="tabela">
@@ -71,6 +81,7 @@
 					</tr>
 				</thead>
 				<c:forEach var="local" items="${comparacao.meusLocaisComparacao}">
+			
 					<tbody>
 						<tr>
 							<td>${local.nome}</td>
@@ -126,15 +137,12 @@
 		</div>
 	</div>
 	
-	<div id="chartCategorias" class="modal chart" >
+	<div id="chartCategorias" class="modal chart-local" >
 	</div>
 	
-	<div id="chartComparacao" class="modal chart" >
+	<div id="chartComparacao" class="modal chart-comparacao" >
 	</div>
-	
-	<%@include file="detalhesComparacao.jsp"%>
-
-
+		
 
 </body>
 

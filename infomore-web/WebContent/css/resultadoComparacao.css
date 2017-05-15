@@ -86,8 +86,14 @@ img {
 	border-top-color: black;
 }
 
-.chart{
+.chart-local{
 	width: 95vw;
+	height: 60vh;
+}
+
+.chart-comparacao{
+	width: 98vw;
+	height: 85vh;
 }
 
 	

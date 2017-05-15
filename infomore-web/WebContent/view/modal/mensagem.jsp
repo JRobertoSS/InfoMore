@@ -12,7 +12,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('.modal').modal().modal('open');
+			$('#modalMsg').modal().modal('open');
 		});
 	</script>
 </c:if>

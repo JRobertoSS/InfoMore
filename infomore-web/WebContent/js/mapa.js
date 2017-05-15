@@ -53,9 +53,8 @@ function deleteMarkers() {
 function criarInfoWindow(conteudo, objetoParaOInfo) {
 	// criar um objeto de InfoWindow (descrição ao clicar no marcador)
 	var infoWindow = new google.maps.InfoWindow({
-		content : conteudo, // o que será mostrado ao clicar
-		anchor : objetoParaOInfo.icon.anchor
-	// no marcador
+		content : conteudo, // o que será mostrado ao clicar no marcador
+		anchor : objetoParaOInfo.getIcon().anchor
 	})
 	// adicionar o listener do evento de click no marcador e mostrar o
 	// InfoWindow
@@ -79,7 +78,7 @@ function criarInfoWindowMeuLocal(marcador) {
 
 	document.infoWindow = new google.maps.InfoWindow({
 		content : conteudo,
-		anchor : marcador.icon.anchor
+		anchor : marcador.getIcon().anchor
 
 	})
 
