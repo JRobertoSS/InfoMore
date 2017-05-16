@@ -46,38 +46,39 @@
 			<input type="hidden" name="acao" value="processar">
 
 			<div class="row form-content">
-				<table class="tabela">
+				<table >
 					<thead>
-						<tr>
+						<tr class="col s12">
 
-							<th></th>
+							<th class="col s1"></th>
 
-							<th>Nome</th>
+							<th class="col s3">Nome</th>
 
-							<th>Descrição</th>
+							<th class="col s3">Descrição</th>
 
-							<th></th>
-							<th></th>
+							<th class="col s1"></th>
+
 						</tr>
 					</thead>
 					<c:forEach var="local" items="${requestScope['meusLocais']}">
 						<tbody>
-							<tr>
-								<td><input id="checkbox${local.id}" type="checkbox"
+							<tr class="col s12">
+								<td class="col s1"><input id="checkbox${local.id}" type="checkbox"
 									name="checkComparar" value="${local.id}"> <label
 									for="checkbox${local.id}"></label></td>
 
-								<td>${local.nome}</td>
+								<td class="col s3">${local.nome}</td>
 
-								<td>${local.descricao}</td>
+								<td class="col s3">${local.descricao}</td>
 
-								<td><a
+								<td class="col s1"><a
 									href="editarLocal?acao=consultar&idLocal=${local.id}"><i
-										class="material-icons icone-editar">mode edit</i></a></td>
-
-								<td><a href="excluirLocal?acao=excluir&idLocal=${local.id}"><i
+										class="material-icons icone-editar">mode edit</i></a>
+									<a href="excluirLocal?acao=excluir&idLocal=${local.id}"><i
 										class="material-icons icone-excluir"
-										onclick="return confirm('Deseja realmente remover este local de sua lista?');">delete_forever</i></a></td>
+										onclick="return confirm('Deseja realmente remover este local de sua lista?');">delete_forever</i></a>
+								</td>
+
 							</tr>
 						</tbody>
 					</c:forEach>

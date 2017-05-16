@@ -52,10 +52,10 @@ function deleteMarkers() {
 // mostrando o conteudo
 function criarInfoWindow(conteudo, objetoParaOInfo) {
 	// criar um objeto de InfoWindow (descrição ao clicar no marcador)
+	
 	var infoWindow = new google.maps.InfoWindow({
 		content : conteudo, // o que será mostrado ao clicar no marcador
-		anchor : objetoParaOInfo.getIcon().anchor
-	})
+	});
 	// adicionar o listener do evento de click no marcador e mostrar o
 	// InfoWindow
 	google.maps.event.addListener(objetoParaOInfo, 'click', function() {
@@ -76,11 +76,12 @@ function criarInfoWindowMeuLocal(marcador) {
 	conteudo += "<p><b>Latitude: </b>" + document.meuLocal.lat() + "</p>";
 	conteudo += "<p><b>Longitude: </b>" + document.meuLocal.lng() + "</p>";
 
+
+	
 	document.infoWindow = new google.maps.InfoWindow({
 		content : conteudo,
-		anchor : marcador.getIcon().anchor
 
-	})
+	});
 
 	google.maps.event.addListener(marcador, 'click', function() {
 		document.infoWindow.open(document.map, marcador);

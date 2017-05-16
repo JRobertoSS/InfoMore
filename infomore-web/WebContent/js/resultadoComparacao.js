@@ -70,27 +70,30 @@ function atualizarGraficoCategorias(id, nomeLocal) {
 
 		// Set chart options
 		var options = {
-			title : 'Distribuição das Categorias em ' + nomeLocal,
+			title : 'Categorias em ' + nomeLocal,
 			titleTextStyle: { 
 				fontSize: 14,
 				bold: true,
 			},
 			legend : {
-				position : 'right',
+				position : 'top',
+				maxLines: 8,
 				textStyle : {
 					color : 'black',
-					fontSize : 11
+					fontSize : 10,
+					bold: true
 				}
+				
 			},
 			chartArea : {
-				left : 10,
-				top : 50,
-				width : '50%',
-				height : '80%'
+				left : 60,
+				top : 150 ,
+				width : '62%',
+				height : '62%'
 			},
 			is3D : true,
-			width : 650,
-			heigth : 1000,
+			/*width : 650,
+			heigth : 1000,*/
 			backgroundColor : '#97d5d1',
 			colors : [ '#4caf50', '#2196f3', '#757575', '#9c27b0', '#fdd835',
 					'#000', '#e53935' ]
@@ -145,7 +148,7 @@ function atualizarGraficoComparacao() {
 			id : 'Comodidades',
 			type : 'number'
 		}, {
-			label : 'Lazer e Cultura',
+			label : 'Lazer/Cultura',
 			id : 'Lazer e Cultura',
 			type : 'number'
 		}, {
@@ -174,24 +177,24 @@ function atualizarGraficoComparacao() {
 		}
 
 		var options = {
-			title : 'Distribuição das Categorias nos Locais',
+			title : 'Categorias nos Locais Comparados',
 			titleTextStyle: { 
 				fontSize: 14,
 				bold: true,
 			},
-			width : 360,
-			heigth : 1300,
+			/*width : 360,
+			heigth : 1300,*/
 			legend : {
-				top: 20,
 				position : 'top',
-				maxLines : 12,
+				maxLines: 4,
 				textStyle : {
 					color : 'black',
-					fontSize : 11
+					fontSize : 10,
+					bold: true
 				}
 			},
 			bar : {
-				groupWidth : '50%'
+				groupWidth : '60%'
 			},
 			isStacked : true,
 			is3D : true,
@@ -210,6 +213,11 @@ function atualizarGraficoComparacao() {
 				baselineColor : '#000',
 				gridlineColor : '#000'
 
+			},
+			chartArea : {
+				top : 120 ,
+				width : '60%',
+				height : '60%'
 			}
 		};
 

@@ -28,6 +28,7 @@ body {
 
 /* cor de funto, aplicado ao body*/
 .corpo {
+	width: 100vw !important;
 	background-color: #6ec4c2;
 }
 

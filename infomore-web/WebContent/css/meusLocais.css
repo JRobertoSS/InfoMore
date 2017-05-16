@@ -25,7 +25,9 @@
 	color: #CCC;
 	text-shadow: 0px 1px black;
 }
-
+.tabela{
+		
+}
 .tabela>thead{
 	border-bottom:1px solid;
 	border-color: #000;
@@ -33,4 +35,15 @@
 .tabela>tbody{
 	border-bottom:1px solid;
 	border-color: #000;
+}
+
+.nome{
+	width: 35%;
+}
+
+.descricao{
+	width:50;
+}
+.acao{
+	width: 5%;
 }
