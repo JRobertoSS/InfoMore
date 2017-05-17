@@ -200,3 +200,18 @@ a:hover {
 	padding-top: 130px;	
 }
 
+.tabela{
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+	width: 95%;
+}
+
+.tabela>thead {
+	border-bottom: 1px solid;
+	border-color: #000;
+}
+
+.tabela>tbody {
+	border-bottom: 1px solid;
+	border-color: #000;
+}

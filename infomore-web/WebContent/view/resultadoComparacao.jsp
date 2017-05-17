@@ -12,18 +12,14 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
-
-<script type="text/javascript" src="js/resultadoComparacao.js"
-	charset="UTF-8"></script>
+<script type="text/javascript" src="js/resultadoComparacao.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/comum.js"></script>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
-
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-
 
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
@@ -88,10 +84,12 @@
 
 							<td>${comparacao.mapaIdPontuacaoLocal.get(local.id)}</td>
 
-							<td><a href="#" class="button-collapse"
-								onclick="atualizarDetalhesCategorias(${local.id})"> <img alt="detalhes"
-									src="images/infomore_icon.png">
-							</a></td>
+							<td>
+								<a href="#" class="button-collapse"
+									onclick="atualizarDetalhesCategorias(${local.id}, '${local.nome}')"> 
+									<img alt="detalhes" src="images/infomore_icon.png">
+								</a>
+							</td>
 							
 							<td><a href="#" class="button-collapse"
 								onclick="atualizarGraficoCategorias(${local.id}, '${local.nome}')"> <img alt="grafico"
@@ -117,6 +115,8 @@
 	 <div class="modal" id="modalDetalhes">
 		<div id="page-content-wrapper" class="modal-content detalhes-modal">
 			<ul>
+				<li class="collection-header"><h5 id="tituloLista"></h5></li>
+				
 				<li class="item-resultado"><img src="images/icon_saude.png"> <label class="nome-categoria">Saúde</label> <span id="quantidadeSaude" class="quantidade right"></span></li>
 					
 				<li class="item-resultado"><img src="images/icon_educacao.png"> <label class="nome-categoria">Educação</label> <span id="quantidadeEducacao" class="quantidade right"></span></li>

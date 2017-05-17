@@ -54,7 +54,7 @@
 						<div class="input-field col s10">
 							<p class="label ">Nome deste local:</p>
 						</div>
-						</br> </br>
+						</br> 
 						<div class="input-field col s10">
 							<input id="inputNome" name="inputNome" type="text"
 								value="${meuLocal.nome}">
@@ -71,7 +71,7 @@
 
 
 						<div class="input-field col s12 center">
-							<h5><b>Informações adicionais</b></h5>
+							<h6><b>Informações adicionais</b></h6>
 						</div>
 						<div class="tabela">
 							<table class="input-field col s8 ">

@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+
 
 <!-- Import da taglib pra uso de jstl -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -12,13 +12,11 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript" src="js/mapa.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/comum.js"></script>
-
+<script type="text/javascript" src="js/meusLocais.js" charset="UTF-8"></script>
 
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-
 
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
@@ -29,7 +27,7 @@
 
 
 <!--Let browser know website is optimized for mobile-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8"/>
 
 <title>Infomore - Meus Locais</title>
 </head>
@@ -41,42 +39,43 @@
 
 	<div id="page-content-wrapper" class="container">
 
-		<form class="col s12" action="meusLocais" method="post">
+		<form action="meusLocais" method="post">
 
 			<input type="hidden" name="acao" value="processar">
 
 			<div class="row form-content">
-				<table >
+				<table class="tabela">
 					<thead>
-						<tr class="col s12">
+						<tr>
 
-							<th class="col s1"></th>
+							<th class="acao"></th>
 
-							<th class="col s3">Nome</th>
+							<th class="nome">Nome</th>
 
-							<th class="col s3">Descrição</th>
-
-							<th class="col s1"></th>
+							<th class="acao"></th>
+							<th class="acao"></th>
 
 						</tr>
 					</thead>
 					<c:forEach var="local" items="${requestScope['meusLocais']}">
 						<tbody>
-							<tr class="col s12">
-								<td class="col s1"><input id="checkbox${local.id}" type="checkbox"
+							<tr >
+								<td class="acao"><input id="checkbox${local.id}" type="checkbox"
 									name="checkComparar" value="${local.id}"> <label
 									for="checkbox${local.id}"></label></td>
 
-								<td class="col s3">${local.nome}</td>
+								<td class="nome" onclick="mostrarDescricao('${local.descricao}');">${local.nome}</td>
 
-								<td class="col s3">${local.descricao}</td>
-
-								<td class="col s1"><a
-									href="editarLocal?acao=consultar&idLocal=${local.id}"><i
-										class="material-icons icone-editar">mode edit</i></a>
-									<a href="excluirLocal?acao=excluir&idLocal=${local.id}"><i
-										class="material-icons icone-excluir"
-										onclick="return confirm('Deseja realmente remover este local de sua lista?');">delete_forever</i></a>
+								<td class="acao">
+									<a href="editarLocal?acao=consultar&idLocal=${local.id}">
+										<img src="images/icon_pencil_edit.png" />
+									</a>
+								</td>
+								<td class="acao">
+									<a href="excluirLocal?acao=excluir&idLocal=${local.id}">
+										<img src="images/icon_x_remove.png" 
+										onclick="return confirm('Deseja realmente remover este local de sua lista?');"/>
+									</a>
 								</td>
 
 							</tr>
@@ -91,7 +90,12 @@
 						href="navegar?acao=mapa">Voltar</a>
 				</div>
 			</div>
-
+			
+			<div id="modalDescricao" class="modal" >
+				<div id="page-content-wrapper" class="modal-content modal-descricao">
+					<p id="descricaoLocal"></p>
+				</div>
+			</div>
 
 
 		</form>

@@ -1,5 +1,5 @@
 .label{
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: bolder;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .espacamento-botoes{
-	padding-top: 50px;	
+	padding-top: 30px;	
 }
 
 .botao-salvar {
@@ -26,6 +26,6 @@
 }
 
 .tabela{
-	padding-left: 50px;
+	padding-left: 45px;
 }
 

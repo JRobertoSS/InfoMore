@@ -1,49 +1,46 @@
-.espacamento-botoes{
-	padding-top: 30px;	
+.espacamento-botoes {
+	padding-top: 30px;
 }
 
 .botao-comparar {
 	background-color: #DE2E76;
 	padding-left: 18px;
 	margin-right: 25px;
-	
 }
 
-.botao-cancelar{
+.botao-voltar {
 	padding-left: 25px;
 	background-color: #2faaab;
 	color: #FFF;
+}
+
+.icone-excluir {
+	color: #CCC;
+	text-shadow: 0px 1px black;
+}
+
+.icone-editar {
+	color: #CCC;
+	text-shadow: 0px 1px black;
+}
+
+.nome {
+	width: 60%;
+}
+
+.acao {
+	width: 15px;
+	height: 15px;
+	max-width: 15px;
+	max-height: 15px;
+}
+
+.modal-descricao {	
+	background: url("../images/background_infomore.png") no-repeat center
+		center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	
-}
-
-.icone-excluir{
-	color: #CCC;
-	text-shadow: 0px 1px black;
-}
-
-.icone-editar{
-	color: #CCC;
-	text-shadow: 0px 1px black;
-}
-.tabela{
-		
-}
-.tabela>thead{
-	border-bottom:1px solid;
-	border-color: #000;
-}
-.tabela>tbody{
-	border-bottom:1px solid;
-	border-color: #000;
-}
-
-.nome{
-	width: 35%;
-}
-
-.descricao{
-	width:50;
-}
-.acao{
-	width: 5%;
 }

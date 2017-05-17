@@ -1,4 +1,5 @@
-function atualizarDetalhesCategorias(id) {
+function atualizarDetalhesCategorias(id, nome) {
+	var tituloLista = document.getElementById('tituloLista');
 	var saude = document.getElementById('quantidadeSaude');
 	var educacao = document.getElementById('quantidadeEducacao');
 	var seguranca = document.getElementById('quantidadeSeguranca');
@@ -20,9 +21,10 @@ function atualizarDetalhesCategorias(id) {
 			+ valorComodidades + valorLazerCultura + valorTransportes
 			+ valorOcorrencias;
 
-	if (saude != null && educacao != null && seguranca != null
-			&& comodidades != null && lazerCultura != null
+	if (tituloLista != null && saude != null && educacao != null && 
+			seguranca != null && comodidades != null && lazerCultura != null
 			&& transportes != null && ocorrencias != null && total != null) {
+		tituloLista.innerHTML = nome;
 		saude.innerHTML = valorSaude;
 		educacao.innerHTML = valorEducacao;
 		seguranca.innerHTML = valorSeguranca;
@@ -109,10 +111,6 @@ function atualizarGraficoCategorias(id, nomeLocal) {
 }
 
 function atualizarGraficoComparacao() {
-
-	for (key in document.idLocais) {
-		console.log(document.locais.get(document.idLocais[key]));
-	}
 
 	// Load the Visualization API and the corechart package.
 	google.charts.load('current', {
