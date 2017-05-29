@@ -37,6 +37,15 @@ function atualizarDetalhesCategorias(id, nome) {
 	}
 }
 
+function montarTooltip(nomeCategoria, valorCategoria, totalPontos, mediaAvaliacao ){
+    var htmlMedia = '<p>Avaliações Médias<p><p>'; 
+    var estrelas = '<img src="images/icon_star.png" class="estrela"> </img></p>';
+    var tooltip = '<p>'+ nomeCategoria + '<p>' 
+    			+ '<p>' + valorCategoria +' ('+ ((valorCategoria/totalPontos) * 100).toFixed(2) + '%)</p>'
+    			+ htmlMedia + '<h7>X '+mediaAvaliacao+'</h7>' +  estrelas;
+    return tooltip;
+}
+
 function atualizarGraficoCategorias(id, nomeLocal) {
 	var valorSaude = document.mapaCategoriaQuantidade[id]['Saúde'];
 	var valorEducacao = document.mapaCategoriaQuantidade[id]['Educação'];
@@ -45,6 +54,16 @@ function atualizarGraficoCategorias(id, nomeLocal) {
 	var valorLazerCultura = document.mapaCategoriaQuantidade[id]['Lazer e Cultura'];
 	var valorTransportes = document.mapaCategoriaQuantidade[id]['Transportes'];
 	var valorOcorrencias = document.mapaCategoriaQuantidade[id]['Ocorrências'];
+	
+	var totalPontos = valorSaude + valorEducacao + valorSeguranca +
+		valorComodidades + valorLazerCultura + valorTransportes + valorOcorrencias;
+	
+	var mediaSaude = document.mapaCategoriaMedia[id]['Saúde'];
+	var mediaEducacao = document.mapaCategoriaMedia[id]['Educação'];
+	var mediaSeguranca = document.mapaCategoriaMedia[id]['Segurança'];
+	var mediaComodidades = document.mapaCategoriaMedia[id]['Comodidades'];
+	var mediaLazerCultura = document.mapaCategoriaMedia[id]['Lazer e Cultura'];
+	var mediaTransportes = document.mapaCategoriaMedia[id]['Transportes'];
 
 	// Load the Visualization API and the corechart package.
 	google.charts.load('current', {
@@ -58,17 +77,25 @@ function atualizarGraficoCategorias(id, nomeLocal) {
 	// instantiates the pie chart, passes in the data and
 	// draws it.
 	function drawChart() {
-
+		
+		
 		// Create the data table.
 		var data = new google.visualization.DataTable();
 		data.addColumn('string', 'Categoria');
 		data.addColumn('number', 'Quantidade de pontos');
-		data.addRows([ [ 'Saúde', valorSaude ], [ 'Educação', valorEducacao ],
-				[ 'Segurança', valorSeguranca ],
-				[ 'Comodidades', valorComodidades ],
-				[ 'Lazer e Cultura', valorLazerCultura ],
-				[ 'Transportes', valorTransportes ],
-				[ 'Ocorrências', valorOcorrencias ] ]);
+		 // A column for custom tooltip content
+        data.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
+        
+ 
+		data.addRows([ 
+						[ 'Saúde', valorSaude, montarTooltip('Saúde', valorSaude, totalPontos, mediaSaude)], 
+						[ 'Educação', valorEducacao, montarTooltip('Educação', valorSaude, totalPontos, mediaEducacao) ],
+						[ 'Segurança', valorSeguranca, montarTooltip('Segurança', valorSaude, totalPontos, mediaSeguranca) ],
+						[ 'Comodidades', valorComodidades, montarTooltip('Comodidades', valorSaude, totalPontos, mediaComodidades) ],
+						[ 'Lazer e Cultura', valorLazerCultura, montarTooltip('Lazer e Cultura', valorSaude, totalPontos, mediaLazerCultura) ],
+						[ 'Transportes', valorTransportes, montarTooltip('Transportes', valorSaude, totalPontos, mediaTransportes) ],
+						[ 'Ocorrências', valorOcorrencias, ''] 
+		              ]);
 
 		// Set chart options
 		var options = {
@@ -87,6 +114,8 @@ function atualizarGraficoCategorias(id, nomeLocal) {
 				}
 				
 			},
+			tooltip: {isHtml: true},
+			
 			chartArea : {
 				left : 60,
 				top : 150 ,
@@ -125,40 +154,58 @@ function atualizarGraficoComparacao() {
 	// draws it.
 	function drawChart() {
 
-		var data = new google.visualization.arrayToDataTable([ [ {
-			label : 'Local',
-			id : 'Local',
-			type : 'string'
-		}, {
-			label : 'Saúde',
-			id : 'Saúde',
-			type : 'number'
-		}, {
-			label : 'Educação',
-			id : 'Educação',
-			type : 'number'
-		}, {
-			label : 'Segurança',
-			id : 'Segurança',
-			type : 'number'
-		}, {
-			label : 'Comodidades',
-			id : 'Comodidades',
-			type : 'number'
-		}, {
-			label : 'Lazer/Cultura',
-			id : 'Lazer e Cultura',
-			type : 'number'
-		}, {
-			label : 'Transportes',
-			id : 'Transportes',
-			type : 'number'
-		}, {
-			label : 'Ocorrências',
-			id : 'Ocorrências',
-			type : 'number'
-		} ] ]);
+		var data = new google.visualization.arrayToDataTable
+		([ 
+			[ 
+				{
+					label : 'Local',
+					id : 'Local',
+					type : 'string'
+				}, {
+					label : 'Saúde',
+					id : 'Saúde',
+					type : 'number'
+				},
+				{type: 'string', role: 'tooltip', 'p': {'html': true}},
+				{
+					label : 'Educação',
+					id : 'Educação',
+					type : 'number'
+				},
+				{type: 'string', role: 'tooltip', 'p': {'html': true}},
+				{
+					label : 'Segurança',
+					id : 'Segurança',
+					type : 'number'
+				},
+				{type: 'string', role: 'tooltip', 'p': {'html': true}},
+				{
+					label : 'Comodidades',
+					id : 'Comodidades',
+					type : 'number'
+				},
+				{type: 'string', role: 'tooltip', 'p': {'html': true}},
+				{
+					label : 'Lazer/Cultura',
+					id : 'Lazer e Cultura',
+					type : 'number'
+				},
+				{type: 'string', role: 'tooltip', 'p': {'html': true}},
+				{
+					label : 'Transportes',
+					id : 'Transportes',
+					type : 'number'
+				},
+				{type: 'string', role: 'tooltip', 'p': {'html': true}},
+				{
+					label : 'Ocorrências',
+					id : 'Ocorrências',
+					type : 'number'
+				}
+			] 
+		]);
 
+		 
 		for (key in document.idLocais) {
 			var valorSaude = document.mapaCategoriaQuantidade[document.idLocais[key]]['Saúde'];
 			var valorEducacao = document.mapaCategoriaQuantidade[document.idLocais[key]]['Educação'];
@@ -167,12 +214,34 @@ function atualizarGraficoComparacao() {
 			var valorLazerCultura = document.mapaCategoriaQuantidade[document.idLocais[key]]['Lazer e Cultura'];
 			var valorTransportes = document.mapaCategoriaQuantidade[document.idLocais[key]]['Transportes'];
 			var valorOcorrencias = document.mapaCategoriaQuantidade[document.idLocais[key]]['Ocorrências'];
-
-			var nomeLocal = document.locais.get(document.idLocais[key]);
-			data.addRows([ [ nomeLocal, valorSaude, valorEducacao,
-					valorSeguranca, valorComodidades, valorLazerCultura,
-					valorTransportes, valorOcorrencias ] ]);
-		}
+			
+			var totalPontos = valorSaude + valorEducacao + valorSeguranca +
+			valorComodidades + valorLazerCultura + valorTransportes + valorOcorrencias;
+		
+			var mediaSaude = document.mapaCategoriaMedia[document.idLocais[key]]['Saúde'];
+			var mediaEducacao = document.mapaCategoriaMedia[document.idLocais[key]]['Educação'];
+			var mediaSeguranca = document.mapaCategoriaMedia[document.idLocais[key]]['Segurança'];
+			var mediaComodidades = document.mapaCategoriaMedia[document.idLocais[key]]['Comodidades'];
+			var mediaLazerCultura = document.mapaCategoriaMedia[document.idLocais[key]]['Lazer e Cultura'];
+			var mediaTransportes = document.mapaCategoriaMedia[document.idLocais[key]]['Transportes'];
+	
+			
+				var nomeLocal = document.locais.get(document.idLocais[key]);
+			data.addRows([ [ nomeLocal, 
+				valorSaude, 
+				montarTooltip('Saúde', valorSaude, totalPontos, mediaSaude),
+				valorEducacao,
+				montarTooltip('Educação', valorEducacao, totalPontos, mediaEducacao),
+				valorSeguranca,
+				montarTooltip('Segurança', valorSeguranca, totalPontos, mediaSeguranca),
+				valorComodidades, 
+				montarTooltip('Comodidades', valorComodidades, totalPontos, mediaComodidades),
+				valorLazerCultura,
+				montarTooltip('Lazer e Cultura', valorLazerCultura, totalPontos, mediaLazerCultura),
+				valorTransportes, 
+				montarTooltip('Transportes', valorTransportes, totalPontos, mediaTransportes),
+				valorOcorrencias ] ]);
+	}
 
 		var options = {
 			title : 'Categorias nos Locais Comparados',
@@ -216,7 +285,8 @@ function atualizarGraficoComparacao() {
 				top : 120 ,
 				width : '60%',
 				height : '60%'
-			}
+			},
+			tooltip: {isHtml: true}
 		};
 
 		var chart = new google.visualization.ColumnChart(document

@@ -77,6 +77,12 @@ img {
 	border-top-color: black;
 }
 
+.chart{
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+}
+
 .chart-local{
 	width: 95vw;
 	height: 85vh;
@@ -86,5 +92,15 @@ img {
 	width: 98vw;
 	height: 85vh;
 }
-
+.estrela{
+	width: 55px;
+	heigth: 55px;
+	padding-top: 0;
+	padding-left: 35px;
+	padding-bottom: 15px;
+	
+}
+.tooltip-text{
+							
+}
 	

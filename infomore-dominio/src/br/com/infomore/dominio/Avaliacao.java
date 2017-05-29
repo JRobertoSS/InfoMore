@@ -26,16 +26,11 @@ public class Avaliacao extends EntidadeDominio{
 	private int estrelas;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="id_usuario", insertable=true, updatable=true)
+	@JoinColumn(name="id_usuario", insertable=true, updatable=true, nullable=true)
 	@Fetch(FetchMode.JOIN)
 	@Cascade(CascadeType.DETACH)
 	private Usuario usuario;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="id_marcador", insertable=true, updatable=true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
-	private Marcador marcador;
 
 	public String getComentario() {
 		return comentario;
@@ -61,16 +56,5 @@ public class Avaliacao extends EntidadeDominio{
 		this.usuario = usuario;
 	}
 
-	public Marcador getMarcador() {
-		return marcador;
-	}
-
-	public void setMarcador(Marcador marcador) {
-		this.marcador = marcador;
-	}
-	
-	
-
-	
 	
 }

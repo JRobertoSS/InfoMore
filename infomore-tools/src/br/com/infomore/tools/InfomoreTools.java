@@ -10,6 +10,7 @@ import java.util.Random;
 import br.com.infomore.core.IFachada;
 import br.com.infomore.core.impl.controle.Fachada;
 import br.com.infomore.core.impl.dao.PontoDAO;
+import br.com.infomore.dominio.Avaliacao;
 import br.com.infomore.dominio.Categoria;
 import br.com.infomore.dominio.EntidadeDominio;
 import br.com.infomore.dominio.Ponto;
@@ -48,6 +49,27 @@ public class InfomoreTools {
 		criarListaDescricoes();
 		// definir limites de pontos máximo e mínimo
 		definirLimitesPontos();
+		
+
+		gerarPontosAleatorios(30, 0); // Saúde
+		gerarPontosAleatorios(40, 1); // Educação
+		gerarPontosAleatorios(20, 2); // Segurança
+		gerarPontosAleatorios(800, 3); // Comodidades
+		gerarPontosAleatorios(400, 4); // Lazer e Cultura
+		gerarPontosAleatorios(250, 5); // Transportes
+		gerarPontosAleatorios(250, 6); // Ocorrências
+		
+		gerarPontosDescricaoEspecifica(30, 0, "Farmácia");
+		gerarPontosDescricaoEspecifica(2, 5, "Aeroporto");
+		gerarPontosDescricaoEspecifica(10, 3, "Shopping Center");
+		gerarPontosDescricaoEspecifica(2, 4, "Parque Estadual");
+		gerarPontosDescricaoEspecifica(5, 4, "Parque de Diversões");
+		
+	}
+
+
+
+	private static void gerarPontosAleatorios(int quantidade, int indexCategoria) {
 		/*
 		 * laço de repetição para criar os pontos:
 		 * 		- gerar uma latitude, baseado na diferença de máxima-mínima + valor da mínima  
@@ -57,15 +79,13 @@ public class InfomoreTools {
 		 * 		- criar o objeto de ponto e associar os dados gerados, além de marcar como certeza e, se for uma ocorrência, sinalizar a flag
 		 * 		- salvar este ponto
 		 */
-		int pontosParaGerar = 2000; // quantidade depontos a serem gerados
+		
 		int i;
-		for(i = 0; i < pontosParaGerar; i++){
+		for(i = 0; i < quantidade; i++){
 			
 			Double latitude = getLatitudeRandom();
 			Double longitude = getLongitudeRandom();
-			
-			int indiceCategoria =  random.nextInt(seedMaxCategoria);
-			Categoria categoria = categorias.get(indiceCategoria);
+			Categoria categoria = categorias.get(indexCategoria);
 			
 			List<String> listaDescricoes = mapaCategoriaDescricoes.get(categoria.getNome());
 			int indiceDescricao = random.nextInt( listaDescricoes.size() );
@@ -78,11 +98,70 @@ public class InfomoreTools {
 			pontoGerado.setDescricao(descricao);
 			pontoGerado.setOcorrencia( categoria.getDescricao().equals(Categoria.OCORRENCIAS) ? true : false);
 			pontoGerado.setCerteza(1.0);
+			
+			verificaOcorrencia(pontoGerado);
+			
+		
+			Avaliacao avaliacao = new Avaliacao();
+			avaliacao.setEstrelas( (random.nextInt(5) + 1 ) );
+			
+			pontoGerado.setAvaliacao(avaliacao);
+			
 			/**
 			 * Persistir o ponto gerado
 			 */
 			fachada.salvar(pontoGerado);
 		}
+		
+	}
+	
+
+
+
+	private static void gerarPontosDescricaoEspecifica(int quantidade, int indexCategoria, String descricao) {
+		/*
+		 * laço de repetição para criar os pontos:
+		 * 		- gerar uma latitude, baseado na diferença de máxima-mínima + valor da mínima  
+		 * 		- gerar uma longitude, baseado na diferença de máxima-mínima + valor da mínima 
+		 * 		- gerar uma categoria, baseado no seed e na lista de categorias
+		 * 		- preencher uma descrição aleatória, baseado na categoria gerada + mapa + lista de descrições ( sendo o tamanho da lista o seed)
+		 * 		- criar o objeto de ponto e associar os dados gerados, além de marcar como certeza e, se for uma ocorrência, sinalizar a flag
+		 * 		- salvar este ponto
+		 */
+		
+		int i;
+		for(i = 0; i < quantidade; i++){
+			
+			Double latitude = getLatitudeRandom();
+			Double longitude = getLongitudeRandom();
+			Categoria categoria = categorias.get(indexCategoria);
+				
+			Ponto pontoGerado = new Ponto();
+			pontoGerado.setLatitude(latitude);
+			pontoGerado.setLongitude(longitude);
+			pontoGerado.setCategoria(categoria);
+			pontoGerado.setDescricao(descricao);
+			pontoGerado.setOcorrencia( categoria.getDescricao().equals(Categoria.OCORRENCIAS) ? true : false);
+			pontoGerado.setCerteza(1.0);
+			
+			verificaOcorrencia(pontoGerado);
+			
+			Avaliacao avaliacao = new Avaliacao();
+			avaliacao.setEstrelas( (random.nextInt(5) + 1 ) );
+			
+			pontoGerado.setAvaliacao(avaliacao);
+			
+			/**
+			 * Persistir o ponto gerado
+			 */
+			fachada.salvar(pontoGerado);
+		}
+		
+	}
+
+	private static void verificaOcorrencia(Ponto pontoGerado) {
+		if(pontoGerado.getCategoria().getDescricao().equals(Categoria.OCORRENCIAS))
+			pontoGerado.setOcorrencia(true);
 	}
 
 
@@ -155,13 +234,12 @@ public class InfomoreTools {
 				"Guarda Municipal", "Polícia Científica", "Força Nacional de Segurança Pública", "Polícia Legislativa Federal");
 		
 		List<String> listaComodidades = Arrays.asList("Venda", "Bazar", "Mercado", "Supermercado", "Hipermercado", "Atacado", "Feira",
-				"Shopping Center", "Galeria", "Padaria", "Restaurante", "Posto de Gasolina", "Loja de conveniência", "Churrascaria", 
+			    "Galeria", "Padaria", "Restaurante", "Posto de Gasolina", "Loja de conveniência", "Churrascaria", 
 				"Armazém", "Oficina Mecânica");
 		
-		List<String> listaLazerCultura = Arrays.asList("Parque Municipal", "Teatro", "Cinema", "Bar", "Casa Noturna", "Biblioteca", "Museu", "Parque de Diversões",
-				"Parque Estadual", "Casa de Shows");
+		List<String> listaLazerCultura = Arrays.asList("Parque Municipal", "Teatro", "Cinema", "Bar", "Casa Noturna", "Biblioteca", "Museu",  "Casa de Shows");
 		
-		List<String> listaTransportes = Arrays.asList("Ponto de Táxi", "Ponto de Ônibus", "Metrô", "Aluguel de Carros", "Aeroporto");
+		List<String> listaTransportes = Arrays.asList("Ponto de Táxi", "Ponto de Ônibus", "Metrô");
 		
 		List<String> listaOcorrencias = Arrays.asList("Acidente de Trânsito", "Assalto", "Homicídio", "Agressão", "Enchente", "Desabamento", 
 				"Furto", "Latrocínio", "Assalto à Mão Armada", "Atropelamento");

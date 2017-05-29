@@ -12,7 +12,9 @@ public class CompararLocais extends EntidadeDominio{
 	
 	private Map<Integer, Double> mapaIdPontuacaoLocal; // mapa - chave: id do local | valor: pontuação do local
 	
-	private Map<Integer, Map<String, Long>> mapaIdCategoriaQuantidade; // mapa - chave: id do local | valor: ( mapa - chave: categoria do ponto | valor: quantidade daqueles pontos naquele local)
+	private Map<Integer, Map<String, Long>> mapaIdCategoriaQuantidade; // mapa - chave: id do local | valor: ( mapa - chave: categoria do ponto | valor: quantidade daqueles pontos da categoria no local)
+	
+	private Map<Integer, Map<String, Integer>> mapaIdCategoriaMediaAvaliacao; // mapa - chave: id do local | valor: ( mapa - chave: categoria do ponto | valor: média da avaliação dos pontos da categoria no local)
 
 	public Usuario getUsuarioLogado() {
 		return usuarioLogado;
@@ -52,6 +54,14 @@ public class CompararLocais extends EntidadeDominio{
 
 	public void setMapaIdCategoriaQuantidade(Map<Integer, Map<String, Long>> mapaIdCategoriaQuantidade) {
 		this.mapaIdCategoriaQuantidade = mapaIdCategoriaQuantidade;
+	}
+
+	public Map<Integer, Map<String, Integer>> getMapaIdCategoriaMediaAvaliacao() {
+		return mapaIdCategoriaMediaAvaliacao;
+	}
+
+	public void setMapaIdCategoriaMediaAvaliacao(Map<Integer, Map<String, Integer>> mapaIdCategoriaMediaAvaliacao) {
+		this.mapaIdCategoriaMediaAvaliacao = mapaIdCategoriaMediaAvaliacao;
 	}
 	
 	

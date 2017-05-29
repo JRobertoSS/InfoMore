@@ -45,10 +45,12 @@
 	<div id="page-content-wrapper" class="container">
 
 		<c:set value="${comparacao}" var="comparacao" scope="request" />
-		<c:set value="${jsonMap}" var="jsonMap" scope="request" />
+		<c:set value="${jsonQuantidades}" var="jsonQuantidades" scope="request" />
+		<c:set value="${jsonMedias}" var="jsonMedias" scope="request" />
 		
 		<script>
-			document.mapaCategoriaQuantidade = JSON.parse('${jsonMap}');
+			document.mapaCategoriaQuantidade = JSON.parse('${jsonQuantidades}');
+			document.mapaCategoriaMedia = JSON.parse('${jsonMedias}');
 			document.idLocais = ${comparacao.idsComparacao};
 			document.locais = new Map();
 		</script>
@@ -137,10 +139,10 @@
 		</div>
 	</div>
 	
-	<div id="chartCategorias" class="modal chart-local" >
+	<div id="chartCategorias" class="modal chart chart-local" >
 	</div>
 	
-	<div id="chartComparacao" class="modal chart-comparacao" >
+	<div id="chartComparacao" class="modal chart chart-comparacao" >
 	</div>
 		
 

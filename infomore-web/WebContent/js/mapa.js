@@ -50,7 +50,7 @@ function deleteMarkers() {
 
 // função que cria um InfoWindow no evento de click no objetoParaOInfo,
 // mostrando o conteudo
-function criarInfoWindow(conteudo, objetoParaOInfo) {
+function criarInfoWindow(conteudo, marcador) {
 	// criar um objeto de InfoWindow (descrição ao clicar no marcador)
 	
 	var infoWindow = new google.maps.InfoWindow({
@@ -58,8 +58,8 @@ function criarInfoWindow(conteudo, objetoParaOInfo) {
 	});
 	// adicionar o listener do evento de click no marcador e mostrar o
 	// InfoWindow
-	google.maps.event.addListener(objetoParaOInfo, 'click', function() {
-		infoWindow.open(document.map, objetoParaOInfo);
+	google.maps.event.addListener(marcador, 'click', function() {
+		infoWindow.open(document.map, marcador);
 	})
 }
 
@@ -112,7 +112,11 @@ function renderizarPontos(pontos) {
 				icon : image
 			});
 			document.markers.push(marker); // adiciona o marker ao array
-			criarInfoWindow(ponto.descricao, marker); // cria um infoWindow
+			
+			// criar o conteúdo do InfoWindows, com descrição do ponto + estrelas
+			var conteudo = criarConteudoInfoWindowMarcador(ponto);
+			
+			criarInfoWindow(conteudo, marker); // cria um infoWindow
 			// para
 			// ao clicar no marcador,
 			// mostrar a descrição
@@ -120,6 +124,28 @@ function renderizarPontos(pontos) {
 	});
 }
 
+/* cria o conteúdo utilizando a descrição do ponto
+ * e o número de estrelas, para renderizar a imagem
+ * de estrelas preenchidas + estrelas não preenchidas (cinzas)
+ */
+function criarConteudoInfoWindowMarcador(ponto){
+	var conteudo = '<p>' + ponto.descricao + '</p> <p>';
+	
+	// ocorrëncias não utilizam avaliação
+	if(ponto.ocorrencia)
+		return conteudo;
+	
+	var preenchidas = 0;
+	for( ; preenchidas < ponto.avaliacao.estrelas; preenchidas++){
+		conteudo += '<img src="images/icon_star.png" class="estrela"></img>';
+	}
+	for(; preenchidas < 5; preenchidas++){
+		conteudo += '<img src="images/icon_star_grey.png" class="estrela"></img>';
+	}
+	conteudo +='</p>';
+	return conteudo;
+	
+}
 // função que converte o objeto de bounds em JSON para envio de ajax
 function circleBoundsToJSON(bounds) {
 	return JSON.stringify({
@@ -148,10 +174,8 @@ function atualizarPontosRaio(circle) {
 		contentType : 'application/json',
 		url : '/infomore/atualizaPontosRaio?acao=listar',
 		dataType : 'json',
-		data : circleBoundsToJSON(boundsNovoCirculo), // função para converter
-														// em JSON
-		success : renderizarPontos
-	// função para atualizar os pontos no raio
+		data : circleBoundsToJSON(boundsNovoCirculo), // função para converter em JSON
+		success : renderizarPontos // função para atualizar os pontos no raio com callback de sucesso
 	});
 }
 

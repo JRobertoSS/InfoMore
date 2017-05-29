@@ -9,6 +9,10 @@
 ul.dropdown-content{
     width:160px !important;
 }
+.estrela{
+	width: 20px;
+	heigth: 20px;
+}
 
 .fechar-modal{
 	position:absolute;

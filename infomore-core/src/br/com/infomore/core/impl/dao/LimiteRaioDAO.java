@@ -19,10 +19,15 @@ public class LimiteRaioDAO extends AbstractDAO<Integer, Ponto> {
     public List<Ponto> listar(EntidadeDominio entidade) {
 	LimiteRaio limiteRaio = (LimiteRaio) entidade;
 	EntityManager em = entityManagerFactory.createEntityManager();
-	Query query = em.createQuery("SELECT T FROM " + Ponto.class.getSimpleName() + " T WHERE latitude > "
-		+ limiteRaio.getPontoSW().getLatitude() + " AND longitude > " + limiteRaio.getPontoSW().getLongitude()
-		+ " AND latitude < " + limiteRaio.getPontoNE().getLatitude() + " AND longitude < "
-		+ limiteRaio.getPontoNE().getLongitude());
+	Query query = 
+			em.createQuery
+			(
+				"SELECT T FROM " + Ponto.class.getSimpleName() 
+				+ " T WHERE latitude > " + limiteRaio.getPontoSW().getLatitude() 
+				+ " AND longitude > " + limiteRaio.getPontoSW().getLongitude()
+				+ " AND latitude < " + limiteRaio.getPontoNE().getLatitude() 
+				+ " AND longitude < " + limiteRaio.getPontoNE().getLongitude()
+			);
 	return (List<Ponto>) query.getResultList();
     }
 

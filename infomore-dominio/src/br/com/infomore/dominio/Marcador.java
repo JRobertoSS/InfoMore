@@ -10,6 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -41,8 +42,11 @@ public abstract class Marcador extends EntidadeDominio {
     @Fetch(FetchMode.JOIN)
     private Categoria categoria; 
 
-    @OneToMany(mappedBy = "marcador", fetch = FetchType.LAZY)
-    private List<Avaliacao> avaliacoes;
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name="id_avaliacao", nullable=true, insertable = true, updatable = true)
+    @Fetch(FetchMode.JOIN)
+    @Cascade(CascadeType.ALL)
+    private Avaliacao avaliacao;
 
     public double getLatitude() {
 	return latitude;
@@ -84,12 +88,15 @@ public abstract class Marcador extends EntidadeDominio {
 	this.categoria = categoria;
     }
 
-    public List<Avaliacao> getAvaliacoes() {
-	return avaliacoes;
-    }
+	public Avaliacao getAvaliacao() {
+		return avaliacao;
+	}
 
-    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-	this.avaliacoes = avaliacoes;
-    }
+	public void setAvaliacao(Avaliacao avaliacao) {
+		this.avaliacao = avaliacao;
+	}
 
+   
+
+    
 }

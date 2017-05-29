@@ -38,7 +38,7 @@ public class MeusLocaisViewHelper implements IViewHelper {
 			CompararLocais compararLocais = new CompararLocais();
 			compararLocais.setIdsComparacao(new ArrayList<Integer>());
 
-			if (checkboxes.length > 0) {
+			if (checkboxes != null && checkboxes.length > 0) {
 				for (String id : checkboxes) {
 					compararLocais.getIdsComparacao().add(Integer.valueOf(id));
 				}
@@ -70,14 +70,21 @@ public class MeusLocaisViewHelper implements IViewHelper {
 
 		if (request.getParameter("acao").equals("processar")) {
 			request.setAttribute("comparacao", resultado.getEntidades().get(0));
-			request.setAttribute("jsonMap", getJsonMap( resultado.getEntidades().get(0) ) );
+			request.setAttribute("jsonQuantidades", getJsonQuantidades( resultado.getEntidades().get(0) ) );
+			request.setAttribute("jsonMedias", getJsonMedias( resultado.getEntidades().get(0) ) );
 			d = request.getRequestDispatcher("view/resultadoComparacao.jsp");
 		}
 		
 		d.forward(request, response);
 	}
 
-	private Object getJsonMap(EntidadeDominio entidadeDominio) {
+	private Object getJsonMedias(EntidadeDominio entidadeDominio) {
+		CompararLocais comparacao = (CompararLocais) entidadeDominio;
+		Gson gson = new Gson();
+		return gson.toJson(comparacao.getMapaIdCategoriaMediaAvaliacao());
+	}
+
+	private Object getJsonQuantidades(EntidadeDominio entidadeDominio) {
 		CompararLocais comparacao = (CompararLocais) entidadeDominio;
 		Gson gson = new Gson();
 		return gson.toJson(comparacao.getMapaIdCategoriaQuantidade());
