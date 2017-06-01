@@ -16,7 +16,7 @@ public class ValidaEmailUnicoUsuario implements IStrategy {
 		Usuario consulta = dao.consultarPorEmail(usuario.getEmail());
 
 		// encontrou um e-mail igual de outro usuário?
-		if (consulta != null && consulta.getId() != usuario.getId())
+		if (consulta != null && ! consulta.getId().equals( usuario.getId() ))
 			return "E-mail " + usuario.getEmail() + " já cadastrado!";
 
 		return null;
