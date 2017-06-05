@@ -46,6 +46,13 @@ function montarTooltip(nomeCategoria, valorCategoria, totalPontos, mediaAvaliaca
     return tooltip;
 }
 
+function montarTooltipOcorrencias(valorCategoria, totalPontos){
+   
+    var tooltip = '<p class="paragrafoOcorrencia">Ocorrências<p>' 
+    			+ '<p>' + valorCategoria +' ('+ ((valorCategoria/totalPontos) * 100).toFixed(2) + '%)</p>';
+    return tooltip;
+}
+
 function atualizarGraficoCategorias(id, nomeLocal) {
 	var valorSaude = document.mapaCategoriaQuantidade[id]['Saúde'];
 	var valorEducacao = document.mapaCategoriaQuantidade[id]['Educação'];
@@ -94,7 +101,7 @@ function atualizarGraficoCategorias(id, nomeLocal) {
 						[ 'Comodidades', valorComodidades, montarTooltip('Comodidades', valorComodidades, totalPontos, mediaComodidades) ],
 						[ 'Lazer e Cultura', valorLazerCultura, montarTooltip('Lazer e Cultura', valorLazerCultura, totalPontos, mediaLazerCultura) ],
 						[ 'Transportes', valorTransportes, montarTooltip('Transportes', valorTransportes, totalPontos, mediaTransportes) ],
-						[ 'Ocorrências', valorOcorrencias, ''] 
+						[ 'Ocorrências', valorOcorrencias, montarTooltipOcorrencias(valorOcorrencias, totalPontos) ] 
 		              ]);
 
 		// Set chart options
@@ -201,7 +208,8 @@ function atualizarGraficoComparacao() {
 					label : 'Ocorrências',
 					id : 'Ocorrências',
 					type : 'number'
-				}
+				},
+				{type: 'string', role: 'tooltip', 'p': {'html': true}}
 			] 
 		]);
 
@@ -240,7 +248,8 @@ function atualizarGraficoComparacao() {
 				montarTooltip('Lazer e Cultura', valorLazerCultura, totalPontos, mediaLazerCultura),
 				valorTransportes, 
 				montarTooltip('Transportes', valorTransportes, totalPontos, mediaTransportes),
-				valorOcorrencias ] ]);
+				valorOcorrencias,
+				montarTooltipOcorrencias(valorOcorrencias, totalPontos)] ]);
 	}
 
 		var options = {
