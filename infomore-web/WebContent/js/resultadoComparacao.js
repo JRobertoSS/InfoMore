@@ -89,11 +89,11 @@ function atualizarGraficoCategorias(id, nomeLocal) {
  
 		data.addRows([ 
 						[ 'Saúde', valorSaude, montarTooltip('Saúde', valorSaude, totalPontos, mediaSaude)], 
-						[ 'Educação', valorEducacao, montarTooltip('Educação', valorSaude, totalPontos, mediaEducacao) ],
-						[ 'Segurança', valorSeguranca, montarTooltip('Segurança', valorSaude, totalPontos, mediaSeguranca) ],
-						[ 'Comodidades', valorComodidades, montarTooltip('Comodidades', valorSaude, totalPontos, mediaComodidades) ],
-						[ 'Lazer e Cultura', valorLazerCultura, montarTooltip('Lazer e Cultura', valorSaude, totalPontos, mediaLazerCultura) ],
-						[ 'Transportes', valorTransportes, montarTooltip('Transportes', valorSaude, totalPontos, mediaTransportes) ],
+						[ 'Educação', valorEducacao, montarTooltip('Educação', valorEducacao, totalPontos, mediaEducacao) ],
+						[ 'Segurança', valorSeguranca, montarTooltip('Segurança', valorSeguranca, totalPontos, mediaSeguranca) ],
+						[ 'Comodidades', valorComodidades, montarTooltip('Comodidades', valorComodidades, totalPontos, mediaComodidades) ],
+						[ 'Lazer e Cultura', valorLazerCultura, montarTooltip('Lazer e Cultura', valorLazerCultura, totalPontos, mediaLazerCultura) ],
+						[ 'Transportes', valorTransportes, montarTooltip('Transportes', valorTransportes, totalPontos, mediaTransportes) ],
 						[ 'Ocorrências', valorOcorrencias, ''] 
 		              ]);
 
